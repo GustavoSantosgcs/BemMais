@@ -18,7 +18,7 @@ def salvar_usuarios(usuarios):
 
 #Validação de email
 def email_valido(email):
-     return email.endswith('@gmail.com') or email.endswith('@ufrpe.br')
+     return email.endswith('@gmail.com') or email.endswith('@ufrpe.br') or email.endswith('@hotmail.com') or email.endswith('@outlook.com')
 
 #Validação de senha
 def senha_valida(senha):
@@ -32,7 +32,7 @@ def cadastrar(usuarios):
           print("Erro de digitação!")
           telefone = input(" Tente novamente apenas os numeros (DDD + numeros: ex 71988889999): ")
      
-     email = input("Digite seu email (@gmail.com ou @ufrpe.br): ").lower()
+     email = input("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
      if not email_valido(email):
           print("email invalido. Tente novamente!")
           return
@@ -41,21 +41,35 @@ def cadastrar(usuarios):
           print("email já cadastrado. ")
           return           
      
-     senha = input("Digite uma senha com 4 digitos: ")
+     senha = input("Digite uma senha com 6 digitos (apenas números): ")
      if not senha_valida(senha):
-          print("Senha invalida! Tente novamente.")
+          print("Senha inválida! Tente novamente digitando apenas números.")
           return
      
-     
+     print("\n Para recuperação de senha, responda a seguinte pergunta: ")   
+     resposta_secreta = input("Qual o nome da sua professora favorita? ").strip()
+     while resposta_secreta == "":
+          resposta_secreta = input("Por favor, digite um nome válido: ").strip()
+               
      usuarios[email] = {
           'nome' : nome,
           'telefone' : telefone,
           'senha' : senha,
-          'pontos' : 0
+          'pontos' : 0,
+          'resposta_secreta' : resposta_secreta
      }
      
      salvar_usuarios(usuarios)
      print("Cadastro realizado com sucesso!")
+
+#Alterar senha:
+def alterar_senha(usuarios,email):
+     nova_senha = input("Digite sua nova senha composta por 6 números: ")
+     while not senha_valida(nova_senha):
+          nova_senha = input("Senha invalida. Tente com 6 digitos e apenas números")
+     usuarios[email]['senha'] = nova_senha
+     salvar_usuarios(usuarios)
+     print("Senha atualizada com sucesso!")
 
 #Editar usuario:
 def editar_conta(usuarios,email):
@@ -69,13 +83,14 @@ def editar_conta(usuarios,email):
           print("2 - nome")
           print("3 - telefone")
           print("4 - senha")
-          print("5 - sair")
-          editar = input("opcao: ")
+          print("5 - Resposta_secreta")
+          print("6 - sair")
+          editar = input("opção: ")
           match editar:
-               case '1': #Edição de novo Email
-                    novo_email = input("Digite seu novo email (@gmail.com ou @ufrpe.br): ")
+               case '1': #Editar Email
+                    novo_email = input("Digite seu novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ")
                     while not email_valido(novo_email):
-                         novo_email = input("Email invalido ou ja existente! Tente novamente (@gmail.com ou @ufrpe.br:)")               
+                         novo_email = input("Email inválido ou já existente! Tente novamente (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com)")               
                     usuarios[novo_email] = usuarios[email]
                     del usuarios[email]
                     salvar_usuarios(usuarios)
@@ -89,27 +104,55 @@ def editar_conta(usuarios,email):
                     print("Nome atualizado com sucesso!")
                     
                case '3':
-                    novo_tel = input("Digite o novo numero de telefone: ")
+                    novo_tel = input("Digite o novo número de telefone: ")
                     while not novo_tel.isdigit() or len(novo_tel) != 11:
-                         novo_tel = input("Numero invalido. Tente com 11 digitos e apenas os numeros")
+                         novo_tel = input("Número inválido. Tente com 11 digitos e apenas os números")
                     usuarios[email]['telefone'] = novo_tel
                     salvar_usuarios(usuarios)
                     print("Telefone atualizado com sucesso!")
                     
                case '4':
-                    nova_senha = input("Digite sua nova senha de 4 numeros: ")
-                    while not senha_valida(nova_senha):
-                         nova_senha = input("Senha invalida. Tente com 6 digitos e apenas os numeros")
-                    usuarios[email]['senha'] = nova_senha
-                    salvar_usuarios(usuarios)
-                    print("Senha atualizada com sucesso!")
+                    alterar_senha(usuarios,email)
+                    
                case '5':
+                    print("Responda a seguinte pergunta novamente: ")
+                    resposta_secreta = input("Qual o nome da sua professora favorita? ").strip()
+                    while resposta_secreta == "":
+                         resposta_secreta = input("Por favor, digite um nome válido: ").strip()
+                    salvar_usuarios(usuarios)
+                    print("Nova resposta secreta salva com sucesso! ")
+                    
+               case '6':
                     print("Vamos voltar então...")
                     break
                case _:
-                    print("Opcao invalida!")     
+                    print("Opção inválida!")     
 
-
+#Recuperar senha:
+def recuperar_senha(usuarios):
+     email = input("Digite seu email cadastrado: ").lower()
+     
+     if email not in usuarios:
+          print("Email não cadastrado!")
+          return
+     
+     telefone = input("Digite seu telefone com 11 digitos: Ex:81999998888 ")
+     while not telefone.isdigit() or len(telefone) != 11:
+          print("Erro de digitação!")
+          telefone = input(" Tente novamente apenas os numeros (DDD + numeros: ex 71988889999): ")
+     
+     if telefone != (usuarios[email]['telefone']):
+          print("Telefone não correspondente!")
+          return
+     
+     print("Responda a seguinte pergunta secreta cadastrada:")
+     resposta_secreta = input("Qual o nome da sua professora preferida? ")
+     if resposta_secreta.lower() != usuarios[email]['resposta_secreta'].lower():
+          print("Resposta secreta incorreta!")
+          return
+     
+     alterar_senha(usuarios,email)
+     
 #Deletar usuario:
 def deletar_conta(usuarios,email):
      confirmacao = input("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
@@ -151,32 +194,32 @@ def login(usuarios):
                          case _:
                               print("opção inválida")          
           else:
-               print("Email ou senha invalidos. ")
+               print("Email ou senha inválidos. ")
 
 #Menu BEM-ETICO:
 def menu_bem(usuarios,email):
      print(f"O que faremos hoje {usuarios[email]['nome']}? ")
-     print("[1] Receber um Desafio do Bem")
-     print("[2] Frase do Dia")
-     print("[3] Iniciar um Cenário Ético")
+     print("[1] Frase do Dia")
+     print("[2] Iniciar um Cenário Ético")
+     print("[3] Receber um Desafio do Bem")
      print("[4] Ver Pontuação e Nível")
      print("[5] Ver Histórico de Respostas")
      print("[6] Ranking de Usuários")
      print("[7] Sair")
-     opcaoBem = input("Opcao: ")          
+     opcaoBem = input("Opção: ")          
      
      match opcaoBem:
           case '1':
                print("Em manutenção")
-               
+          
           case '2':
-               print("Em manutenção")
-               
-          case '3':
                pontos = iniciar_dilema()
                # Aqui você pode salvar esses pontos no perfil do usuário, por exemplo:
                usuarios[email]['pontos'] = usuarios[email].get('pontos', 0) + pontos
                salvar_usuarios(usuarios)
+               
+          case '3':
+               print("Em manutenção")
                
           case '4':
                print("Em manutenção")
@@ -199,7 +242,8 @@ def menu():
      while True:
         print("1 - Cadastrar")
         print("2 - Login")
-        print("3 - Sair")
+        print("3 - Recuperação de senha")
+        print("4 - Sair")
         opcao = input("Escolha uma opção: ")
         
         match opcao:
@@ -208,6 +252,8 @@ def menu():
              case '2':
                   login(usuarios)
              case '3':
+                  recuperar_senha(usuarios)
+             case '4':
                   print("Até mais então...")
                   break
              case _:
