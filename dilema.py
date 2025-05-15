@@ -3,7 +3,6 @@ def iniciar_dilema():
     print("\n Seja bem-vindo(a) ao CENÁRIOS ÉTICOS!")
     print("Responda as questões com as alternativas (a, b ou c):\n")
 
-#Perguntas:
     perguntas = [
         {
             "pergunta": "Você descobre uma falha de segurança grave no sistema da empresa onde trabalha. O que faz?",
@@ -13,7 +12,7 @@ def iniciar_dilema():
                 "c": "Ignora, afinal, não é problema seu."
             },
             "pontuações": {
-                "a": 5,
+                "a": 1,
                 "b": 0,
                 "c": 0
             },
@@ -32,7 +31,7 @@ def iniciar_dilema():
                 "c": "Faz o que o cliente pede; afinal, ele está pagando."
             },
             "pontuações": {
-                "a": 5,
+                "a": 1,
                 "b": 0,
                 "c": 0
             },
@@ -52,7 +51,7 @@ def iniciar_dilema():
             },
             "pontuações": {
                 "a": 0,
-                "b": 5,
+                "b": 1,
                 "c": 0
             },
             "resposta_certa": "b",
@@ -71,7 +70,7 @@ def iniciar_dilema():
             },
             "pontuações": {
                 "a": 0,
-                "b": 5,
+                "b": 1,
                 "c": 0
             },
             "resposta_certa": "b",
@@ -89,7 +88,7 @@ def iniciar_dilema():
                 "c": "Entrega os dados completos, afinal é só um amigo."
             },
             "pontuações": {
-                "a": 5,
+                "a": 1,
                 "b": 0,
                 "c": 0
             },
@@ -108,7 +107,7 @@ def iniciar_dilema():
                 "c": "Usa o script para economizar no projeto."
             },
             "pontuações": {
-                "a": 5,
+                "a": 1,
                 "b": 0,
                 "c": 0
             },
@@ -127,7 +126,7 @@ def iniciar_dilema():
                 "c": "Pula os testes e entrega logo para agradar."
             },
             "pontuações": {
-                "a": 5,
+                "a": 1,
                 "b": 0,
                 "c": 0
             },
@@ -146,7 +145,7 @@ def iniciar_dilema():
                 "c": "Copia tudo, afinal foi você quem escreveu."
             },
             "pontuações": {
-                "a": 5,
+                "a": 1,
                 "b": 0,
                 "c": 0
             },
@@ -159,8 +158,6 @@ def iniciar_dilema():
         }
     ]
 
-
-#Funções:
     for i, pergunta in enumerate(perguntas, 1):
         print(f"\nPergunta {i}: {pergunta['pergunta']}")
         for letra, alternativa in pergunta["alternativas"].items():
