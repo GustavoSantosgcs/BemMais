@@ -8,26 +8,62 @@ arquivo_usuarios = os.path.join('dados', 'usuarios.json')
 
 #Carregamento de dados já existentes:
 def carregar_usuarios():
+     """
+     Carrega os usuários do arquivo JSON, se existir.
+
+     Retorna:
+     dict: Dicionário com os dados dos usuários cadastrados.
+     """
      if os.path.exists(arquivo_usuarios):
           with open(arquivo_usuarios,'r') as arquivo:
                return json.load(arquivo)
      return {}
 
 #Salvar usuario:         
-def salvar_usuarios(usuarios):
+def salvar_usuarios(usuarios):  
+     """
+     Salva os dados dos usuários no arquivo JSON.
+
+     Parâmetros:
+     usuarios (dict): Dicionário contendo os dados dos usuários.
+     """
      with open(arquivo_usuarios,'w') as arquivo:
           json.dump(usuarios, arquivo, indent=4)
 
 #Validação de email
-def email_valido(email):
+def email_valido(email):  
+     """
+     Verifica se o e-mail é válido de acordo com domínios permitidos.
+
+     Parâmetros:
+     email (str): E-mail informado pelo usuário.
+
+     Retorna:
+     bool: True se o e-mail for válido, False caso contrário.
+     """
      return email.endswith('@gmail.com') or email.endswith('@ufrpe.br') or email.endswith('@hotmail.com') or email.endswith('@outlook.com')
 
 #Validação de senha
 def senha_valida(senha):
+     """
+     Verifica se a senha contém apenas dígitos e tem 6 caracteres.
+
+     Parâmetros:
+     senha (str): Senha informada pelo usuário.
+
+     Retorna:
+     bool: True se a senha for válida, False caso contrário.
+     """
      return senha.isdigit() and len(senha) == 6
 
 #Cadastro de usuário:
 def cadastrar(usuarios):
+     """
+     Realiza o cadastro de um novo usuário com nome, telefone, email, senha e pergunta secreta.
+
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários existentes.
+     """ 
      nome = input("Digite seu nome: ")
      telefone = input("Digite seu telefone com 11 digitos: Ex:81999998888 ")
      while not telefone.isdigit() or len(telefone) != 11:
@@ -75,6 +111,13 @@ def alterar_senha(usuarios,email):
 
 #Editar usuario:
 def editar_conta(usuarios,email):
+     """
+     Permite ao usuário editar suas informações pessoais, incluindo email, nome, telefone, senha e resposta secreta.
+
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     email (str): Email do usuário que deseja editar.
+     """
      print("Dados atuais:")
      print(f"Email: {email}")
      print(f"Nome: {usuarios[email]['nome']}")
@@ -121,6 +164,7 @@ def editar_conta(usuarios,email):
                     resposta_secreta = input("Qual o nome da sua professora favorita? ").strip()
                     while resposta_secreta == "":
                          resposta_secreta = input("Por favor, digite um nome válido: ").strip()
+                    usuarios[email]['resposta_secreta'] = resposta_secreta
                     salvar_usuarios(usuarios)
                     print("Nova resposta secreta salva com sucesso! ")
                     
@@ -132,6 +176,13 @@ def editar_conta(usuarios,email):
 
 #Recuperar senha:
 def recuperar_senha(usuarios):
+     """
+     Permite ao usuário recuperar a senha caso tenha esquecido, mediante verificação de email,
+     telefone e resposta secreta.
+
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     """
      email = input("Digite seu email cadastrado: ").lower()
      
      if email not in usuarios:
@@ -157,66 +208,105 @@ def recuperar_senha(usuarios):
      
 #Deletar usuario:
 def deletar_conta(usuarios,email):
+     """
+     Exclui a conta do usuário após confirmação da intenção e validação da senha.
+
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     email (str): Email do usuário que deseja excluir a conta.
+
+     Retorna:
+     bool: True se a conta foi excluída com sucesso, False caso contrário.
+     """
      confirmacao = input("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
      if confirmacao == 's':
-          del usuarios[email]
-          salvar_usuarios(usuarios)
-          print("Sua conta foi deletada com sucesso.")
-          return True
+          confirmacao_senha = input("Para excluir sua conta, confirme sua senha: ")
+          if confirmacao_senha == usuarios[email]['senha']:
+               del usuarios[email]
+               salvar_usuarios(usuarios)
+               print("Sua conta foi deletada com sucesso.")
+               return True
+          else:
+               print("Senha incorreta!")
+               return False
      else:
+          print("Operação cancelada!")
           return False     
 
 #Ver pontuação e nível:
 def pontuacao_e_nivel(usuarios, email):
-    pontos = usuarios[email]['pontos']
-    if pontos < 10:
-        nivel = 'Iniciante 🐣'
-    elif pontos < 20:
-        nivel = 'Explorador 🌱'
-    elif pontos < 30:
-        nivel = 'Consciente 💡'
-    elif pontos < 50:
-        nivel = 'Mentor 🌟'
-    else:
-        nivel = 'Mestre 🌈'
-    
-    print(f"\n⭐ Pontuação total: {pontos} pontos")
-    print(f"🔰 Nível atual: {nivel}\n")
+     """
+     Exibe, com uma saudação personalizada, a pontuação e
+     o nível do usuário com base nos pontos acumulados.
+
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     email (str): Email do usuário cuja pontuação será exibida.
+     """
+     pontos = usuarios[email]['pontos']
+     if pontos < 10:
+          nivel = 'Iniciante 🐣'
+     elif pontos < 20:
+          nivel = 'Explorador 🌱'
+     elif pontos < 30:
+          nivel = 'Consciente 💡'
+     elif pontos < 50:
+          nivel = 'Mentor 🌟'
+     else:
+          nivel = 'Mestre 🌈'
+     print(f"\n🚀 Olá, {usuarios[email]['nome']}! Sua jornada pelo BEM+ está em andamento.")
+     print("Vamos conferir seu progresso e o impacto positivo que você está construindo...\n")
+     print(f"\n⭐ Pontuação total: {pontos} pontos")
+     print(f"🔰 Nível atual: {nivel}\n")
 
 #Logar:
 def login(usuarios):
-          email = input("Digite seu email: ").lower()
-          senha = input("Digite sua senha: ")
-          
-          if email in usuarios and usuarios[email]['senha'] == senha:
-               print(f"\nBem-vindo(a), {usuarios[email]['nome']}")
-               while True:
-                    print("O que deseja fazer? ")
-                    print("1 - Prosseguir para o Menu BEM+")
-                    print("2 - Editar Conta")
-                    print("3 - Deletar Conta")
-                    print("4 - Sair")
-                    opcaoUsuario = input("Opção: ")
-                    match opcaoUsuario:
-                         case '1':
-                              print("Então vamos continuar! ")
-                              menu_bem(usuarios,email)
-                         case '2':
-                              editar_conta(usuarios,email)
-                              return
-                         case '3':
-                              deletar_conta(usuarios, email)
-                              break
-                         case '4':
-                              print("Até mais então...")
-                              break
-                         case _:
-                              print("opção inválida")          
-          else:
-               print("Email ou senha inválidos. ")
+     """
+     Realiza o login de um usuário e apresenta opções para acessar o menu BEM+,
+     editar conta, deletar conta ou sair.
+
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     """
+     email = input("Digite seu email: ").lower()
+     senha = input("Digite sua senha: ")
+     
+     if email in usuarios and usuarios[email]['senha'] == senha:
+          print(f"\nBem-vindo(a), {usuarios[email]['nome']}")
+          while True:
+               print("O que deseja fazer? ")
+               print("1 - Prosseguir para o Menu BEM+")
+               print("2 - Editar Conta")
+               print("3 - Deletar Conta")
+               print("4 - Sair")
+               opcaoUsuario = input("Opção: ")
+               match opcaoUsuario:
+                    case '1':
+                         print("Então vamos continuar! ")
+                         menu_bem(usuarios,email)
+                    case '2':
+                         editar_conta(usuarios,email)
+                         return
+                    case '3':
+                         deletar_conta(usuarios, email)
+                         break
+                    case '4':
+                         print("Até mais então...")
+                         break
+                    case _:
+                         print("opção inválida")          
+     else:
+          print("Email ou senha inválidos. ")
 
 #Menu BEM+:
 def menu_bem(usuarios,email):
+     """
+     Apresenta o menu principal do BEM+ com as opções de funcionalidades ao usuário.
+
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     email (str): Email do usuário logado.
+     """     
      print(f"O que faremos hoje {usuarios[email]['nome']}? ")
      print("[1] Frase do Dia")
      print("[2] Iniciar um Cenário Ético")
@@ -257,6 +347,9 @@ def menu_bem(usuarios,email):
      
 #Menu principal:
 def menu():
+     """
+     Exibe o menu principal do sistema e direciona para cadastro, login, recuperação de senha ou encerramento.
+     """     
      usuarios = carregar_usuarios()
      while True:
         print("1 - Cadastrar")
@@ -276,8 +369,6 @@ def menu():
                   print("Até mais então...")
                   break
              case _:
-                  print("opção inválida")
-                  
+                  print("opção inválida")                  
 
-
-menu()                              
+menu()                                  
