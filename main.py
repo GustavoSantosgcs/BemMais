@@ -90,14 +90,17 @@ def menu_bem(usuarios,email):
      usuarios (dict): Dicionário com os usuários cadastrados.
      email (str): Email do usuário logado.
      """     
-     print(f"O que faremos hoje {usuarios[email]['nome']}? ")
-     print("[1] Frase do Dia")
-     print("[2] Iniciar um Cenário Ético")
-     print("[3] Receber um Desafio do Bem")
-     print("[4] Ver Pontuação e Nível")
-     print("[5] Ver Histórico de Respostas")
-     print("[6] Ranking de Usuários")
-     print("[7] Sair")
+     print("\n" + "="*42)
+     print(f"🌟 MENU BEM+ - {usuarios[email]['nome']} 🌟".center(42))
+     print("="*42)
+     print("│ 1 - Frase do Dia              │")
+     print("│ 2 - Iniciar Cenário Ético     │")
+     print("│ 3 - Receber Desafio do Bem    │")
+     print("│ 4 - Ver Pontuação e Nível     │")
+     print("│ 5 - Ver Histórico de Respostas│")
+     print("│ 6 - Ranking de Usuários       │")
+     print("│ 7 - Sair                      │")
+     print("="*42)
      opcaoBem = input("Opção: ")          
      
      match opcaoBem:
@@ -135,23 +138,27 @@ def menu():
      """     
      usuarios = carregar_usuarios()
      while True:
-        print("1 - Cadastrar")
-        print("2 - Login")
-        print("3 - Recuperação de senha")
-        print("4 - Sair")
-        opcao = input("Escolha uma opção: ")
-        
-        match opcao:
-             case '1':
-                  cadastrar(usuarios)
-             case '2':
-                  login(usuarios)
-             case '3':
-                  recuperar_senha(usuarios)
-             case '4':
-                  print("Até mais então...")
-                  break
-             case _:
-                  print("opção inválida")                  
+          print("\n" + "="*40)
+          print("📘  MENU PRINCIPAL - BEM+ 📘".center(40))
+          print("="*40)
+          print("│ 1 - Cadastrar               │")
+          print("│ 2 - Login                   │")
+          print("│ 3 - Recuperação de senha    │")
+          print("│ 4 - Sair                    │")
+          print("="*40)
+          opcao = input("Escolha uma opção: ")
+             
+          match opcao:
+               case '1':
+                    cadastrar(usuarios)
+               case '2':
+                    login(usuarios)
+               case '3':
+                    recuperar_senha(usuarios)
+               case '4':
+                    print("Até mais então...")
+                    break
+               case _:
+                    print("opção inválida")                  
 
 menu()                                  
