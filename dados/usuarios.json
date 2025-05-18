@@ -10,7 +10,7 @@
         "nome": "Gustavo Santos",
         "telefone": "71985452583",
         "senha": "123123",
-        "pontos": 2,
+        "pontos": 12,
         "resposta_secreta": "Livia"
     },
     "ana.lima@ufrpe.br": {
@@ -21,7 +21,7 @@
         "resposta_secreta": "Carla"
     },
     "joao.silva@ufrpe.br": {
-        "nome": "João Silva",
+        "nome": "Jo\u00c3\u00a3o Silva",
         "telefone": "81987654321",
         "senha": "654321",
         "pontos": 7,
@@ -46,7 +46,7 @@
         "telefone": "81981234567",
         "senha": "321321",
         "pontos": 6,
-        "resposta_secreta": "Patrícia"
+        "resposta_secreta": "Patr\u00c3\u00adcia"
     },
     "rafael.costa@outlook.com": {
         "nome": "Rafael Costa",
