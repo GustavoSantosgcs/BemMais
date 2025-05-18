@@ -1,12 +1,13 @@
 import json
 import os
+import re
 
 arquivo_usuarios = os.path.join('dados', 'usuarios.json')
 
 #Carregamento de dados já existentes:
 def carregar_usuarios():
      """
-     Carrega os usuários do arquivo JSON, se existir.
+     Carrega os usuários do arquivo JSON, caso exista.
 
      Retorna:
      dict: Dicionário com os dados dos usuários cadastrados.
@@ -19,7 +20,7 @@ def carregar_usuarios():
 #Salvar usuario:         
 def salvar_usuarios(usuarios):  
      """
-     Salva os dados dos usuários no arquivo usuarios.JSON.
+     Salva os dados dos usuários no arquivo JSON estabelecido.
 
      Parâmetros:
      usuarios (dict): Dicionário contendo os dados dos usuários.
@@ -29,16 +30,17 @@ def salvar_usuarios(usuarios):
 
 #Validação de email
 def email_valido(email):  
-     """
-     Verifica se o e-mail é válido de acordo com domínios permitidos.
+    """
+    Verifica se o e-mail possui um formato válido e pertence a um domínio permitido.
 
-     Parâmetros:
-     email (str): E-mail informado pelo usuário.
+    Parâmetros:
+    email (str): E-mail informado pelo usuário.
 
-     Retorna:
-     bool: True se o e-mail for válido, False caso contrário.
-     """
-     return email.endswith('@gmail.com') or email.endswith('@ufrpe.br') or email.endswith('@hotmail.com') or email.endswith('@outlook.com')
+    Retorna:
+    bool: True se o e-mail for válido, False caso contrário.
+    """
+    padrao = r'^[\w\.-]+@(?:gmail\.com|hotmail\.com|outlook\.com|ufrpe\.br)$'
+    return re.match(padrao, email) is not None
 
 #Validação de senha
 def senha_valida(senha):
@@ -143,8 +145,9 @@ def editar_conta(usuarios,email):
           match editar:
                case '1': #Editar Email
                     novo_email = input("Digite seu novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ")
-                    while not email_valido(novo_email):
-                         novo_email = input("Email inválido ou já existente! Tente novamente (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com)")               
+                    
+                    while (not email_valido(novo_email)) or (novo_email in usuarios and novo_email != email):
+                         novo_email = input("Email inválido ou já existente! Tente novamente: ").lower()
                     usuarios[novo_email] = usuarios[email]
                     del usuarios[email]
                     salvar_usuarios(usuarios)
