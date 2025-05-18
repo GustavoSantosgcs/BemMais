@@ -22,7 +22,7 @@ def carregar_usuarios():
 #Salvar usuario:         
 def salvar_usuarios(usuarios):  
      """
-     Salva os dados dos usuários no arquivo JSON.
+     Salva os dados dos usuários no arquivo usuarios.JSON.
 
      Parâmetros:
      usuarios (dict): Dicionário contendo os dados dos usuários.
@@ -100,15 +100,27 @@ def cadastrar(usuarios):
      salvar_usuarios(usuarios)
      print("Cadastro realizado com sucesso!")
 
-#Alterar senha:
-def alterar_senha(usuarios,email):
-     nova_senha = input("Digite sua nova senha composta por 6 números: ")
-     while not senha_valida(nova_senha):
-          nova_senha = input("Senha invalida. Tente com 6 digitos e apenas números")
-     usuarios[email]['senha'] = nova_senha
-     salvar_usuarios(usuarios)
-     print("Senha atualizada com sucesso!")
+def alterar_senha(usuarios, email):
+    """
+    Permite ao usuário alterar a senha, sendo necessário a confirmação da senha anterior.
 
+    Parâmetros:
+    usuarios (dict): Dicionário com os usuários cadastrados.
+    email (str): Email do usuário que deseja alterar a senha.
+    """
+    senha_atual = input("Digite sua senha atual (6 dígitos) para confirmar a alteração: ")
+    if senha_atual != usuarios[email]['senha']:
+        print("❌ Senha atual incorreta! Voltando ao menu...")
+        return
+    
+    nova_senha = input("Digite sua nova senha composta por 6 números: ")
+    while not senha_valida(nova_senha):
+        nova_senha = input("Senha inválida. Tente novamente com 6 dígitos numéricos: ")
+
+    usuarios[email]['senha'] = nova_senha
+    salvar_usuarios(usuarios)
+    print("✅ Senha atualizada com sucesso!")
+    
 #Editar usuario:
 def editar_conta(usuarios,email):
      """
@@ -182,6 +194,7 @@ def recuperar_senha(usuarios):
 
      Parâmetros:
      usuarios (dict): Dicionário com os usuários cadastrados.
+     email (str): Email do usuário que deseja recuperar a conta.
      """
      email = input("Digite seu email cadastrado: ").lower()
      
@@ -246,11 +259,11 @@ def pontuacao_e_nivel(usuarios, email):
      pontos = usuarios[email]['pontos']
      if pontos < 10:
           nivel = 'Iniciante 🐣'
-     elif pontos < 20:
+     elif pontos < 40:
           nivel = 'Explorador 🌱'
-     elif pontos < 30:
+     elif pontos < 70:
           nivel = 'Consciente 💡'
-     elif pontos < 50:
+     elif pontos < 90:
           nivel = 'Mentor 🌟'
      else:
           nivel = 'Mestre 🌈'

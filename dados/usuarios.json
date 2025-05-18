@@ -9,8 +9,64 @@
     "adm@gmail.com": {
         "nome": "Gustavo Santos",
         "telefone": "71985452583",
-        "senha": "123456",
+        "senha": "123123",
         "pontos": 2,
         "resposta_secreta": "Livia"
+    },
+    "ana.lima@ufrpe.br": {
+        "nome": "Ana Lima",
+        "telefone": "81990011223",
+        "senha": "101010",
+        "pontos": 10,
+        "resposta_secreta": "Carla"
+    },
+    "joao.silva@ufrpe.br": {
+        "nome": "João Silva",
+        "telefone": "81987654321",
+        "senha": "654321",
+        "pontos": 7,
+        "resposta_secreta": "Sandra"
+    },
+    "mariana.rocha@gmail.com": {
+        "nome": "Mariana Rocha",
+        "telefone": "81991234567",
+        "senha": "202420",
+        "pontos": 5,
+        "resposta_secreta": "Beatriz"
+    },
+    "carlos.almeida@ufrpe.br": {
+        "nome": "Carlos Almeida",
+        "telefone": "81980001122",
+        "senha": "909090",
+        "pontos": 9,
+        "resposta_secreta": "Juliana"
+    },
+    "juliana.moura@hotmail.com": {
+        "nome": "Juliana Moura",
+        "telefone": "81981234567",
+        "senha": "321321",
+        "pontos": 6,
+        "resposta_secreta": "Patrícia"
+    },
+    "rafael.costa@outlook.com": {
+        "nome": "Rafael Costa",
+        "telefone": "81985556677",
+        "senha": "789456",
+        "pontos": 3,
+        "resposta_secreta": "Renata"
+    },
+    "luana.ferreira@ufrpe.br": {
+        "nome": "Luana Ferreira",
+        "telefone": "81986667788",
+        "senha": "111222",
+        "pontos": 8,
+        "resposta_secreta": "Amanda"
+    },
+    "pedro.martins@ufrpe.br": {
+        "nome": "Pedro Martins",
+        "telefone": "81987778899",
+        "senha": "147258",
+        "pontos": 1,
+        "resposta_secreta": "Vanessa"
     }
 }
