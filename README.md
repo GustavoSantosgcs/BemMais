@@ -1,33 +1,39 @@
-# Projeto BEM+
+Projeto BEM+
 Pratique o bem. Viva a ética.
 
-# Descrição:
+📝 Descrição
 ⚠️ Aviso: Este é o meu primeiro projeto e ainda está em desenvolvimento.
 O código está passando por mudanças frequentes para melhorias e correções.
 
-Sinta-se à vontade para acompanhar, dar sugestões ou enviar pull requests!
+Sinta-se à vontade para acompanhar, sugerir melhorias ou enviar pull requests!
 
-# Funcionalidades:
-Cadastro de Usuário (CRUD COMPLETO): Sistema de cadastro de dados pessoais que são armazenados em um arquivo JSON, mas que podem ser alterados, consultados e excluidos.
+🚀 Funcionalidades
+Cadastro de Usuário (CRUD completo): Sistema de cadastro com dados armazenados em JSON, permitindo criar, ler, atualizar e excluir contas.
 
-Frase do Dia: Uma nova frase inspiradora será exibida diariamente para motivar boas atitudes e fortalecimento da saúde mental.       
+Frase do Dia: Exibição de uma frase inspiradora diariamente, com foco em atitudes positivas e bem-estar mental.
 
-Quiz com Cenários Éticos: O usuário receberá dilemas éticos, atualmente mais direcionado ao ramo de TI, e deverá escolher entre 3 alternativas. As respostas influenciam a pontuação.
+Quiz com Cenários Éticos: O usuário responde dilemas éticos (especialmente voltados à área de TI), com pontuação baseada nas escolhas.
 
-Desafios do Bem: Toda semana, novos desafios serão propostos para incentivar ações positivas e fortalecer hábitos éticos. *Alguns dos desafios são relacionados a outros projetos sociais da minha turma.
+Desafios do Bem: Desafios semanais incentivando ações éticas e sociais. Alguns são integrados a projetos da turma.
 
-Sistema de Pontuação: O usuário acumulará pontos ao realizar os Desafios do Bem e participar do Quiz Ético. Conforme a pontuação, avançará por diferentes níveis de ética e bem-estar.
+Sistema de Pontuação e Níveis: Usuários acumulam pontos com base nas atividades, evoluindo por níveis de ética e responsabilidade social.
 
-# Tecnologias Utilizadas:
-Python 3
+🛠 Tecnologias Utilizadas
+Linguagem: Python 3
+
 Módulos:
-     os para manipulação do terminal.
-     re para expressões regulares na validação de emails.
-     random para seleção aleatória de frases.
 
-# Possíveis Melhorias Futuras:
+os – Para manipulação de diretórios e terminal
 
-Interface gráfica: Com a intenção de tornar o sistema mais atraente e agradável ao público.
-Ranking de Usuários: Exibir um ranking ordenado com a pontuação dos membros do Bem+.
-Histórico de Respostas: Exibir histórico ordenado por data ou tipo de atividade/desafio que tenha sido realizado.
-Verificação de Duas Etapas: Gerar um código para confirmação da recuperação de senha, tornando o sistema de cadastro mais seguro.
+re – Para validação de e-mails usando expressões regulares
+
+random – Para seleção aleatória de frases motivacionais
+
+🌱 Melhorias Futuras (Planejadas)
+Interface Gráfica: Tornar a experiência mais atrativa e amigável ao usuário.
+
+Ranking de Usuários: Exibir classificação por pontuação entre os membros do BEM+.
+
+Histórico de Atividades: Registrar e exibir histórico de respostas e desafios concluídos.
+
+Verificação em Duas Etapas: Implementar confirmação por código para recuperação de senha, aumentando a segurança.
