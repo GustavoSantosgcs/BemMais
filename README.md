@@ -1,13 +1,16 @@
-Projeto BEM+
+# Projeto BEM+:
+
 Pratique o bem. Viva a ética.
 
-📝 Descrição
+#  Descrição:
+
 ⚠️ Aviso: Este é o meu primeiro projeto e ainda está em desenvolvimento.
 O código está passando por mudanças frequentes para melhorias e correções.
 
 Sinta-se à vontade para acompanhar, sugerir melhorias ou enviar pull requests!
 
-🚀 Funcionalidades
+#  Funcionalidades:
+
 Cadastro de Usuário (CRUD completo): Sistema de cadastro com dados armazenados em JSON, permitindo criar, ler, atualizar e excluir contas.
 
 Frase do Dia: Exibição de uma frase inspiradora diariamente, com foco em atitudes positivas e bem-estar mental.
@@ -18,7 +21,8 @@ Desafios do Bem: Desafios semanais incentivando ações éticas e sociais. Algun
 
 Sistema de Pontuação e Níveis: Usuários acumulam pontos com base nas atividades, evoluindo por níveis de ética e responsabilidade social.
 
-🛠 Tecnologias Utilizadas
+# Tecnologias Utilizadas:
+
 Linguagem: Python 3
 
 Módulos:
@@ -29,7 +33,8 @@ re – Para validação de e-mails usando expressões regulares
 
 random – Para seleção aleatória de frases motivacionais
 
-🌱 Melhorias Futuras (Planejadas)
+# Melhorias Futuras (Planejadas):
+
 Interface Gráfica: Tornar a experiência mais atrativa e amigável ao usuário.
 
 Ranking de Usuários: Exibir classificação por pontuação entre os membros do BEM+.
