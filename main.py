@@ -5,6 +5,7 @@ from usuario import (
     salvar_usuarios,
     email_valido,
     senha_valida,
+    telefone_valido,
     cadastrar,
     alterar_senha,
     editar_conta,

@@ -28,7 +28,7 @@ def salvar_usuarios(usuarios):
      with open(arquivo_usuarios,'w') as arquivo:
           json.dump(usuarios, arquivo, indent=4)
 
-#Validação de email
+#Validação de email:
 def email_valido(email):  
     """
     Verifica se o e-mail possui um formato válido e pertence a um domínio permitido.
@@ -42,7 +42,7 @@ def email_valido(email):
     padrao = r'^[\w\.-]+@(?:gmail\.com|hotmail\.com|outlook\.com|ufrpe\.br)$'
     return re.match(padrao, email) is not None
 
-#Validação de senha
+#Validação de senha:
 def senha_valida(senha):
      """
      Verifica se a senha contém apenas dígitos e tem 6 caracteres.
@@ -55,6 +55,20 @@ def senha_valida(senha):
      """
      return senha.isdigit() and len(senha) == 6
 
+#Validação de telefone:
+def telefone_valido(telefone):
+     """
+     Verifica se o telefone informado possui um formato padrão do Brasil.
+     
+     Parâmetros:
+     telefone (str): telefone informado pelo usuário.
+     
+     Retorna:
+     bool: True se o telefone estiver valido, False caso negativo.
+     """
+     padrao = r'^\([1-9]{2}\)\s9[0-9]{4}-[0-9]{4}$'
+     return re.match(padrao,telefone) is not None
+
 #Cadastro de usuário:
 def cadastrar(usuarios):
      """
@@ -64,10 +78,10 @@ def cadastrar(usuarios):
      usuarios (dict): Dicionário com os usuários existentes.
      """ 
      nome = input("Digite seu nome: ")
-     telefone = input("Digite seu telefone com 11 digitos: Ex:81999998888 ")
-     while not telefone.isdigit() or len(telefone) != 11:
+     telefone = input("Digite seu telefone com DDD Ex:(81) 99999-8888: ").strip()
+     while not telefone_valido(telefone):
           print("Erro de digitação!")
-          telefone = input(" Tente novamente apenas os numeros (DDD + numeros: ex 71988889999): ")
+          telefone = input(" Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
      
      email = input("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
      if not email_valido(email):
@@ -99,6 +113,7 @@ def cadastrar(usuarios):
      salvar_usuarios(usuarios)
      print("Cadastro realizado com sucesso!")
 
+#Alteração de senha:
 def alterar_senha(usuarios, email):
     """
     Permite ao usuário alterar a senha, sendo necessário a confirmação da senha anterior.
@@ -161,9 +176,10 @@ def editar_conta(usuarios,email):
                     print("Nome atualizado com sucesso!")
                     
                case '3':
-                    novo_tel = input("Digite o novo número de telefone: ")
-                    while not novo_tel.isdigit() or len(novo_tel) != 11:
-                         novo_tel = input("Número inválido. Tente com 11 digitos e apenas os números")
+                    novo_tel = input("Digite o novo número de telefone com DDD Ex:(81) 99999-8888: ")
+                    while not telefone_valido(novo_tel):
+                         novo_tel = input("Cel. invalido! Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
+                    
                     usuarios[email]['telefone'] = novo_tel
                     salvar_usuarios(usuarios)
                     print("Telefone atualizado com sucesso!")

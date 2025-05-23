@@ -29,7 +29,7 @@ Sinta-se à vontade para acompanhar, sugerir melhorias ou enviar pull requests!
 Módulos:
 
 - **os** – Para manipulação de diretórios e terminal
-- **re** – Para validação de e-mails usando expressões regulares
+- **re** – Para validação da configuração do telefone e e-mails usando expressões regulares
 - **random** – Para seleção aleatória de frases motivacionais
 
 # Como Instalar e Executar o projeto Bem+
