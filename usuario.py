@@ -189,8 +189,8 @@ def editar_conta(usuarios,email):
 #Recuperar senha:
 def recuperar_senha(usuarios):
      """
-     Permite ao usuário recuperar a senha caso tenha esquecido, mediante verificação de email,
-     telefone e resposta secreta.
+     Permite ao usuário recuperar a senha caso tenha esquecido,
+     mediante verificação de email e resposta secreta.
 
      Parâmetros:
      usuarios (dict): Dicionário com os usuários cadastrados.
@@ -200,15 +200,6 @@ def recuperar_senha(usuarios):
      
      if email not in usuarios:
           print("Email não cadastrado!")
-          return
-     
-     telefone = input("Digite seu telefone com 11 digitos: Ex:81999998888 ")
-     while not telefone.isdigit() or len(telefone) != 11:
-          print("Erro de digitação!")
-          telefone = input(" Tente novamente apenas os numeros (DDD + numeros: ex 71988889999): ")
-     
-     if telefone != (usuarios[email]['telefone']):
-          print("Telefone não correspondente!")
           return
      
      print("Responda a seguinte pergunta secreta cadastrada:")
