@@ -59,6 +59,9 @@ def senha_valida(senha):
 def telefone_valido(telefone):
      """
      Verifica se o telefone informado possui um formato padrão do Brasil.
+     Aceita o número com o sem espaço após o DDD
+     Ex.:(81) 98877-4422 ou (81)98877-4422
+
      
      Parâmetros:
      telefone (str): telefone informado pelo usuário.
@@ -66,7 +69,7 @@ def telefone_valido(telefone):
      Retorna:
      bool: True se o telefone estiver valido, False caso negativo.
      """
-     padrao = r'^\([1-9]{2}\)\s9[0-9]{4}-[0-9]{4}$'
+     padrao = r'^\([1-9]{2}\)\s?9[0-9]{4}-[0-9]{4}$'
      return re.match(padrao,telefone) is not None
 
 #Cadastro de usuário:

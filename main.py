@@ -1,17 +1,8 @@
 import json
 import os
-from usuario import (
-     carregar_usuarios,
-    salvar_usuarios,
-    email_valido,
-    senha_valida,
-    telefone_valido,
-    cadastrar,
-    alterar_senha,
-    editar_conta,
-    recuperar_senha,
-    deletar_conta
-)
+from usuario import (carregar_usuarios,salvar_usuarios,email_valido,
+    senha_valida, telefone_valido, cadastrar, alterar_senha,
+    editar_conta, recuperar_senha, deletar_conta)
 from frases import frase_dia
 from dilema import iniciar_dilema
 from desafios import desafios_bem
@@ -37,7 +28,7 @@ def pontuacao_e_nivel(usuarios, email):
      elif pontos < 90:
           nivel = 'Mentor 🌟'
      else:
-          nivel = 'Mestre 🌈'
+          nivel = 'Mestre 👑'
      print(f"\n🚀 Olá, {usuarios[email]['nome']}! Sua jornada pelo BEM+ está em andamento.")
      print("Vamos conferir seu progresso e o impacto positivo que você está construindo...\n")
      print(f"\n⭐ Pontuação total: {pontos} pontos")
