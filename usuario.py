@@ -92,15 +92,22 @@ def cadastrar(usuarios):
                print("email invalido. Tente novamente!")
           elif email in usuarios:
                print("email já cadastrado. ")
-               return #Usuario retorna ao menu login           
+               return            
           else:
                break
-          
-     senha = input("Digite uma senha com 6 digitos (apenas números): ")
-     while not senha_valida(senha):
-          print("Senha inválida! Tente novamente...")
-          senha = input("Digite uma senha com 6 digitos (apenas números): ")
      
+     while True:     
+          senha = input("Digite uma senha com 6 digitos (apenas números): ")
+          while not senha_valida(senha):
+               print("Senha inválida! Tente novamente...")
+               senha = input("Digite uma senha com 6 digitos (apenas números): ")
+          confirmação = input("Confirme sua senha: ")
+          if confirmação == senha:
+               print("Perfeito! Senhas iguais.")
+               break
+          else:
+               print("Senhas diferentes! Tente novamente...")
+          
      print("\n Para recuperação de senha, responda a seguinte pergunta: ")   
      resposta_secreta = input("Qual o nome da sua professora favorita? ").strip()
      while resposta_secreta == "":
@@ -150,16 +157,25 @@ def alterar_senha(usuarios, email):
     """
     senha_atual = input("Digite sua senha atual (6 dígitos) para confirmar a alteração: ")
     if senha_atual != usuarios[email]['senha']:
-        print("❌ Senha atual incorreta! Voltando ao menu...")
+        print("Senha atual incorreta! Voltando ao menu...")
         return
     
-    nova_senha = input("Digite sua nova senha composta por 6 números: ")
-    while not senha_valida(nova_senha):
-        nova_senha = input("Senha inválida. Tente novamente com 6 dígitos numéricos: ")
-
+    while True:     
+          nova_senha = input("Digite sua nova senha composta por 6 números: ")
+          while not senha_valida(nova_senha):
+               print("Senha inválida! Tente novamente...")
+               nova_senha = input("Digite uma senha com 6 digitos (apenas números): ")
+          
+          confirmação = input("Confirme sua senha: ")
+          if confirmação == nova_senha:
+               print("Perfeito! Senhas iguais.")
+               break
+          else:
+               print("Senhas diferentes! Tente novamente...")
+    
     usuarios[email]['senha'] = nova_senha
     salvar_usuarios(usuarios)
-    print("✅ Senha atualizada com sucesso!")
+    print("Senha atualizada com sucesso!")
 
 #Alterar resposta secreta:
 def alterar_resposta(usuarios,email):
