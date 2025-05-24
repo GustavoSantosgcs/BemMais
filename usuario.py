@@ -86,19 +86,20 @@ def cadastrar(usuarios):
           print("Erro de digitação!")
           telefone = input(" Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
      
-     email = input("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
-     if not email_valido(email):
-          print("email invalido. Tente novamente!")
-          return
-
-     if email in usuarios:
-          print("email já cadastrado. ")
-          return           
-     
+     while True:
+          email = input("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
+          if not email_valido(email):
+               print("email invalido. Tente novamente!")
+          elif email in usuarios:
+               print("email já cadastrado. ")
+               return #Usuario retorna ao menu login           
+          else:
+               break
+          
      senha = input("Digite uma senha com 6 digitos (apenas números): ")
-     if not senha_valida(senha):
-          print("Senha inválida! Tente novamente digitando apenas números.")
-          return
+     while not senha_valida(senha):
+          print("Senha inválida! Tente novamente...")
+          senha = input("Digite uma senha com 6 digitos (apenas números): ")
      
      print("\n Para recuperação de senha, responda a seguinte pergunta: ")   
      resposta_secreta = input("Qual o nome da sua professora favorita? ").strip()
@@ -199,9 +200,9 @@ def editar_conta(usuarios,email):
           print("6 - sair")
           editar = input("opção: ")
           match editar:
-               case '1': #Editar Email
+               case '1': 
                     email = alterar_email(usuarios,email)
-                    
+                    return email     
                case '2':
                     novo_nome = input("Digite o novo nome: ")
                     usuarios[email]['nome'] = novo_nome

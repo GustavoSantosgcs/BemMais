@@ -163,9 +163,15 @@ def iniciar_dilema():
         for letra, alternativa in pergunta["alternativas"].items():
             print(f"  ({letra}) {alternativa}")
         
-        resposta = input("Sua resposta: ").lower()
-        while resposta not in ['a', 'b', 'c']:
-            resposta = input("Opção inválida. Escolha (a, b ou c): ").lower()
+        while True:
+            resposta = input("Digite sua alternativa ou digite 'sair' para encerrar: ").lower()
+            if resposta == 'sair':
+                print("Certo. Vamos encerrar por aqui...")
+                return pontuacao
+            elif resposta in ['a','b','c']:
+                break
+            else:    
+                print("Opção inválida!\n ")
 
         pontos_resposta = pergunta.get("pontuações", {}).get(resposta, 0)
         pontuacao += pontos_resposta

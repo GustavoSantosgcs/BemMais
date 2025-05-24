@@ -60,11 +60,10 @@ def login(usuarios):
                          print("Então vamos continuar! ")
                          menu_bem(usuarios,email)
                     case '2':
-                         editar_conta(usuarios,email)
-                         return
+                         email = editar_conta(usuarios,email)
                     case '3':
-                         deletar_conta(usuarios, email)
-                         break
+                         if deletar_conta(usuarios, email):
+                              break
                     case '4':
                          print("Até mais então...")
                          break
@@ -91,38 +90,40 @@ def menu_bem(usuarios,email):
      print("│ 4 - Ver Pontuação e Nível     │")
      print("│ 5 - Ver Histórico de Respostas│")
      print("│ 6 - Ranking de Usuários       │")
-     print("│ 7 - Sair                      │")
+     print("│ 7 - Sair do menu BEM+         │")
      print("="*42)
      opcaoBem = input("Opção: ")          
      
-     match opcaoBem:
-          case '1':
-               frase_dia()
+     while True:
+          match opcaoBem:
+               case '1':
+                    frase_dia()
+                    input("\nPressione Enter para continuar...")
+               
+               case '2':
+                    pontos = iniciar_dilema()
+                    usuarios[email]['pontos'] = usuarios[email].get('pontos', 0) + pontos
+                    salvar_usuarios(usuarios)
+                    
+               case '3':
+                    desafios_bem(usuarios,email)
+                    salvar_usuarios(usuarios)
+                    
+               case '4':
+                    pontuacao_e_nivel(usuarios,email)
+                    input("\nPressione Enter para continuar...")
+               case '5':
+                    print("Desculpe, Histórico de Respostas ainda em manutenção")
+                    
+               case '6':
+                    print("Desculpe, Ranking de Usuários ainda em manutenção")
+                    
+               case '7':
+                    print("Saindo do Menu BEM+...")
+                    return
+               case _:
+                    print("Opção invalida!")       
           
-          case '2':
-               pontos = iniciar_dilema()
-               usuarios[email]['pontos'] = usuarios[email].get('pontos', 0) + pontos
-               salvar_usuarios(usuarios)
-               
-          case '3':
-               desafios_bem(usuarios,email)
-               salvar_usuarios(usuarios)
-               
-          case '4':
-               pontuacao_e_nivel(usuarios,email)
-               
-          case '5':
-               print("Em manutenção")
-               
-          case '6':
-               print("Em manutenção")
-               
-          case '7':
-               print("Em manutenção")
-               
-          case _:
-               print("Opção invalida!")       
-     
 #Menu principal:
 def menu():
      """
