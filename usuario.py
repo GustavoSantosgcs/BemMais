@@ -116,6 +116,28 @@ def cadastrar(usuarios):
      salvar_usuarios(usuarios)
      print("Cadastro realizado com sucesso!")
 
+#Alterar email:
+def alterar_email(usuarios, email):
+     """
+     Permite ao usuário realizar alteração de email.
+     
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     email (str): Email cadastrado do usuário que será alterado.
+     
+     retorna:
+     str: O novo email atualizado.
+     """
+     novo_email = input("Digite seu novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ")  
+     while (not email_valido(novo_email)) or (novo_email in usuarios and novo_email != email):
+          novo_email = input("Email inválido ou já existente! Tente novamente: ").lower()
+     
+     usuarios[novo_email] = usuarios[email]
+     del usuarios[email]
+     salvar_usuarios(usuarios)
+     print("email atualizado com sucesso!")
+     return novo_email
+
 #Alteração de senha:
 def alterar_senha(usuarios, email):
     """
@@ -137,7 +159,23 @@ def alterar_senha(usuarios, email):
     usuarios[email]['senha'] = nova_senha
     salvar_usuarios(usuarios)
     print("✅ Senha atualizada com sucesso!")
-    
+
+#Alterar resposta secreta:
+def alterar_resposta(usuarios,email):
+     """
+     Permite ao usuário alterar a resposta secreta usada para recuperação de senha.
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     email (str): Email do usuário que deseja alterar a resposta secreta.
+     """
+     print("Responda a seguinte pergunta novamente: ")
+     resposta_secreta = input("Qual o nome da sua professora favorita? ").strip()
+     while resposta_secreta == "":
+          resposta_secreta = input("Por favor, digite um nome válido: ").strip()
+     usuarios[email]['resposta_secreta'] = resposta_secreta
+     salvar_usuarios(usuarios)
+     print("Nova resposta secreta salva com sucesso! ")
+          
 #Editar usuario:
 def editar_conta(usuarios,email):
      """
@@ -162,15 +200,7 @@ def editar_conta(usuarios,email):
           editar = input("opção: ")
           match editar:
                case '1': #Editar Email
-                    novo_email = input("Digite seu novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ")
-                    
-                    while (not email_valido(novo_email)) or (novo_email in usuarios and novo_email != email):
-                         novo_email = input("Email inválido ou já existente! Tente novamente: ").lower()
-                    usuarios[novo_email] = usuarios[email]
-                    del usuarios[email]
-                    salvar_usuarios(usuarios)
-                    print("email atualizado com sucesso!")
-                    email = novo_email
+                    email = alterar_email(usuarios,email)
                     
                case '2':
                     novo_nome = input("Digite o novo nome: ")
@@ -191,14 +221,7 @@ def editar_conta(usuarios,email):
                     alterar_senha(usuarios,email)
                     
                case '5':
-                    print("Responda a seguinte pergunta novamente: ")
-                    resposta_secreta = input("Qual o nome da sua professora favorita? ").strip()
-                    while resposta_secreta == "":
-                         resposta_secreta = input("Por favor, digite um nome válido: ").strip()
-                    usuarios[email]['resposta_secreta'] = resposta_secreta
-                    salvar_usuarios(usuarios)
-                    print("Nova resposta secreta salva com sucesso! ")
-                    
+                    alterar_resposta(usuarios,email)
                case '6':
                     print("Vamos voltar então...")
                     break
