@@ -34,7 +34,7 @@ def pontuacao_e_nivel(usuarios, email):
      print(f"\n⭐ Pontuação total: {pontos} pontos")
      print(f"🔰 Nível atual: {nivel}\n")
 
-#Logar:
+#Menu do usuário:
 def login(usuarios):
      """
      Realiza o login de um usuário e apresenta opções para acessar o menu BEM+,
@@ -82,17 +82,17 @@ def menu_bem(usuarios,email):
      email (str): Email do usuário logado.
      """     
      while True:
-          print("\n" + "="*42)
-          print(f"🌟 MENU BEM+ - {usuarios[email]['nome']} 🌟".center(42))
-          print("="*42)
-          print("│ 1 - Frase do Dia              │")
-          print("│ 2 - Iniciar Cenário Ético     │")
-          print("│ 3 - Receber Desafio do Bem    │")
-          print("│ 4 - Ver Pontuação e Nível     │")
-          print("│ 5 - Ver Histórico de Respostas│")
-          print("│ 6 - Ranking de Usuários       │")
-          print("│ 7 - Sair do menu BEM+         │")
-          print("="*42)          
+          print("\n" + "="*38)
+          print(f"🌟 MENU BEM+ - {usuarios[email]['nome']} 🌟".center(38))
+          print("="*38)
+          print("│ 1 - Frase do Dia                  │")
+          print("│ 2 - Iniciar Cenário Ético         │")
+          print("│ 3 - Receber Desafio do Bem        │")
+          print("│ 4 - Ver Pontuação e Nível         │")
+          print("│ 5 - Ver Histórico de Respostas    │")
+          print("│ 6 - Ranking de Usuários           │")
+          print("│ 7 - Sair do menu BEM+             │")
+          print("="*38)          
           opcaoBem = input("Sua opção é? ")
           match opcaoBem:
                case '1':
@@ -123,21 +123,21 @@ def menu_bem(usuarios,email):
                case _:
                     print("Opção invalida!")       
           
-#Menu principal:
-def menu():
+#Menu inicial:
+def menu_inicial():
      """
-     Exibe o menu principal do sistema e direciona para cadastro, login, recuperação de senha ou encerramento.
+     Exibe o menu inicial do sistema e direciona para cadastro, login, recuperação de senha ou encerramento.
      """     
      usuarios = carregar_usuarios()
      while True:
-          print("\n" + "="*40)
-          print("📘  MENU PRINCIPAL - BEM+ 📘".center(40))
-          print("="*40)
+          print("\n" + "="*32)
+          print("📘  MENU INICIAL - BEM+  📘".center(32))
+          print("="*32)
           print("│ 1 - Cadastrar               │")
           print("│ 2 - Login                   │")
           print("│ 3 - Recuperação de senha    │")
           print("│ 4 - Sair                    │")
-          print("="*40)
+          print("="*32)
           opcao = input("Escolha uma opção: ")
              
           match opcao:
@@ -153,4 +153,4 @@ def menu():
                case _:
                     print("opção inválida")                  
 
-menu()                                  
+menu_inicial()                                  
