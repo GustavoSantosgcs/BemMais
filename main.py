@@ -81,20 +81,19 @@ def menu_bem(usuarios,email):
      usuarios (dict): Dicionário com os usuários cadastrados.
      email (str): Email do usuário logado.
      """     
-     print("\n" + "="*42)
-     print(f"🌟 MENU BEM+ - {usuarios[email]['nome']} 🌟".center(42))
-     print("="*42)
-     print("│ 1 - Frase do Dia              │")
-     print("│ 2 - Iniciar Cenário Ético     │")
-     print("│ 3 - Receber Desafio do Bem    │")
-     print("│ 4 - Ver Pontuação e Nível     │")
-     print("│ 5 - Ver Histórico de Respostas│")
-     print("│ 6 - Ranking de Usuários       │")
-     print("│ 7 - Sair do menu BEM+         │")
-     print("="*42)
-     opcaoBem = input("Opção: ")          
-     
      while True:
+          print("\n" + "="*42)
+          print(f"🌟 MENU BEM+ - {usuarios[email]['nome']} 🌟".center(42))
+          print("="*42)
+          print("│ 1 - Frase do Dia              │")
+          print("│ 2 - Iniciar Cenário Ético     │")
+          print("│ 3 - Receber Desafio do Bem    │")
+          print("│ 4 - Ver Pontuação e Nível     │")
+          print("│ 5 - Ver Histórico de Respostas│")
+          print("│ 6 - Ranking de Usuários       │")
+          print("│ 7 - Sair do menu BEM+         │")
+          print("="*42)          
+          opcaoBem = input("Sua opção é? ")
           match opcaoBem:
                case '1':
                     frase_dia()
