@@ -14,7 +14,7 @@
         "resposta_secreta": "Carla"
     },
     "joao.silva@ufrpe.br": {
-        "nome": "João Silva",
+        "nome": "Jo\u00c3\u00a3o Silva",
         "telefone": "(81) 98765-4321",
         "senha": "654321",
         "pontos": 7,
@@ -39,7 +39,7 @@
         "telefone": "(81) 98123-4567",
         "senha": "321321",
         "pontos": 6,
-        "resposta_secreta": "Patrícia"
+        "resposta_secreta": "Patr\u00c3\u00adcia"
     },
     "rafael.costa@outlook.com": {
         "nome": "Rafael Costa",

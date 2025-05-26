@@ -253,7 +253,6 @@ def recuperar_senha(usuarios):
 
      Parâmetros:
      usuarios (dict): Dicionário com os usuários cadastrados.
-     email (str): Email do usuário que deseja recuperar a conta.
      """
      email = input("Digite seu email cadastrado: ").lower()
      
@@ -268,11 +267,12 @@ def recuperar_senha(usuarios):
           return
      
      alterar_senha(usuarios,email)
-     
+     print("Senha redefinida com sucesso! Você já pode fazer login com a nova senha.")
+
 #Deletar usuario:
 def deletar_conta(usuarios,email):
      """
-     Exclui a conta do usuário após confirmação da intenção e validação da senha.
+     Exclui a conta do usuário após validação da senha e confirmação da intenção.
 
      Parâmetros:
      usuarios (dict): Dicionário com os usuários cadastrados.
@@ -281,17 +281,17 @@ def deletar_conta(usuarios,email):
      Retorna:
      bool: True se a conta foi excluída com sucesso, False caso contrário.
      """
-     confirmacao = input("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
-     if confirmacao == 's':
-          confirmacao_senha = input("Para excluir sua conta, confirme sua senha: ")
-          if confirmacao_senha == usuarios[email]['senha']:
+     senha = input("Para excluir sua conta, confirme sua senha: ")
+     if senha == usuarios[email]['senha']:
+          confirmacao = input("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
+          if confirmacao == 's':
                del usuarios[email]
                salvar_usuarios(usuarios)
                print("Sua conta foi deletada com sucesso.")
                return True
           else:
-               print("Senha incorreta!")
+               print("Operação cancelada!")
                return False
      else:
-          print("Operação cancelada!")
+          print("Senha incorreta!")
           return False     
