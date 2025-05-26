@@ -138,7 +138,7 @@ def alterar_email(usuarios, email):
      """
      novo_email = input("Digite seu novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ")  
      while (not email_valido(novo_email)) or (novo_email in usuarios and novo_email != email):
-          novo_email = input("Email inválido ou já existente! Tente novamente: ").lower()
+          novo_email = input("Email inválido ou já cadastrado! Tente novamente: ").lower()
      
      usuarios[novo_email] = usuarios[email]
      del usuarios[email]
