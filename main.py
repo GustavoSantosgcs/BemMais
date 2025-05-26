@@ -111,15 +111,20 @@ def menu_bem(usuarios,email):
                case '4':
                     pontuacao_e_nivel(usuarios,email)
                     input("\nPressione Enter para continuar...")
+               
                case '5':
                     print("Desculpe, Histórico de Respostas ainda em manutenção")
-                    
+                    input("\nPressione Enter para continuar...")
+               
                case '6':
                     print("Desculpe, Ranking de Usuários ainda em manutenção")
-                    
+                    input("\nPressione Enter para continuar...")
+               
                case '7':
                     print("Saindo do Menu BEM+...")
+                    input("\nPressione Enter para retornar...")
                     return
+               
                case _:
                     print("Opção invalida!")       
           
