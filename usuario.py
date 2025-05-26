@@ -239,9 +239,11 @@ def editar_conta(usuarios,email):
                     
                case '5':
                     alterar_resposta(usuarios,email)
+               
                case '6':
                     print("Vamos voltar então...")
                     break
+               
                case _:
                     print("Opção inválida!")     
 
