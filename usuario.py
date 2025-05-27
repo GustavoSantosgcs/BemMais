@@ -10,7 +10,7 @@ def carregar_usuarios():
      Carrega os usuários do arquivo JSON, caso exista.
 
      Retorna:
-     dict: Dicionário com os dados dos usuários cadastrados.
+     dict: Dicionário com os dados dos usuários cadastrados ou o dicionário vazio.
      """
      if os.path.exists(arquivo_usuarios):
           with open(arquivo_usuarios,'r') as arquivo:
