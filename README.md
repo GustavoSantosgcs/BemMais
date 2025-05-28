@@ -38,9 +38,9 @@ Módulos:
   Para verificar, basta digitar no seu terminal: *python --version*
   
 - **2-** Abra um terminal na sua IDE e execute o seguinte comando para clonar o repositório:
-  *git clone https://github.com/seu-usuario/BemMais.git*
+  *git clone https://github.com/GustavoSantosgcs/BemMais.git*
 
-- **3-** Acesse a pasta ProjetoI
+- **3-** Acesse a pasta BemMais
 
 - **4-** Execute o arquivo *main.py*
 
