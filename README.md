@@ -31,14 +31,16 @@ Módulos:
 - **os** – Para manipulação de diretórios e terminal
 - **re** – Para validação da configuração do telefone e e-mails usando expressões regulares
 - **random** – Para seleção aleatória de frases motivacionais
+- **time** - Para verificação de data
 
 # Como Instalar e Executar o projeto Bem+
 
 - **1-** Verifique se possui a versão Python 3.
-  Para verificar, basta digitar no seu terminal: *python --version*
+  Para verificar, basta digitar no seu terminal:
+    *python --version*
   
 - **2-** Abra um terminal na sua IDE e execute o seguinte comando para clonar o repositório:
-  *git clone https://github.com/GustavoSantosgcs/BemMais.git*
+    *git clone https://github.com/GustavoSantosgcs/BemMais.git*
 
 - **3-** Acesse a pasta BemMais
 
