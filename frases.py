@@ -23,7 +23,7 @@ def frase_dia():
     
     Verifica também se já existe uma frase armazenada para a data atual no arquivo 'frase_dia.json'.
     """
-    hoje = time.strftime("%Y-%m-%d")
+    hoje = time.strftime("%d-$m-%Y")
 
     # Verificação se já existe uma frase salva para o dia atual
     if os.path.exists(arquivo_frase):
