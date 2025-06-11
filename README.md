@@ -1,16 +1,16 @@
-# **Projeto BEM+:**
+# 🧠 **Projeto BEM+ | _Pratique o bem. Viva a ética._** 
 
-- Pratique o bem. Viva a ética.
+---
 
-#  Descrição:
+##   📌**Descrição:**
 
-⚠️ **Aviso:** *Este é o meu primeiro projeto e ainda está em desenvolvimento.*
+O **BEM+** é um projeto educacional e social, desenvolvido em Python, com o objetivo de incentivar boas ações, reflexões éticas e responsabilidade pessoal — especialmente voltado à área de Tecnologia da Informação.
 
-*O código está passando por mudanças frequentes para melhorias e correções.*
+O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, participem de desafios do bem e acumulem pontos com base nas suas atitudes. Com uma abordagem leve, mas reflexiva, o BEM+ promove o desenvolvimento pessoal por meio de escolhas conscientes e ações positivas no mundo real.
 
-Sinta-se à vontade para acompanhar, sugerir melhorias ou enviar pull requests!
+---
 
-#  Funcionalidades:
+## 🚀 **Funcionalidades:**
 
 - **Cadastro de Usuário (CRUD completo):** Sistema de cadastro com dados armazenados em JSON, permitindo criar, ler, atualizar e excluir contas.
 
@@ -22,9 +22,11 @@ Sinta-se à vontade para acompanhar, sugerir melhorias ou enviar pull requests!
 
 - **Sistema de Pontuação e Níveis:** Usuários acumulam pontos com base nas atividades, evoluindo por níveis de ética e responsabilidade social.
 
-# Tecnologias Utilizadas:
+---
 
-- **Linguagem:** Python 3
+## 🛠️**Tecnologias Utilizadas:**
+
+- **Linguagem:** Python 3 🐍
 
 Módulos:
 
@@ -33,27 +35,39 @@ Módulos:
 - **random** – Para seleção aleatória de frases motivacionais
 - **time** - Para verificação de data
 
-# Como Instalar e Executar o projeto Bem+
+---
 
-- **1-** Verifique se possui a versão Python 3.
-  Para verificar, basta digitar no seu terminal:
-    *python --version*
-  
-- **2-** Abra um terminal na sua IDE e execute o seguinte comando para clonar o repositório:
-    *git clone https://github.com/GustavoSantosgcs/BemMais.git*
+##  💻**Como Instalar e Executar o BEM+**
 
-- **3-** Acesse a pasta BemMais
+- **1 -** Verifique se possui a versão Python 3.
+  Para verificar, basta digitar no seu terminal: 
+```bash
+python --version
+```  
+- **2 -** Abra um terminal na sua IDE e execute o seguinte comando para clonar o repositório:
 
-- **4-** Execute o arquivo *main.py*
+```bash
+git clone https://github.com/GustavoSantosgcs/BemMais.git
+```
 
-- **5-** Pronto! Agora é só aproveitar o Bem+
+- **3 -** Acesse a pasta BemMais
 
-# Melhorias Futuras (Planejadas):
+- **4 -** Execute o arquivo *main.py*
 
-- **Interface Gráfica:** Tornar a experiência mais atrativa e amigável ao usuário.
+- **5 -** Pronto! Agora é só aproveitar o Bem+
 
-- **Ranking de Usuários:** Exibir classificação por pontuação entre os membros do BEM+.
+---
 
-- **Histórico de Atividades:** Registrar e exibir histórico de respostas e desafios concluídos.
+## **Melhorias Futuras (Planejadas):**
 
-- **Verificação em Duas Etapas:** Implementar confirmação por código para recuperação de senha, aumentando a segurança.
+- 🎨 Interface Gráfica (GUI)
+
+- 🏆 Ranking de Usuários
+
+- 📊 Histórico de Atividades
+
+- 🔐 Verificação em Duas Etapas
+
+
+### ⚠️ **Aviso:**
+ *Este é o meu primeiro projeto e ainda está em desenvolvimento. Nesse sentido, o código está passando por mudanças frequentes para melhorias e correções.*
