@@ -2,7 +2,7 @@ import json
 import os
 import re
 
-arquivo_usuarios = os.path.join('dados', 'usuarios.json')
+ARQUIVO_USUARIOS = os.path.join('dados', 'usuarios.json')
 
 #Carregamento de dados já existentes:
 def carregar_usuarios():
@@ -12,9 +12,12 @@ def carregar_usuarios():
      Retorna:
      dict: Dicionário com os dados dos usuários cadastrados ou o dicionário vazio.
      """
-     if os.path.exists(arquivo_usuarios):
-          with open(arquivo_usuarios,'r') as arquivo:
-               return json.load(arquivo)
+     if os.path.exists(ARQUIVO_USUARIOS):
+          try:
+               with open(ARQUIVO_USUARIOS,'r',encoding="utf-8") as arquivo:
+                    return json.load(arquivo)
+          except (json.JSONDecodeError, IOError):
+            print("⚠️  Erro ao ler usuários. Criando arquivo novo.")
      return {}
 
 #Salvar usuario:         
@@ -25,7 +28,7 @@ def salvar_usuarios(usuarios):
      Parâmetros:
      usuarios (dict): Dicionário contendo os dados dos usuários.
      """
-     with open(arquivo_usuarios,'w') as arquivo:
+     with open(ARQUIVO_USUARIOS,'w',encoding="utf-8") as arquivo:
           json.dump(usuarios, arquivo, indent=4)
 
 #Validação de email:
