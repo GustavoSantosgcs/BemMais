@@ -54,8 +54,8 @@ def login(usuarios):
                print("2 - Editar Conta")
                print("3 - Deletar Conta")
                print("4 - Sair")
-               opcaoUsuario = input("Opção: ")
-               match opcaoUsuario:
+               opcao_usuario = input("Opção: ")
+               match opcao_usuario:
                     case '1':
                          print("Então vamos continuar! ")
                          menu_bem(usuarios,email)
@@ -93,8 +93,8 @@ def menu_bem(usuarios,email):
           print("│ 6 - Ranking de Usuários           │")
           print("│ 7 - Sair do menu BEM+             │")
           print("="*38)          
-          opcaoBem = input("Sua opção é? ")
-          match opcaoBem:
+          opcao_bem = input("Sua opção é? ")
+          match opcao_bem:
                case '1':
                     frase_dia()
                     input("\nPressione Enter para continuar...")
