@@ -83,7 +83,9 @@ def cadastrar(usuarios):
      Parâmetros:
      usuarios (dict): Dicionário com os usuários existentes.
      """ 
-     nome = input("Digite seu nome: ")
+     nome = input("Digite seu nome de usuário: ").strip()
+     while nome == "":
+          nome = input("Você precisa digitar algo.\nDigite seu nome de usuário: ").strip()               
      telefone = input("Digite seu telefone com DDD Ex:(81) 99999-8888: ").strip()
      while not telefone_valido(telefone):
           print("Erro de digitação!")
@@ -111,7 +113,7 @@ def cadastrar(usuarios):
           else:
                print("Senhas diferentes! Tente novamente...")
           
-     print("\n Para recuperação de senha, responda a seguinte pergunta: ")   
+     print("\nPara recuperação de senha, responda a seguinte pergunta: ")   
      resposta_secreta = input("Qual o nome da sua professora favorita? ").strip()
      while resposta_secreta == "":
           resposta_secreta = input("Por favor, digite um nome válido: ").strip()
@@ -123,6 +125,7 @@ def cadastrar(usuarios):
           'pontos' : 0,
           'resposta_secreta' : resposta_secreta
      }
+     usuarios[email]['desafios_realizados'] = []
      
      salvar_usuarios(usuarios)
      print("Cadastro realizado com sucesso!")
@@ -205,7 +208,7 @@ def editar_conta(usuarios,email):
      usuarios (dict): Dicionário com os usuários cadastrados.
      email (str): Email do usuário que deseja editar.
      """
-     print("Dados atuais:")
+     print("\nDados atuais:")
      print(f"Email: {email}")
      print(f"Nome: {usuarios[email]['nome']}")
      print(f"Telefone: {usuarios[email]['telefone']}")
@@ -216,7 +219,7 @@ def editar_conta(usuarios,email):
           print("3 - telefone")
           print("4 - senha")
           print("5 - Resposta_secreta")
-          print("6 - sair")
+          print("0 - sair")
           editar = input("opção: ")
           match editar:
                case '1': 
@@ -243,12 +246,14 @@ def editar_conta(usuarios,email):
                case '5':
                     alterar_resposta(usuarios,email)
                
-               case '6':
+               case '0':
                     print("Vamos voltar então...")
                     break
                
                case _:
                     print("Opção inválida!")     
+                    
+     return email
 
 #Recuperar senha:
 def recuperar_senha(usuarios):

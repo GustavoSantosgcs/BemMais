@@ -87,7 +87,7 @@ def menu_bem(usuarios,email):
           print("="*38)
           print("│ 1 - Frase do Dia                  │")
           print("│ 2 - Iniciar Cenário Ético         │")
-          print("│ 3 - Receber Desafio do Bem        │")
+          print("│ 3 - Desafios do Bem               │")
           print("│ 4 - Ver Pontuação e Nível         │")
           print("│ 5 - Ver Histórico de Respostas    │")
           print("│ 6 - Ranking de Usuários           │")
@@ -101,12 +101,11 @@ def menu_bem(usuarios,email):
                
                case '2':
                     pontos = iniciar_dilema()
-                    usuarios[email]['pontos'] = usuarios[email].get('pontos', 0) + pontos
+                    usuarios[email]['pontos'] += pontos
                     salvar_usuarios(usuarios)
                     
                case '3':
                     desafios_bem(usuarios,email)
-                    salvar_usuarios(usuarios)
                     
                case '4':
                     pontuacao_e_nivel(usuarios,email)

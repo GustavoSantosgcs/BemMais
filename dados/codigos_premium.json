@@ -1,0 +1,37 @@
+{
+  "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural).": [
+    "CULT01",
+    "CULT02",
+    "CULT03",
+    "CULT04",
+    "CULT05"
+  ],
+  "🚿 Reduzir o consumo de água em casa por uma semana (EcoDrop).": [
+    "DROP01",
+    "DROP02",
+    "DROP03",
+    "DROP04",
+    "DROP05"
+  ],
+  "🐾 Realizar adoção de um animal (Projeto P.A.T.A.S.)": [
+    "PATS01",
+    "PATS02",
+    "PATS03",
+    "PATS04",
+    "PATS05"
+  ],
+  "🐾 Visitar os animais abrigados (Projeto P.A.T.A.S.)": [
+    "VISIT01",
+    "VISIT02",
+    "VISIT03",
+    "VISIT04",
+    "VISIT05"
+  ],
+  "🔍 Encontrar e devolver item perdido (Central de Achados e Perdidos UFRPE)": [
+    "ACH01",
+    "ACH02",
+    "ACH03",
+    "ACH04",
+    "ACH05"
+  ]
+}

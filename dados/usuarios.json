@@ -1,56 +1,108 @@
 {
-    "adm@ufrpe.br": {
-        "nome": "Gustavo Santos",
-        "telefone": "(81) 98888-7777",
-        "senha": "123123",
-        "pontos": 4,
-        "resposta_secreta": "Livia"
+    "sandro.sandra@gmail.com": {
+        "nome": "Sandra",
+        "telefone": "(21) 98845-2789",
+        "senha": "333123",
+        "pontos": 45,
+        "resposta_secreta": "Livia",
+        "desafios_realizados": [
+            "💬 Inicie uma conversa com alguém novo hoje e deseje um bom dia sincero.",
+            "🤝 Ajude uma pessoa idosa com sacolas ou atravessar a rua com segurança.",
+            "🌟 Faça um elogio genuíno a alguém que esteja precisando de motivação.",
+            "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural)."
+        ]
     },
-    "ana.lima@ufrpe.br": {
-        "nome": "Ana Lima",
-        "telefone": "(81) 99001-1223",
-        "senha": "101010",
+    "bgs84749@ufrpe.br": {
+        "nome": "Gustavo",
+        "telefone": "(11) 98675-2583",
+        "senha": "321321",
         "pontos": 10,
-        "resposta_secreta": "Carla"
+        "resposta_secreta": "Lemos",
+        "desafios_realizados": [
+            "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural)."
+        ]
     },
-    "joao.silva@ufrpe.br": {
-        "nome": "Jo\u00c3\u00a3o Silva",
-        "telefone": "(81) 98765-4321",
+    "ana.silva@gmail.com": {
+        "nome": "Ana Silva",
+        "telefone": "(81) 91234-5678",
         "senha": "654321",
-        "pontos": 7,
-        "resposta_secreta": "Sandra"
+        "pontos": 25,
+        "resposta_secreta": "Mariana",
+        "desafios_realizados": [
+            "📚 Doe um livro que você já leu para alguém que possa gostar dele.",
+            "💖 Envie uma mensagem agradecendo alguém que te inspirou ou te ajudou recentemente."
+        ]
+    },
+    "carlos.melo@ufrpe.br": {
+        "nome": "Carlos Melo",
+        "telefone": "(81) 99876-4321",
+        "senha": "112233",
+        "pontos": 30,
+        "resposta_secreta": "Pedro",
+        "desafios_realizados": [
+            "🌱 Plante algo (pode ser uma muda ou até um grão) e cuide por uma semana."
+        ]
     },
     "mariana.rocha@gmail.com": {
         "nome": "Mariana Rocha",
-        "telefone": "(81) 99123-4567",
-        "senha": "202420",
+        "telefone": "(81) 97765-4433",
+        "senha": "445566",
+        "pontos": 15,
+        "resposta_secreta": "Fernanda",
+        "desafios_realizados": [
+            "📵 Fique 1 hora longe do celular e aproveite para dar atenção total a alguém."
+        ]
+    },
+    "joao.pereira@ufrpe.br": {
+        "nome": "João Pereira",
+        "telefone": "(81) 96654-3322",
+        "senha": "778899",
+        "pontos": 50,
+        "resposta_secreta": "Ricardo",
+        "desafios_realizados": [
+            "🧺 Separe roupas ou alimentos que não usa mais e doe para quem precisa.",
+            "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural).",
+            "🚿 Reduzir o consumo de água em casa por uma semana (EcoDrop)."
+        ]
+    },
+    "luiza.alves@gmail.com": {
+        "nome": "Luiza Alves",
+        "telefone": "(81) 95543-2211",
+        "senha": "990011",
         "pontos": 5,
-        "resposta_secreta": "Beatriz"
+        "resposta_secreta": "Carla",
+        "desafios_realizados": []
     },
-    "carlos.almeida@ufrpe.br": {
-        "nome": "Carlos Almeida",
-        "telefone": "(81) 98000-1122",
-        "senha": "909090",
-        "pontos": 9,
-        "resposta_secreta": "Juliana"
+    "rafael.santos@ufrpe.br": {
+        "nome": "Rafael Santos",
+        "telefone": "(81) 94432-1100",
+        "senha": "223344",
+        "pontos": 20,
+        "resposta_secreta": "Juliana",
+        "desafios_realizados": [
+            "💬 Inicie uma conversa com alguém novo hoje e deseje um bom dia sincero."
+        ]
     },
-    "juliana.moura@hotmail.com": {
-        "nome": "Juliana Moura",
-        "telefone": "(81) 98123-4567",
-        "senha": "321321",
-        "pontos": 6,
-        "resposta_secreta": "Patr\u00c3\u00adcia"
+    "beatriz.melo@gmail.com": {
+        "nome": "Beatriz Melo",
+        "telefone": "(81) 93321-0099",
+        "senha": "556677",
+        "pontos": 35,
+        "resposta_secreta": "Sofia",
+        "desafios_realizados": [
+            "📝 Escreva uma mensagem positiva (bilhete, WhatsApp ou e-mail) para alguém importante na sua vida.",
+            "🤝 Ajude uma pessoa idosa com sacolas ou atravessar a rua com segurança."
+        ]
     },
-    "rafael.costa@outlook.com": {
-        "nome": "Rafael Costa",
-        "telefone": "(81) 98555-6677",
-        "senha": "789456",
-        "pontos": 3,
-        "resposta_secreta": "Renata"
-    },
-    "luana.ferreira@ufrpe.br": {
-        "nome": "Luana Ferreira",
-        "telefone": "(81) 98666-7788",
-        "senha": "111222"
+    "fernando.lima@ufrpe.br": {
+        "nome": "Fernando Lima",
+        "telefone": "(81) 92210-9988",
+        "senha": "889900",
+        "pontos": 40,
+        "resposta_secreta": "Letícia",
+        "desafios_realizados": [
+            "😊 Ofereça ajuda a um colega que esteja com dificuldades, mesmo que ele não peça.",
+            "🌱 Plante algo (pode ser uma muda ou até um grão) e cuide por uma semana."
+        ]
     }
 }
