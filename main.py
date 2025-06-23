@@ -34,7 +34,36 @@ def pontuacao_e_nivel(usuarios, email):
      print(f"\n⭐ Pontuação total: {pontos} pontos")
      print(f"🔰 Nível atual: {nivel}\n")
 
-#Menu do usuário:
+
+# Ranking de Usuários:
+def ranking(usuarios):
+     """
+    Exibe um ranking dos cinco usuários com maior pontuação.
+    
+    Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+    
+    """
+     nome_pontos = []
+     for email, dados in usuarios.items():
+          nome = dados.get('nome',email)
+          pontos = dados.get('pontos',0)
+          nome_pontos.append((nome,pontos))
+     
+     nome_pontos.sort(key=lambda x: x[1], reverse=True)
+     top5 = nome_pontos[:5]
+     
+     print("\n🏆 Top 5 Usuários 🏆\n")
+     print(f"{'Pos':<3} {'Nome':<20} {'Pontos':>6}")
+     print("=" * 31)
+
+     # Linhas do ranking
+     for pos, (nome, pontos) in enumerate(top5, 1):
+          print(f"{pos:<3} {nome:<20} {pontos:>6}")
+
+     print("=" * 31)
+     
+# Menu do usuário:
 def login(usuarios):
      """
      Realiza o login de um usuário e apresenta opções para acessar o menu BEM+,
@@ -72,6 +101,7 @@ def login(usuarios):
      else:
           print("Email ou senha inválidos. ")
 
+
 #Menu BEM+:
 def menu_bem(usuarios,email):
      """
@@ -91,7 +121,7 @@ def menu_bem(usuarios,email):
           print("│ 4 - Ver Pontuação e Nível         │")
           print("│ 5 - Ver Histórico de Respostas    │")
           print("│ 6 - Ranking de Usuários           │")
-          print("│ 7 - Sair do menu BEM+             │")
+          print("│ 0 - Sair do menu BEM+             │")
           print("="*38)          
           opcao_bem = input("Sua opção é? ")
           match opcao_bem:
@@ -116,16 +146,17 @@ def menu_bem(usuarios,email):
                     input("\nPressione Enter para continuar...")
                
                case '6':
-                    print("Desculpe, Ranking de Usuários ainda em manutenção")
+                    ranking(usuarios)
                     input("\nPressione Enter para continuar...")
                
-               case '7':
+               case '0':
                     print("Saindo do Menu BEM+...")
                     input("\nPressione Enter para retornar...")
                     return
                
                case _:
                     print("Opção invalida!")       
+
           
 #Menu inicial:
 def menu_inicial():
@@ -156,5 +187,6 @@ def menu_inicial():
                     break
                case _:
                     print("opção inválida")                  
+
 
 menu_inicial()                                  
