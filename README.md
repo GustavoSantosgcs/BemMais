@@ -5,7 +5,7 @@
 
 O **BEM+** é um projeto educacional e social, desenvolvido em Python, com o objetivo de incentivar boas ações, reflexões éticas e responsabilidade pessoal — especialmente voltado à área de Tecnologia da Informação.
 
-O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, participem de desafios do bem, acompanhem seu histórico de respostas e vejam seu ranking entre os colegas. Com uma abordagem leve, mas reflexiva, o BEM+ promove o desenvolvimento pessoal por meio de escolhas conscientes e ações positivas no mundo real.
+O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, participem de desafios do bem, acompanhem seu histórico de respostas e vejam um ranking com TOP 5 usuários com mais pontos. Com uma abordagem leve, mas reflexiva, o BEM+ promove o desenvolvimento pessoal por meio de escolhas conscientes e ações positivas no mundo real.
 
 ---
 ## 🚀 **Funcionalidades (Release 2)**
@@ -19,10 +19,9 @@ O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, pa
 
 - **Quiz de Cenários Éticos:**  
   - Sorteio de 5 dilemas éticos por sessão, com pontuação e comentário conforme a escolha.  
-  - Histórico de todas as respostas (data, pergunta, escolha e pontos).
 
 - **Desafios do Bem:**  
-  - Lista de desafios normais e premium, com validação via voucher.  
+  - Lista de desafios regulares e desafios premium (os desafios premium são relacionados a outros projetos da turma e solicitam validação via voucher para confirmar conclusão).  
   - Geração e consumo de códigos premium em `dados/codigos_premium.json`.
 
 - **Sistema de Pontuação & Níveis:**  
