@@ -1,25 +1,53 @@
 {
-    "sandro.sandra@gmail.com": {
-        "nome": "Sandra",
+    "guido.python@gmail.com": {
+        "nome": "Guido van Rossum",
         "telefone": "(21) 98845-2789",
-        "senha": "333123",
-        "pontos": 45,
-        "resposta_secreta": "Livia",
+        "senha": "198906",
+        "pontos": 100,
+        "resposta_secreta": "Brendan Eich",
         "desafios_realizados": [
             "💬 Inicie uma conversa com alguém novo hoje e deseje um bom dia sincero.",
             "🤝 Ajude uma pessoa idosa com sacolas ou atravessar a rua com segurança.",
             "🌟 Faça um elogio genuíno a alguém que esteja precisando de motivação.",
             "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural)."
+        ],
+        "historico_respostas": [
+            {
+                "data": "20 - 06 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta": "a",
+                "pontos": 1
+            },
+            {
+                "data": "21 - 06 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você: ",
+                "resposta": "b",
+                "pontos": 1
+            },
+            {
+                "data": "22 - 06 - 2025",
+                "pergunta": "🔍 Na Central de Achados e Perdidos UFRPE, você encontra um item de valor sem registro eletrônico do dono. O que faz?",
+                "resposta": "a",
+                "pontos": 1
+            }
         ]
     },
     "bgs84749@ufrpe.br": {
-        "nome": "Gustavo",
+        "nome": "Gustavo Santos",
         "telefone": "(11) 98675-2583",
-        "senha": "321321",
-        "pontos": 10,
+        "senha": "123123",
+        "pontos": 46,
         "resposta_secreta": "Lemos",
         "desafios_realizados": [
             "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural)."
+        ],
+        "historico_respostas": [
+            {
+                "data": "23 - 06 - 2025",
+                "pergunta": "💻 Você descobre uma falha de segurança grave no sistema da empresa onde trabalha. O que faz?",
+                "resposta": "a",
+                "pontos": 1
+            }
         ]
     },
     "ana.silva@gmail.com": {
@@ -31,6 +59,20 @@
         "desafios_realizados": [
             "📚 Doe um livro que você já leu para alguém que possa gostar dele.",
             "💖 Envie uma mensagem agradecendo alguém que te inspirou ou te ajudou recentemente."
+        ],
+        "historico_respostas": [
+            {
+                "data": "19 - 06 - 2025",
+                "pergunta": "📄 Durante um projeto, você percebe que um colega está plagiando códigos de fontes públicas sem dar os devidos créditos. Você:",
+                "resposta": "b",
+                "pontos": 1
+            },
+            {
+                "data": "20 - 06 - 2025",
+                "pergunta": "🤥 Você pode mentir para proteger um amigo de um problema sério. O que faz?",
+                "resposta": "b",
+                "pontos": 1
+            }
         ]
     },
     "carlos.melo@ufrpe.br": {
@@ -41,6 +83,20 @@
         "resposta_secreta": "Pedro",
         "desafios_realizados": [
             "🌱 Plante algo (pode ser uma muda ou até um grão) e cuide por uma semana."
+        ],
+        "historico_respostas": [
+            {
+                "data": "18 - 06 - 2025",
+                "pergunta": "💻 Você encontra um script online que promete burlar o licenciamento de um software caro que sua equipe precisa. Você:",
+                "resposta": "a",
+                "pontos": 1
+            },
+            {
+                "data": "19 - 06 - 2025",
+                "pergunta": "⏩ Seu chefe pede para acelerar o projeto, mesmo que precise 'dar um jeitinho' nos testes de segurança. Você:",
+                "resposta": "a",
+                "pontos": 1
+            }
         ]
     },
     "mariana.rocha@gmail.com": {
@@ -51,18 +107,40 @@
         "resposta_secreta": "Fernanda",
         "desafios_realizados": [
             "📵 Fique 1 hora longe do celular e aproveite para dar atenção total a alguém."
+        ],
+        "historico_respostas": [
+            {
+                "data": "21 - 06 - 2025",
+                "pergunta": "🔒 Você tem acesso a dados pessoais de usuários na empresa. Um amigo pede para você passar algumas informações. O que você faz?",
+                "resposta": "a",
+                "pontos": 1
+            }
         ]
     },
     "joao.pereira@ufrpe.br": {
         "nome": "João Pereira",
         "telefone": "(81) 96654-3322",
         "senha": "778899",
-        "pontos": 50,
+        "pontos": 30,
         "resposta_secreta": "Ricardo",
         "desafios_realizados": [
             "🧺 Separe roupas ou alimentos que não usa mais e doe para quem precisa.",
             "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural).",
             "🚿 Reduzir o consumo de água em casa por uma semana (EcoDrop)."
+        ],
+        "historico_respostas": [
+            {
+                "data": "22 - 06 - 2025",
+                "pergunta": "💬 Inicie uma conversa com alguém novo hoje e deseje um bom dia sincero.",
+                "resposta": "a",
+                "pontos": 1
+            },
+            {
+                "data": "23 - 06 - 2025",
+                "pergunta": "🌟 Faça um elogio genuíno a alguém que esteja precisando de motivação.",
+                "resposta": "a",
+                "pontos": 1
+            }
         ]
     },
     "luiza.alves@gmail.com": {
@@ -71,7 +149,8 @@
         "senha": "990011",
         "pontos": 5,
         "resposta_secreta": "Carla",
-        "desafios_realizados": []
+        "desafios_realizados": [],
+        "historico_respostas": []
     },
     "rafael.santos@ufrpe.br": {
         "nome": "Rafael Santos",
@@ -81,6 +160,14 @@
         "resposta_secreta": "Juliana",
         "desafios_realizados": [
             "💬 Inicie uma conversa com alguém novo hoje e deseje um bom dia sincero."
+        ],
+        "historico_respostas": [
+            {
+                "data": "20 - 06 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você: ",
+                "resposta": "b",
+                "pontos": 1
+            }
         ]
     },
     "beatriz.melo@gmail.com": {
@@ -92,6 +179,20 @@
         "desafios_realizados": [
             "📝 Escreva uma mensagem positiva (bilhete, WhatsApp ou e-mail) para alguém importante na sua vida.",
             "🤝 Ajude uma pessoa idosa com sacolas ou atravessar a rua com segurança."
+        ],
+        "historico_respostas": [
+            {
+                "data": "18 - 06 - 2025",
+                "pergunta": "📄 Durante um projeto, você percebe que um colega está plagiando códigos de fontes públicas sem dar os devidos créditos. Você:",
+                "resposta": "b",
+                "pontos": 1
+            },
+            {
+                "data": "19 - 06 - 2025",
+                "pergunta": "🤥 Você pode mentir para proteger um amigo de um problema sério. O que faz?",
+                "resposta": "b",
+                "pontos": 1
+            }
         ]
     },
     "fernando.lima@ufrpe.br": {
@@ -103,6 +204,20 @@
         "desafios_realizados": [
             "😊 Ofereça ajuda a um colega que esteja com dificuldades, mesmo que ele não peça.",
             "🌱 Plante algo (pode ser uma muda ou até um grão) e cuide por uma semana."
+        ],
+        "historico_respostas": [
+            {
+                "data": "21 - 06 - 2025",
+                "pergunta": "🔒 Você tem acesso a dados pessoais de usuários na empresa. Um amigo pede para você passar algumas informações. O que você faz?",
+                "resposta": "a",
+                "pontos": 1
+            },
+            {
+                "data": "22 - 06 - 2025",
+                "pergunta": "💻 Você descobre uma falha de segurança grave no sistema da empresa onde trabalha. O que faz?",
+                "resposta": "a",
+                "pontos": 1
+            }
         ]
     }
 }
