@@ -18,7 +18,7 @@ def salvar_codigos(cods):
 
 
 # Listas de desafios normais
-desafios_normais = [
+desafios_regulares = [
     "💬 Inicie uma conversa com alguém novo hoje e deseje um bom dia sincero.",
     "🧺 Separe roupas ou alimentos que não usa mais e doe para quem precisa.",
     "🌟 Faça um elogio genuíno a alguém que esteja precisando de motivação.",
@@ -60,7 +60,7 @@ def desafios_bem(usuarios, email):
         match escolha:
             # Desafios normais
             case '1':
-                pendentes = [d for d in desafios_normais if d not in realizados]
+                pendentes = [d for d in desafios_regulares if d not in realizados]
                 if not pendentes:
                     print("\nVocê já completou todos os desafios normais! 🎉")
                     continue
