@@ -209,12 +209,12 @@ def editar_conta(usuarios,email):
      usuarios (dict): Dicionário com os usuários cadastrados.
      email (str): Email do usuário que deseja editar.
      """
-     print("\nDados atuais:")
+     print("\nDados atuais:\n")
      print(f"Email: {email}")
      print(f"Nome: {usuarios[email]['nome']}")
      print(f"Telefone: {usuarios[email]['telefone']}")
      while True:
-          print("O que deseja editar: ")
+          print("\nO que deseja editar: ")
           print("1 - email")
           print("2 - nome")
           print("3 - telefone")
@@ -248,7 +248,7 @@ def editar_conta(usuarios,email):
                     alterar_resposta(usuarios,email)
                
                case '0':
-                    print("Vamos voltar então...")
+                    print("Vamos voltar então...\n")
                     break
                
                case _:
