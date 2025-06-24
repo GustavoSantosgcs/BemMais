@@ -5,33 +5,47 @@
 
 O **BEM+** é um projeto educacional e social, desenvolvido em Python, com o objetivo de incentivar boas ações, reflexões éticas e responsabilidade pessoal — especialmente voltado à área de Tecnologia da Informação.
 
-O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, participem de desafios do bem e acumulem pontos com base nas suas atitudes. Com uma abordagem leve, mas reflexiva, o BEM+ promove o desenvolvimento pessoal por meio de escolhas conscientes e ações positivas no mundo real.
+O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, participem de desafios do bem, acompanhem seu histórico de respostas e vejam seu ranking entre os colegas. Com uma abordagem leve, mas reflexiva, o BEM+ promove o desenvolvimento pessoal por meio de escolhas conscientes e ações positivas no mundo real.
 
 ---
-## 🚀 **Funcionalidades:**
+## 🚀 **Funcionalidades (Release 2)**
 
-- **Cadastro de Usuário (CRUD completo):** Sistema de cadastro com dados armazenados em JSON, permitindo criar, ler, atualizar e excluir contas.
+- **CRUD de Usuário:**  
+  - Cadastro, leitura, atualização e exclusão de contas, com dados armazenados em JSON.  
+  - Pergunta secreta para recuperação de senha.
 
-- **Frase do Dia:** Exibição de uma frase inspiradora diariamente, com foco em atitudes positivas e bem-estar mental.
+- **Frase do Dia:**  
+  - Exibição diária de uma frase inspiradora, focada em positividade e bem-estar.
 
-- **Quiz com Cenários Éticos:** O usuário responde dilemas éticos (especialmente voltados à área de TI), com pontuação baseada nas escolhas.
+- **Quiz de Cenários Éticos:**  
+  - Sorteio de 5 dilemas éticos por sessão, com pontuação e comentário conforme a escolha.  
+  - Histórico de todas as respostas (data, pergunta, escolha e pontos).
 
-- **Desafios do Bem:** Desafios semanais incentivando ações éticas e sociais. Alguns são integrados a projetos da turma.
+- **Desafios do Bem:**  
+  - Lista de desafios normais e premium, com validação via voucher.  
+  - Geração e consumo de códigos premium em `dados/codigos_premium.json`.
 
-- **Sistema de Pontuação e Níveis:** Usuários acumulam pontos com base nas atividades, evoluindo por níveis de ética e responsabilidade social.
+- **Sistema de Pontuação & Níveis:**  
+  - Pontos por quiz e desafios, níveis de “Iniciante” a “Mestre”.
+
+- **Ranking de Usuários:**  
+  - Top 5 geral exibido no menu, ordenado pela pontuação.
+
+- **Histórico de Respostas:**  
+  - Listagem completa das perguntas já respondidas, com data e resultado.
 
 ---
 ## 🛠️**Tecnologias Utilizadas:**
 
 - **Linguagem:** Python 3 🐍
 
-Módulos:
-
-- **os** – Para manipulação de diretórios e terminal
-- **re** – Para validação da configuração do telefone e e-mails usando expressões regulares
-- **random** – Para seleção aleatória de frases motivacionais
-- **time** - Para verificação de data
-
+- **Módulos:**  
+  - `os` – manipulação de arquivos e diretórios  
+  - `json` – leitura e escrita de dados em JSON  
+  - `re` – validação de e-mails e telefones  
+  - `random` – seleção aleatória de dilemas e desafios  
+  - `time` – registro de data em histórico  
+ 
 ---
 ##  💻**Como Instalar e Executar o BEM+**
 
@@ -57,11 +71,11 @@ git clone https://github.com/GustavoSantosgcs/BemMais.git
 
 - 🎨 Interface Gráfica (GUI)
 
-- 🏆 Ranking de Usuários
+- 🔐 Autenticação em Dois Fatores
 
-- 📊 Histórico de Atividades
+- 📈 Estatísticas de Uso e Gráficos
 
-- 🔐 Verificação em Duas Etapas
+- 🌐 Internacionalização (i18n)
 
 
 ### ⚠️ **Aviso:**
