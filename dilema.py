@@ -71,7 +71,7 @@ PERGUNTAS = [
         }
     },
     {
-        "pergunta": "💻 Você descobre uma falha de segurança grave no sistema da empresa onde\n"
+        "pergunta": "💻  Você descobre uma falha de segurança grave no sistema da empresa onde\n"
         "trabalha. O que faz?",
         "alternativas": {
             "a": "Comunica imediatamente ao chefe ou à equipe de segurança.",
@@ -87,7 +87,7 @@ PERGUNTAS = [
         }
     },
     {
-        "pergunta": "🖥️ Você é contratado para desenvolver um sistema, mas o cliente pede que você\n"
+        "pergunta": "🖥️  Você é contratado para desenvolver um sistema, mas o cliente pede que você\n"
         "copie partes de um software de outra empresa sem autorização. O que você faz?",
         "alternativas": {
             "a": "Recusa a tarefa e explica as implicações legais e éticas.",
@@ -150,7 +150,7 @@ PERGUNTAS = [
         }
     },
     {
-        "pergunta": "💻 Você encontra um script online que promete burlar o\n"
+        "pergunta": "💻  Você encontra um script online que promete burlar o\n"
         "licenciamento de um software caro que sua equipe precisa. Você:",
         "alternativas": {
             "a": "Nem pensa nisso e busca alternativas legais.",
@@ -218,11 +218,11 @@ def iniciar_dilema(usuarios,email):
     selecionadas = random.sample(PERGUNTAS, k=5)
     
     for i, pergunta in enumerate(selecionadas, 1):     
-        print("=" * 75)
+        print("=" * 80)
         print(f"Cenário {i}: {pergunta['pergunta']}")
         for letra, alternativa in pergunta["alternativas"].items():
             print(f"  ({letra}) {alternativa}")
-        print("=" * 75)
+        print("=" * 80)
         
         while True:
             resposta = input("Digite ('a','b','c') ou 'sair' para encerrar: ").lower()
