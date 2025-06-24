@@ -119,8 +119,8 @@ def menu_bem(usuarios,email):
           print("│ 2 - Iniciar Cenário Ético         │")
           print("│ 3 - Desafios do Bem               │")
           print("│ 4 - Ver Pontuação e Nível         │")
-          print("│ 5 - Ver Histórico de Respostas    │")
-          print("│ 6 - Ranking de Usuários           │")
+          print("│ 5 - Ranking de Usuários           │")
+          print("│ 6 - Ver Histórico de Respostas    │")
           print("│ 0 - Sair do menu BEM+             │")
           print("="*38)          
           opcao_bem = input("Sua opção é? ")
@@ -142,11 +142,11 @@ def menu_bem(usuarios,email):
                     input("\nPressione Enter para continuar...")
                
                case '5':
-                    print("Desculpe, Histórico de Respostas ainda em manutenção")
+                    ranking(usuarios)
                     input("\nPressione Enter para continuar...")
                
                case '6':
-                    ranking(usuarios)
+                    print("Desculpe, Histórico de Respostas ainda em manutenção")
                     input("\nPressione Enter para continuar...")
                
                case '0':
