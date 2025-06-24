@@ -36,7 +36,7 @@ def pontuacao_e_nivel(usuarios, email):
 
 
 # Ranking de Usuários:
-def ranking(usuarios):
+def ranking_usuarios(usuarios):
      """
     Exibe um ranking dos cinco usuários com maior pontuação.
     
@@ -63,8 +63,30 @@ def ranking(usuarios):
 
      print("=" * 31)
      
+     
+# Histórico de Respostas do usuário:
+def exibir_historico(usuarios,email):
+     """
+     Exibe o histórico de respostas do usuário aos cenários éticos, quando existir.
+     
+     Parâmetros:
+     usuarios (dict): Dicionário com os usuários cadastrados.
+     email (str): Email do usuário cuja pontuação será exibida.
+     """
+     
+     
+     historico = usuarios[email].get('historico_respostas',[])
+     if not historico:
+          print("\n🤔 Você ainda não realizou nenhum cenário ético.")
+     else:
+          print("\n📃 Histórico de Respostas\n")
+          for i, chave in enumerate(historico, 1):
+               print(f"{i}. [{chave['data']}] Pergunta: {chave['pergunta']}")
+               print(f"   Sua resposta: ({chave['resposta']}) — +{chave['pontos']} ponto(s)\n")
+
+     
 # Menu do usuário:
-def login(usuarios):
+def login(usuarios):    
      """
      Realiza o login de um usuário e apresenta opções para acessar o menu BEM+,
      editar conta, deletar conta ou sair.
@@ -130,7 +152,7 @@ def menu_bem(usuarios,email):
                     input("\nPressione Enter para continuar...")
                
                case '2':
-                    pontos = iniciar_dilema()
+                    pontos = iniciar_dilema(usuarios,email)
                     usuarios[email]['pontos'] += pontos
                     salvar_usuarios(usuarios)
                     
@@ -142,11 +164,11 @@ def menu_bem(usuarios,email):
                     input("\nPressione Enter para continuar...")
                
                case '5':
-                    ranking(usuarios)
+                    ranking_usuarios(usuarios)
                     input("\nPressione Enter para continuar...")
                
                case '6':
-                    print("Desculpe, Histórico de Respostas ainda em manutenção")
+                    exibir_historico(usuarios, email)
                     input("\nPressione Enter para continuar...")
                
                case '0':

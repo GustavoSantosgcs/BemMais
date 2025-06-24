@@ -126,6 +126,7 @@ def cadastrar(usuarios):
           'resposta_secreta' : resposta_secreta
      }
      usuarios[email]['desafios_realizados'] = []
+     usuarios[email]['historico_respostas'] = []
      
      salvar_usuarios(usuarios)
      print("Cadastro realizado com sucesso!")

@@ -1,4 +1,7 @@
 import random
+import time
+from usuario import salvar_usuarios
+
 
 #Lista de perguntas com as alternativas e comentários
 PERGUNTAS = [
@@ -197,19 +200,24 @@ PERGUNTAS = [
 ]
 
 
-def iniciar_dilema():
+def iniciar_dilema(usuarios,email):
     """
-    Conduz um mini-teste de 5 cenários éticos, contabiliza e retorna a pontuação.
+    Conduz um questionário com cinco cenários éticos, contabiliza e retorna a pontuação.
     
-    return (int): pontuacao (total de pontos adquiridos no questionário)
+    Parâmetros:
+    usuarios (dict): Dicionário com os usuários cadastrados.
+    email (str): Email do usuário cuja pontuação será exibida.
+    
+    returns: 
+    int: pontuacao (total de pontos adquiridos no questionário)
     """
     pontuacao = 0
     print("\n Seja bem-vindo(a) ao CENÁRIOS ÉTICOS!")
-    print("Responda as 5 questões com as alternativas (a, b ou c):\n")
+    print("Responda aos cinco dilemas com as alternativas (a, b ou c):\n")
 
     selecionadas = random.sample(PERGUNTAS, k=5)
     
-    for i, pergunta in enumerate(selecionadas, 1):
+    for i, pergunta in enumerate(selecionadas, 1):     
         print("=" * 75)
         print(f"Cenário {i}: {pergunta['pergunta']}")
         for letra, alternativa in pergunta["alternativas"].items():
@@ -232,6 +240,18 @@ def iniciar_dilema():
         
         print(f"\n✅ Você ganhou {pontos_resposta} ponto(s) nesta pergunta.")
         print(pergunta["comentario"][resposta])
+
+        data_resposta = time.strftime("%d - %m - %Y")
+        registro = {
+            'data': data_resposta,
+            'pergunta': pergunta['pergunta'],
+            'resposta': resposta,
+            'pontos': pontos_resposta
+        }
+        usuarios[email]['historico_respostas'].append(registro)
+        salvar_usuarios(usuarios)
+
+
 
     print(f"\n Você ganhou {pontuacao} ponto(s) nesse dilema!\n")
     return pontuacao
