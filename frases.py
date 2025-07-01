@@ -41,10 +41,12 @@ def frase_dia():
             frase = dados["frase"]
         else:
             frase = random.choice(frases)
+            os.makedirs(os.path.dirname(ARQUIVO_FRASE), exist_ok=True)
             with open(ARQUIVO_FRASE, 'w',encoding="utf-8") as arquivo:
                 json.dump({"data": hoje, "frase": frase}, arquivo, indent=4)
     else:
         frase = random.choice(frases)
+        os.makedirs(os.path.dirname(ARQUIVO_FRASE), exist_ok=True)
         with open(ARQUIVO_FRASE, 'w',encoding="utf-8") as arquivo:
             json.dump({"data": hoje, "frase": frase}, arquivo, indent=4)
 
