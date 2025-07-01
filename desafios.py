@@ -1,6 +1,6 @@
 import json
 import os
-from usuario import Usuario, RepoUsuario, nao_vazio
+from usuario import RepoUsuario, nao_vazio
 
 COD_PREMIUM = os.path.join('dados', 'codigos_premium.json')
 
