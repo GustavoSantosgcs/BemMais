@@ -299,6 +299,7 @@ def cadastrar_usuario(repo: RepoUsuario):
                email = nao_vazio("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
                if not Usuario.email_valido(email):
                     print("Formato de email inválido!")
+                    continue
                if repo.buscar(email):   
                     print("Email já cadastrado!")
                     return
