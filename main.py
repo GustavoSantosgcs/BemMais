@@ -1,81 +1,80 @@
-import json
-import os
-from usuario import (carregar_usuarios,salvar_usuarios,email_valido,
-    senha_valida, telefone_valido, cadastrar, alterar_senha,
-    editar_conta, recuperar_senha, deletar_conta)
+from usuario import (
+     RepoUsuario,
+     nao_vazio,
+     cadastrar_usuario,
+     editar_conta,
+     recuperar_senha,
+     deletar_conta
+)
 from frases import frase_dia
 from dilema import iniciar_dilema
 from desafios import desafios_bem
 
 
 #Ver pontuação e nível:
-def pontuacao_e_nivel(usuarios, email):
+def pontuacao_e_nivel(repo: RepoUsuario, email):
      """
      Exibe, com uma saudação personalizada, a pontuação e
      o nível do usuário com base nos pontos acumulados.
 
      Parâmetros:
-     usuarios (dict): Dicionário com os usuários cadastrados.
-     email (str): Email do usuário cuja pontuação será exibida.
+     repo (RepoUsuario): repositório de usuários persistido em JSON.
+     email (str): email do usuário cujo progresso será exibido.
      """
-     pontos = usuarios[email]['pontos']
-     if pontos < 10:
+     user = repo.buscar(email)
+
+     if user.pontos < 10:
           nivel = 'Iniciante 🐣'
-     elif pontos < 40:
+     elif user.pontos < 40:
           nivel = 'Explorador 🌱'
-     elif pontos < 70:
+     elif user.pontos < 70:
           nivel = 'Consciente 💡'
-     elif pontos < 90:
+     elif user.pontos < 90:
           nivel = 'Mentor 🌟'
      else:
           nivel = 'Mestre 👑'
-     print(f"\n🚀 Olá, {usuarios[email]['nome']}! Sua jornada pelo BEM+ está em andamento.")
+     print(f"\n🚀 Olá, {user.nome}! Sua jornada pelo BEM+ está em andamento.")
      print("Vamos conferir seu progresso e o impacto positivo que você está construindo...\n")
-     print(f"\n⭐ Pontuação total: {pontos} pontos")
+     print(f"\n⭐ Pontuação total: {user.pontos} pontos")
      print(f"🔰 Nível atual: {nivel}\n")
 
 
 # Ranking de Usuários:
-def ranking_usuarios(usuarios):
+def ranking_usuarios(repo: RepoUsuario):
      """
-    Exibe um ranking dos cinco usuários com maior pontuação.
-    
-    Parâmetros:
-     usuarios (dict): Dicionário com os usuários cadastrados.
-    
-    """
-     nome_pontos = []
-     for email, dados in usuarios.items():
-          nome = dados.get('nome',email)
-          pontos = dados.get('pontos',0)
-          nome_pontos.append((nome,pontos))
+     Exibe um ranking dos cinco usuários com maior pontuação.
+
+     Parâmetros:
+          repo (RepoUsuario): repositório de usuários.    
+     """
+     users = repo.listar()
      
-     nome_pontos.sort(key=lambda x: x[1], reverse=True)
-     top5 = nome_pontos[:5]
+     # Ordena direto as instâncias pelo atributo 'pontos'
+     top5 = sorted(users, key=lambda user: user.pontos, reverse=True)[:5]
      
      print("\n🏆 Top 5 Usuários 🏆\n")
      print(f"{'Pos':<3} {'Nome':<20} {'Pontos':>6}")
      print("=" * 31)
 
      # Linhas do ranking
-     for pos, (nome, pontos) in enumerate(top5, 1):
-          print(f"{pos:<3} {nome:<20} {pontos:>6}")
+     for pos, user in enumerate(top5, 1):
+          print(f"{pos:<3} {user.nome:<20} {user.pontos:>6}")
 
      print("=" * 31)
      
      
 # Histórico de Respostas do usuário:
-def exibir_historico(usuarios,email):
+def exibir_historico(repo: RepoUsuario,email):
      """
      Exibe o histórico de respostas do usuário aos cenários éticos, quando existir.
      
      Parâmetros:
-     usuarios (dict): Dicionário com os usuários cadastrados.
-     email (str): Email do usuário cuja pontuação será exibida.
-     """
-     
-     
-     historico = usuarios[email].get('historico_respostas',[])
+     repo (RepoUsuario): repositório de usuários persistido em JSON.
+     email (str): email do usuário cujo histórico será exibido.
+     """     
+     user = repo.buscar(email)
+
+     historico = user.historico_respostas
      if not historico:
           print("\n🤔 Você ainda não realizou nenhum cenário ético.")
      else:
@@ -86,19 +85,20 @@ def exibir_historico(usuarios,email):
 
      
 # Menu do usuário:
-def login(usuarios):    
+def login(repo: RepoUsuario):
      """
      Realiza o login de um usuário e apresenta opções para acessar o menu BEM+,
      editar conta, deletar conta ou sair.
 
      Parâmetros:
-     usuarios (dict): Dicionário com os usuários cadastrados.
+     repo (RepoUsuario): repositório de usuários persistido em JSON.
      """
-     email = input("Digite seu email: ").lower()
+     email = nao_vazio("Digite seu email: ").lower()
      senha = input("Digite sua senha: ")
-     
-     if email in usuarios and usuarios[email]['senha'] == senha:
-          print(f"\nBem-vindo(a), {usuarios[email]['nome']}")
+     user = repo.buscar(email)
+     if user and user.senha == senha:
+          
+          print(f"\nBem-vindo(a), {user.nome}")
           while True:
                print("O que deseja fazer? ")
                print("1 - Prosseguir para o Menu BEM+")
@@ -109,11 +109,11 @@ def login(usuarios):
                match opcao_usuario:
                     case '1':
                          print("Então vamos continuar! ")
-                         menu_bem(usuarios,email)
+                         menu_bem(repo,email)
                     case '2':
-                         email = editar_conta(usuarios,email)
+                         email = editar_conta(repo,email)
                     case '3':
-                         if deletar_conta(usuarios, email):
+                         if deletar_conta(repo, email):
                               break
                     case '4':
                          print("Até mais então...")
@@ -125,17 +125,18 @@ def login(usuarios):
 
 
 #Menu BEM+:
-def menu_bem(usuarios,email):
+def menu_bem(repo: RepoUsuario,email):
      """
      Apresenta o menu principal do BEM+ com as opções de funcionalidades ao usuário.
 
      Parâmetros:
-     usuarios (dict): Dicionário com os usuários cadastrados.
-     email (str): Email do usuário logado.
-     """     
+          repo (RepoUsuario): repositório de usuários persistido em JSON.
+          email (str): email do usuário logado.
+     """    
+     user = repo.buscar(email) 
      while True:
           print("\n" + "="*38)
-          print(f"🌟 MENU BEM+ - {usuarios[email]['nome']} 🌟".center(38))
+          print(f"🌟 MENU BEM+ - {user.nome} 🌟".center(38))
           print("="*38)
           print("│ 1 - Frase do Dia                  │")
           print("│ 2 - Iniciar Cenário Ético         │")
@@ -152,23 +153,23 @@ def menu_bem(usuarios,email):
                     input("\nPressione Enter para continuar...")
                
                case '2':
-                    pontos = iniciar_dilema(usuarios,email)
-                    usuarios[email]['pontos'] += pontos
-                    salvar_usuarios(usuarios)
+                    pontos = iniciar_dilema(repo,email)
+                    user.pontos += pontos
+                    repo.salvar_usuarios()
                     
                case '3':
-                    desafios_bem(usuarios,email)
+                    desafios_bem(repo,email)
                     
                case '4':
-                    pontuacao_e_nivel(usuarios,email)
+                    pontuacao_e_nivel(repo,email)
                     input("\nPressione Enter para continuar...")
                
                case '5':
-                    ranking_usuarios(usuarios)
+                    ranking_usuarios(repo)
                     input("\nPressione Enter para continuar...")
                
                case '6':
-                    exibir_historico(usuarios, email)
+                    exibir_historico(repo, email)
                     input("\nPressione Enter para continuar...")
                
                case '0':
@@ -181,11 +182,13 @@ def menu_bem(usuarios,email):
 
           
 #Menu inicial:
-def menu_inicial():
+def menu_inicial(repo):
      """
-     Exibe o menu inicial do sistema e direciona para cadastro, login, recuperação de senha ou encerramento.
+     Exibe o menu inicial de cadastro, login e recuperação de senha.
+
+     Parâmetros:
+          repo (RepoUsuario): repositório de usuários persistido em JSON.
      """     
-     usuarios = carregar_usuarios()
      while True:
           print("\n" + "="*32)
           print("📘  MENU INICIAL - BEM+  📘".center(32))
@@ -199,11 +202,11 @@ def menu_inicial():
              
           match opcao:
                case '1':
-                    cadastrar(usuarios)
+                    cadastrar_usuario(repo)
                case '2':
-                    login(usuarios)
+                    login(repo)
                case '3':
-                    recuperar_senha(usuarios)
+                    recuperar_senha(repo)
                case '4':
                     print("Até mais então...")
                     break
@@ -211,4 +214,7 @@ def menu_inicial():
                     print("opção inválida")                  
 
 
-menu_inicial()                                  
+# Main:
+if __name__ == "__main__":
+    repo = RepoUsuario()
+    menu_inicial(repo)
