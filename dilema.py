@@ -1,9 +1,9 @@
 import random
 import time
-from usuario import salvar_usuarios
+from usuario import Usuario, RepoUsuario
 
 
-#Lista de perguntas com as alternativas e comentários
+# Lista de perguntas com as alternativas e comentários:
 PERGUNTAS = [
     {
         "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão\n"
@@ -200,23 +200,26 @@ PERGUNTAS = [
 ]
 
 
-def iniciar_dilema(usuarios,email):
+# Iniciar cenários éticos:
+def iniciar_dilema(repo,email):
     """
     Conduz um questionário com cinco cenários éticos, contabiliza e retorna a pontuação.
     
     Parâmetros:
-    usuarios (dict): Dicionário com os usuários cadastrados.
-    email (str): Email do usuário cuja pontuação será exibida.
-    
-    returns: 
+        repo (RepoUsuario): repositório de usuários persistido em JSON.
+        email (str): email do usuário atualmente logado.
+        
+    return: 
     int: pontuacao (total de pontos adquiridos no questionário)
     """
+    user = repo.buscar(email)
     pontuacao = 0
     print("\n Seja bem-vindo(a) ao CENÁRIOS ÉTICOS!")
     print("Responda aos cinco dilemas com as alternativas (a, b ou c):\n")
 
     selecionadas = random.sample(PERGUNTAS, k=5)
     
+    # looping de perguntas:
     for i, pergunta in enumerate(selecionadas, 1):     
         print("=" * 80)
         print(f"Cenário {i}: {pergunta['pergunta']}")
@@ -231,6 +234,7 @@ def iniciar_dilema(usuarios,email):
                     break
                 case 'sair':    
                     print("Ok. Vamos encerrar por aqui...")
+                    repo.salvar_usuarios()
                     return pontuacao
                 case _:
                      print("Opção inválida!\n ")   
@@ -248,10 +252,8 @@ def iniciar_dilema(usuarios,email):
             'resposta': resposta,
             'pontos': pontos_resposta
         }
-        usuarios[email]['historico_respostas'].append(registro)
-        salvar_usuarios(usuarios)
+        user.historico_respostas.append(registro)
 
-
-
+    repo.salvar_usuarios()
     print(f"\n Você ganhou {pontuacao} ponto(s) nesse dilema!\n")
     return pontuacao
