@@ -1,6 +1,6 @@
 import random
 import time
-from usuario import Usuario, RepoUsuario
+from usuario import RepoUsuario
 
 
 # Lista de perguntas com as alternativas e comentários:
@@ -201,7 +201,7 @@ PERGUNTAS = [
 
 
 # Iniciar cenários éticos:
-def iniciar_dilema(repo,email):
+def iniciar_dilema(repo: RepoUsuario,email):
     """
     Conduz um questionário com cinco cenários éticos, contabiliza e retorna a pontuação.
     
