@@ -6,7 +6,7 @@
 - [Funcionalidades](#funcionalidades-release-2)
 - [Tecnologias](#tecnologias-utilizadas)
 - [Instalação](#como-instalar-e-executar-o-bem)
-- [Estrutura do Projeto](#Estrutura-do-Projeto)
+- [Estrutura do Projeto](#estrutura-do-projeto)
 - [Melhorias Futuras](#melhorias-futuras-planejadas)
 ---
 
