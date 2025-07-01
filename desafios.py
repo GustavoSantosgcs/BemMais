@@ -1,6 +1,6 @@
 import json
 import os
-from usuario import salvar_usuarios
+from usuario import Usuario, RepoUsuario, nao_vazio
 
 COD_PREMIUM = os.path.join('dados', 'codigos_premium.json')
 
@@ -13,6 +13,7 @@ def carregar_codigos():
 
 
 def salvar_codigos(cods):
+    os.makedirs(os.path.dirname(COD_PREMIUM), exist_ok=True)
     with open(COD_PREMIUM, 'w', encoding='utf-8') as arquivo:
         json.dump(cods, arquivo, indent=2, ensure_ascii=False)
 
@@ -42,16 +43,17 @@ desafios_premium = [
 ]
 
 # Menu interativo de desafios do bem
-def desafios_bem(usuarios, email):
+def desafios_bem(repo: RepoUsuario, email):
     """
     Exibe e gerencia o menu de desafios (regulares e premium), atualizando pontos
     e histórico de desafios realizados.
 
     Parâmetros:
-        usuarios (dict): dados dos usuários.
-        email (str): identificador do usuário atual.
+        repo (RepoUsuario): repositório de usuários persistido em JSON.
+        email (str): email do usuário atualmente logado.
     """
-    realizados = usuarios[email]['desafios_realizados']
+    user = repo.buscar(email)
+    user.desafios_realizados = user.desafios_realizados
     codigos = carregar_codigos()
 
     while True:
@@ -68,7 +70,7 @@ def desafios_bem(usuarios, email):
         match escolha:
             # Desafios normais
             case '1':
-                pendentes = [d for d in desafios_regulares if d not in realizados]
+                pendentes = [d for d in desafios_regulares if d not in user.desafios_realizados]
                 if not pendentes:
                     print("\nVocê já completou todos os desafios normais! 🎉")
                     continue
@@ -87,10 +89,10 @@ def desafios_bem(usuarios, email):
                 opcao = input("Opção: ").strip()
                 match opcao:
                     case '1':
-                        usuarios[email]['pontos'] += 3
-                        realizados.append(selecao)
+                        user.pontos += 3
+                        user.desafios_realizados.append(selecao)
                         print("Parabéns! Você ganhou 3 pontos pelo desafio!")
-                        salvar_usuarios(usuarios)
+                        repo.salvar_usuarios()
                     case '2':
                         print("Tudo bem, volte quando concluir! 👍")
                     case _:
@@ -98,7 +100,7 @@ def desafios_bem(usuarios, email):
 
             # Desafios premium com interação do voucher
             case '2':  
-                pendentes_premium = [d for d in desafios_premium if d not in realizados]
+                pendentes_premium = [d for d in desafios_premium if d not in user.desafios_realizados]
                 if not pendentes_premium:
                     print("\nVocê já completou todos os desafios premium! Parabéns! 🎉")
                     continue
@@ -117,26 +119,26 @@ def desafios_bem(usuarios, email):
                     continue
 
                 print("\nPara validar este desafio premium, insira o voucher recebido:")
-                voucher = input("Voucher: ").strip()
+                voucher = nao_vazio("Voucher: ").strip()
                 if voucher in validos:
                     # Consome o voucher
                     validos.remove(voucher)
                     codigos[selecao] = validos
                     salvar_codigos(codigos)
 
-                    usuarios[email]['pontos'] += 10
-                    realizados.append(selecao)
+                    user.pontos += 10
+                    user.desafios_realizados.append(selecao)
                     print("✅ Voucher aceito! Você ganhou 10 pontos! ✨")
-                    salvar_usuarios(usuarios)
+                    repo.salvar_usuarios()
                 else:
                     print("❌Voucher inválido ou já utilizado!")
 
             case '3':  
-                if not realizados:
+                if not user.desafios_realizados:
                     print("\nVocê ainda não completou nenhum desafio.")
                 else:
                     print("\n✅ Desafios já concluídos:")
-                    for d in realizados:
+                    for d in user.desafios_realizados:
                         print(f" - {d}")
 
             case '0':  
@@ -144,3 +146,6 @@ def desafios_bem(usuarios, email):
 
             case _:
                 print("Opção inválida, tente novamente.")
+
+
+
