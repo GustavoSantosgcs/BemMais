@@ -4,7 +4,7 @@ from usuario import salvar_usuarios
 
 COD_PREMIUM = os.path.join('dados', 'codigos_premium.json')
 
-# Funções para carregar e salvar códigos de vouchers
+# Funções para carregar e salvar códigos de vouchers:
 def carregar_codigos():
     if os.path.exists(COD_PREMIUM):
         with open(COD_PREMIUM, 'r', encoding='utf-8') as arquivo:
@@ -43,6 +43,14 @@ desafios_premium = [
 
 # Menu interativo de desafios do bem
 def desafios_bem(usuarios, email):
+    """
+    Exibe e gerencia o menu de desafios (regulares e premium), atualizando pontos
+    e histórico de desafios realizados.
+
+    Parâmetros:
+        usuarios (dict): dados dos usuários.
+        email (str): identificador do usuário atual.
+    """
     realizados = usuarios[email]['desafios_realizados']
     codigos = carregar_codigos()
 
