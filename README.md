@@ -1,6 +1,15 @@
 # 🧠 **Projeto BEM+ | _Pratique o bem. Viva a ética._** 
-
 ---
+
+## 📑 **Índice**
+- [Descrição](#descrição)
+- [Funcionalidades](#funcionalidades-release-2)
+- [Tecnologias](#tecnologias-utilizadas)
+- [Instalação](#como-instalar-e-executar-o-bem)
+- [Estrutura do Projeto](#Estrutura-do-Projeto)
+- [Melhorias Futuras](#melhorias-futuras-planejadas)
+---
+
 ##   📌**Descrição:**
 
 O **BEM+** é um projeto educacional e social, desenvolvido em Python, com o objetivo de incentivar boas ações, reflexões éticas e responsabilidade pessoal — especialmente voltado à área de Tecnologia da Informação.
@@ -36,7 +45,7 @@ O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, pa
 ---
 ## 🛠️**Tecnologias Utilizadas:**
 
-- **Linguagem:** Python 3 🐍
+- **Linguagem:** [![Python Version](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/)
 
 - **Módulos:**  
   - `os` – manipulação de arquivos e diretórios  
@@ -44,6 +53,8 @@ O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, pa
   - `re` – validação de e-mails e telefones  
   - `random` – seleção aleatória de dilemas e desafios  
   - `time` – registro de data em histórico  
+
+- **Paradigma:** Programação Orientada a Objetos 
  
 ---
 ##  💻**Como Instalar e Executar o BEM+**
@@ -65,6 +76,19 @@ git clone https://github.com/GustavoSantosgcs/BemMais.git
 
 - **5 -** Pronto! Agora é só aproveitar o Bem+
 
+---
+## 📁 **Estrutura do Projeto**
+```
+BemMais/
+├── dados/                   # JSON de usuários, vouchers e frase do dia
+│   ├── usuarios.json
+│   └── codigos_premium.json
+├── usuario.py               # Classes de domínio e repositório
+├── frases.py                # Frase do dia
+├── dilema.py                # Cenários éticos
+├── desafios.py              # Menu de desafios
+└── main.py                  # Ponto de entrada (menus e orquestração)
+```
 ---
 ## **Melhorias Futuras (Planejadas):**
 
