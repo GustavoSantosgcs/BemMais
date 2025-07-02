@@ -1,6 +1,6 @@
 import random
 import time
-from usuario import RepoUsuario
+from utils import nao_vazio, limpar_tela
 
 
 # Lista de perguntas com as alternativas e comentários:
@@ -201,7 +201,7 @@ PERGUNTAS = [
 
 
 # Iniciar cenários éticos:
-def iniciar_dilema(repo: RepoUsuario,email):
+def iniciar_dilema(repo,email):
     """
     Conduz um questionário com cinco cenários éticos, contabiliza e retorna a pontuação.
     
@@ -210,10 +210,11 @@ def iniciar_dilema(repo: RepoUsuario,email):
         email (str): email do usuário atualmente logado.
         
     return: 
-    int: pontuacao (total de pontos adquiridos no questionário)
+        int: pontuacao (total de pontos adquiridos no questionário)
     """
     user = repo.buscar(email)
     pontuacao = 0
+    limpar_tela()
     print("\n Seja bem-vindo(a) ao CENÁRIOS ÉTICOS!")
     print("Responda aos cinco dilemas com as alternativas (a, b ou c):\n")
 
@@ -221,6 +222,7 @@ def iniciar_dilema(repo: RepoUsuario,email):
     
     # looping de perguntas:
     for i, pergunta in enumerate(selecionadas, 1):     
+        limpar_tela()
         print("=" * 80)
         print(f"Cenário {i}: {pergunta['pergunta']}")
         for letra, alternativa in pergunta["alternativas"].items():
@@ -228,7 +230,7 @@ def iniciar_dilema(repo: RepoUsuario,email):
         print("=" * 80)
         
         while True:
-            resposta = input("Digite ('a','b','c') ou 'sair' para encerrar: ").lower()
+            resposta = nao_vazio("Digite ('a','b','c') ou 'sair' para encerrar: ").lower()
             match resposta:
                 case 'a'| 'b'|'c':
                     break
@@ -244,8 +246,9 @@ def iniciar_dilema(repo: RepoUsuario,email):
         
         print(f"\n✅ Você ganhou {pontos_resposta} ponto(s) nesta pergunta.")
         print(pergunta["comentario"][resposta])
+        input("pressione Enter para continuar...")
 
-        data_resposta = time.strftime("%d - %m - %Y")
+        data_resposta = time.strftime("%d/%m/%Y")
         registro = {
             'data': data_resposta,
             'pergunta': pergunta['pergunta'],
