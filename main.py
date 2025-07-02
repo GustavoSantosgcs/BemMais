@@ -1,11 +1,6 @@
-from usuario import (
-     RepoUsuario,
-     nao_vazio,
-     cadastrar_usuario,
-     editar_conta,
-     recuperar_senha,
-     deletar_conta
-)
+from repo_usuario import RepoUsuario
+from serv_usuario import ServicoUsuario
+from utils import nao_vazio, limpar_tela
 from frases import frase_dia
 from dilema import iniciar_dilema
 from desafios import desafios_bem
@@ -18,8 +13,8 @@ def pontuacao_e_nivel(repo: RepoUsuario, email):
      o nível do usuário com base nos pontos acumulados.
 
      Parâmetros:
-     repo (RepoUsuario): repositório de usuários persistido em JSON.
-     email (str): email do usuário cujo progresso será exibido.
+          repo (RepoUsuario): repositório de usuários persistido em JSON.
+          email (str): email do usuário cujo progresso será exibido.
      """
      user = repo.buscar(email)
 
@@ -33,6 +28,8 @@ def pontuacao_e_nivel(repo: RepoUsuario, email):
           nivel = 'Mentor 🌟'
      else:
           nivel = 'Mestre 👑'
+          
+     limpar_tela()     
      print(f"\n🚀 Olá, {user.nome}! Sua jornada pelo BEM+ está em andamento.")
      print("Vamos conferir seu progresso e o impacto positivo que você está construindo...\n")
      print(f"\n⭐ Pontuação total: {user.pontos} pontos")
@@ -52,6 +49,7 @@ def ranking_usuarios(repo: RepoUsuario):
      # Ordena direto as instâncias pelo atributo 'pontos'
      top5 = sorted(users, key=lambda user: user.pontos, reverse=True)[:5]
      
+     limpar_tela()
      print("\n🏆 Top 5 Usuários 🏆\n")
      print(f"{'Pos':<3} {'Nome':<20} {'Pontos':>6}")
      print("=" * 31)
@@ -69,11 +67,11 @@ def exibir_historico(repo: RepoUsuario,email):
      Exibe o histórico de respostas do usuário aos cenários éticos, quando existir.
      
      Parâmetros:
-     repo (RepoUsuario): repositório de usuários persistido em JSON.
-     email (str): email do usuário cujo histórico será exibido.
+          repo (RepoUsuario): repositório de usuários persistido em JSON.
+          email (str): email do usuário cujo histórico será exibido.
      """     
      user = repo.buscar(email)
-
+     limpar_tela()
      historico = user.historico_respostas
      if not historico:
           print("\n🤔 Você ainda não realizou nenhum cenário ético.")
@@ -85,46 +83,49 @@ def exibir_historico(repo: RepoUsuario,email):
 
      
 # Menu do usuário:
-def login(repo: RepoUsuario):
+def login(repo: RepoUsuario, serv: ServicoUsuario):
      """
      Realiza o login de um usuário e apresenta opções para acessar o menu BEM+,
      editar conta, deletar conta ou sair.
 
      Parâmetros:
-     repo (RepoUsuario): repositório de usuários persistido em JSON.
+          repo (RepoUsuario): repositório de usuários persistido em JSON.
      """
      email = nao_vazio("Digite seu email: ").lower()
      senha = input("Digite sua senha: ")
      user = repo.buscar(email)
-     if user and user.senha == senha:
-          
-          print(f"\nBem-vindo(a), {user.nome}")
-          while True:
-               print("O que deseja fazer? ")
-               print("1 - Prosseguir para o Menu BEM+")
-               print("2 - Editar Conta")
-               print("3 - Deletar Conta")
-               print("4 - Sair")
-               opcao_usuario = input("Opção: ")
-               match opcao_usuario:
-                    case '1':
-                         print("Então vamos continuar! ")
-                         menu_bem(repo,email)
-                    case '2':
-                         email = editar_conta(repo,email)
-                    case '3':
-                         if deletar_conta(repo, email):
-                              break
-                    case '4':
-                         print("Até mais então...")
-                         break
-                    case _:
-                         print("opção inválida")          
-     else:
+     if not (user and user.senha == senha):
           print("Email ou senha inválidos. ")
+          return
+     
+     while True:
+          limpar_tela()
+          print(f"\nBem-vindo(a), {user.nome}")
+          print("O que deseja fazer? ")
+          print("1 - Prosseguir para o Menu BEM+")
+          print("2 - Editar Conta")
+          print("3 - Deletar Conta")
+          print("4 - Sair")
+          op = input("Opção: ")
+          match op:
+               case '1':
+                    print("Então vamos continuar! ")
+                    menu_bem(repo,email)
+               case '2':
+                    email = serv.editar_conta(email)
+               case '3':
+                    if serv.deletar_conta(email):
+                         break
+               case '4':
+                    print("Até mais então...")
+                    break
+               case _:
+                    print("opção inválida")          
+                    input("Pressione Enter para continuar…")
+                    limpar_tela()
 
 
-#Menu BEM+:
+# Menu BEM+:
 def menu_bem(repo: RepoUsuario,email):
      """
      Apresenta o menu principal do BEM+ com as opções de funcionalidades ao usuário.
@@ -135,6 +136,7 @@ def menu_bem(repo: RepoUsuario,email):
      """    
      user = repo.buscar(email) 
      while True:
+          limpar_tela()
           print("\n" + "="*38)
           print(f"🌟 MENU BEM+ - {user.nome} 🌟".center(38))
           print("="*38)
@@ -178,11 +180,13 @@ def menu_bem(repo: RepoUsuario,email):
                     return
                
                case _:
-                    print("Opção invalida!")       
+                    print("Opção invalida!")   
+                    input("Pressione Enter para continuar…")
+                    limpar_tela()    
 
           
-#Menu inicial:
-def menu_inicial(repo):
+# Menu inicial:
+def menu_inicial(repo: RepoUsuario, serv: ServicoUsuario):
      """
      Exibe o menu inicial de cadastro, login e recuperação de senha.
 
@@ -190,6 +194,7 @@ def menu_inicial(repo):
           repo (RepoUsuario): repositório de usuários persistido em JSON.
      """     
      while True:
+          limpar_tela()
           print("\n" + "="*32)
           print("📘  MENU INICIAL - BEM+  📘".center(32))
           print("="*32)
@@ -202,19 +207,22 @@ def menu_inicial(repo):
              
           match opcao:
                case '1':
-                    cadastrar_usuario(repo)
+                    serv.cadastrar_usuario()
                case '2':
-                    login(repo)
+                    login(repo, serv)
                case '3':
-                    recuperar_senha(repo)
+                    serv.recuperar_senha()
                case '4':
                     print("Até mais então...")
                     break
                case _:
-                    print("opção inválida")                  
+                    print("opção inválida") 
+                    input("Pressione Enter para continuar…")
+                    limpar_tela()                 
 
 
 # Main:
 if __name__ == "__main__":
-    repo = RepoUsuario()
-    menu_inicial(repo)
+     repo = RepoUsuario()
+     serv = ServicoUsuario(repo)
+     menu_inicial(repo, serv)
