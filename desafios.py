@@ -1,8 +1,9 @@
 import json
 import os
-from usuario import RepoUsuario, nao_vazio
+from utils import nao_vazio, limpar_tela
 
 COD_PREMIUM = os.path.join('dados', 'codigos_premium.json')
+
 
 # Funções para carregar e salvar códigos de vouchers:
 def carregar_codigos():
@@ -42,8 +43,9 @@ desafios_premium = [
     "🔍 Encontrar e devolver item perdido (Central de Achados e Perdidos UFRPE)"
 ]
 
+
 # Menu interativo de desafios do bem
-def desafios_bem(repo: RepoUsuario, email):
+def desafios_bem(repo, email):
     """
     Exibe e gerencia o menu de desafios (regulares e premium), atualizando pontos
     e histórico de desafios realizados.
@@ -53,10 +55,10 @@ def desafios_bem(repo: RepoUsuario, email):
         email (str): email do usuário atualmente logado.
     """
     user = repo.buscar(email)
-    user.desafios_realizados = user.desafios_realizados
     codigos = carregar_codigos()
 
     while True:
+        limpar_tela()
         print("\n" + "="*32)
         print("🌟 MENU DESAFIOS 🌟".center(32))
         print("="*32)
@@ -70,6 +72,7 @@ def desafios_bem(repo: RepoUsuario, email):
         match escolha:
             # Desafios normais
             case '1':
+                limpar_tela()
                 pendentes = [d for d in desafios_regulares if d not in user.desafios_realizados]
                 if not pendentes:
                     print("\nVocê já completou todos os desafios normais! 🎉")
@@ -79,10 +82,10 @@ def desafios_bem(repo: RepoUsuario, email):
                     print(f"[{i}] {d}")
                 idx = input("Escolha o número do desafio (ou ENTER para voltar): ")
                 if not idx.isdigit() or not (1 <= int(idx) <= len(pendentes)):
+                    limpar_tela()
                     continue
 
                 selecao = pendentes[int(idx) - 1]
-                
                 
                 print(f"\nVocê concluiu este desafio?\n{selecao}")
                 print("[1] Sim    [2] Não")
@@ -95,11 +98,17 @@ def desafios_bem(repo: RepoUsuario, email):
                         repo.salvar_usuarios()
                     case '2':
                         print("Tudo bem, volte quando concluir! 👍")
+                        input("Pressione Enter para continuar...")
+                        limpar_tela()
+
                     case _:
-                        print("Opção inválida, retornando ao menu.")
+                        print("Opção inválida!")
+                        input("Pressione Enter para continuar...")
+                        limpar_tela()
 
             # Desafios premium com interação do voucher
             case '2':  
+                limpar_tela()
                 pendentes_premium = [d for d in desafios_premium if d not in user.desafios_realizados]
                 if not pendentes_premium:
                     print("\nVocê já completou todos os desafios premium! Parabéns! 🎉")
@@ -116,6 +125,8 @@ def desafios_bem(repo: RepoUsuario, email):
                 validos = codigos.get(selecao, [])
                 if not validos:
                     print("Nenhum voucher válido disponível para este premium.")
+                    input("Pressione Enter para continuar...")
+                    limpar_tela()
                     continue
 
                 print("\nPara validar este desafio premium, insira o voucher recebido:")
@@ -130,18 +141,28 @@ def desafios_bem(repo: RepoUsuario, email):
                     user.desafios_realizados.append(selecao)
                     print("✅ Voucher aceito! Você ganhou 10 pontos! ✨")
                     repo.salvar_usuarios()
+                    input("Pressione Enter para continuar...")
+                    limpar_tela()
+
                 else:
                     print("❌Voucher inválido ou já utilizado!")
+                    input("Pressione Enter para continuar...")
+                    limpar_tela()
+
 
             case '3':  
+                limpar_tela()
                 if not user.desafios_realizados:
                     print("\nVocê ainda não completou nenhum desafio.")
                 else:
                     print("\n✅ Desafios já concluídos:")
                     for d in user.desafios_realizados:
                         print(f" - {d}")
+                    input("Pressione Enter para continuar...")
+                    limpar_tela()       
 
             case '0':  
+                limpar_tela()
                 break
 
             case _:
