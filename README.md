@@ -3,9 +3,9 @@
 
 ## 📑 **Índice**
 - [Descrição](#descrição)
-- [Funcionalidades](#funcionalidades-release-2)
-- [Tecnologias](#tecnologias-utilizadas)
-- [Instalação](#como-instalar-e-executar-o-bem)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Instalação](#como-instalar-e-executar-o-bem+)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Melhorias Futuras](#melhorias-futuras-planejadas)
 ---
@@ -17,7 +17,7 @@ O **BEM+** é um projeto educacional e social, desenvolvido em Python, com o obj
 O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, participem de desafios do bem, acompanhem seu histórico de respostas e vejam um ranking com TOP 5 usuários com mais pontos. Com uma abordagem leve, mas reflexiva, o BEM+ promove o desenvolvimento pessoal por meio de escolhas conscientes e ações positivas no mundo real.
 
 ---
-## 🚀 **Funcionalidades (Release 2)**
+## 🚀 **Funcionalidades**
 
 - **CRUD de Usuário:**  
   - Cadastro, leitura, atualização e exclusão de contas, com dados armazenados em JSON.  
@@ -43,7 +43,7 @@ O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, pa
   - Listagem completa das perguntas já respondidas, com data e resultado.
 
 ---
-## 🛠️**Tecnologias Utilizadas:**
+## 🛠️**Tecnologias Utilizadas**
 
 - **Linguagem:** [![Python Version](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/)
 
