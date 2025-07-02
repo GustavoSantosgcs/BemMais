@@ -1,15 +1,6 @@
 # 🧠 **Projeto BEM+ | _Pratique o bem. Viva a ética._** 
 ---
 
-## 📑 **Índice**
-- [Descrição](#descrição)
-- [Funcionalidades](#funcionalidades)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Instalação](#como-instalar-e-executar-o-bem+)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Melhorias Futuras](#melhorias-futuras-planejadas)
----
-
 ##   📌**Descrição:**
 
 O **BEM+** é um projeto educacional e social, desenvolvido em Python, com o objetivo de incentivar boas ações, reflexões éticas e responsabilidade pessoal — especialmente voltado à área de Tecnologia da Informação.
@@ -83,10 +74,13 @@ BemMais/
 ├── dados/                   # JSON de usuários, vouchers e frase do dia
 │   ├── usuarios.json
 │   └── codigos_premium.json
-├── usuario.py               # Classes de domínio e repositório
+├── usuario.py               # Classe de domínio de Usuário
+├── repo_usuario.py          # Repositório de Usuário (persistência em JSON)
+├── serv_usuario.py          # Lógica de fluxo interativo de Usuário (I/O)
+├── utils.py                 # Funções auxiliares (e.g. limpar_tela, nao_vazio)
 ├── frases.py                # Frase do dia
-├── dilema.py                # Cenários éticos
-├── desafios.py              # Menu de desafios
+├── dilema.py                # Cenários éticos (quiz)
+├── desafios.py              # Menu de desafios (regulares e premium)
 └── main.py                  # Ponto de entrada (menus e orquestração)
 ```
 ---
