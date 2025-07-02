@@ -2,6 +2,7 @@ import json
 import os
 import random
 import time
+from utils import limpar_tela
 
 # Lista de frases
 frases = [
@@ -24,33 +25,46 @@ frases = [
 
 ARQUIVO_FRASE = os.path.join('dados','frase_dia.json')
 
+
+
+def salvar_frase(data, frase):
+    """
+    Persiste no disco a frase do dia em JSON, junto com a data.
+    Se o diretório ainda não existir, ele é criado automaticamente.
+
+    Parâmetros:
+        data (str): Data em que a frase foi gerada, no formato "DD/MM/YYYY".
+        frase (str): Texto da frase a ser salva no arquivo JSON.
+    """
+    os.makedirs(os.path.dirname(ARQUIVO_FRASE), exist_ok=True)
+    with open(ARQUIVO_FRASE, 'w', encoding='utf-8') as arq:
+        json.dump({"data": data, "frase": frase}, arq, indent=4, ensure_ascii=False)
+
+
 def frase_dia():
     """
-    Exibe a frase do dia, garantindo que a mesma frase seja mantida até o dia seguinte usando o
-    módulo Time.
-    
-    Verifica também se já existe uma frase armazenada para a data atual no arquivo 'frase_dia.json'.
+    Exibe a frase do dia, garantindo que permaneça igual até o dia seguinte.
     """
-    hoje = time.strftime("%d -%m - %Y")
-
+    hoje = time.strftime("%d/%m/%Y")
+    
     # Verificação se já existe uma frase salva para o dia atual
     if os.path.exists(ARQUIVO_FRASE):
-        with open(ARQUIVO_FRASE, 'r',encoding="utf-8") as arquivo:
-            dados = json.load(arquivo)
-        if dados.get("data") == hoje:
-            frase = dados["frase"]
-        else:
-            frase = random.choice(frases)
-            os.makedirs(os.path.dirname(ARQUIVO_FRASE), exist_ok=True)
-            with open(ARQUIVO_FRASE, 'w',encoding="utf-8") as arquivo:
-                json.dump({"data": hoje, "frase": frase}, arquivo, indent=4)
+        try:
+            with open(ARQUIVO_FRASE, 'r', encoding='utf-8') as arq:
+                dados = json.load(arq)
+        except (json.JSONDecodeError, IOError):
+            dados = {}
+    else:
+        dados = {}
+
+    if dados.get("data") == hoje:
+        frase = dados.get("frase", random.choice(frases))
     else:
         frase = random.choice(frases)
-        os.makedirs(os.path.dirname(ARQUIVO_FRASE), exist_ok=True)
-        with open(ARQUIVO_FRASE, 'w',encoding="utf-8") as arquivo:
-            json.dump({"data": hoje, "frase": frase}, arquivo, indent=4)
+        salvar_frase(hoje, frase)
 
     borda = "=" * (len(frase) + 4)
+    limpar_tela()
     print("\n✨ Frase do Dia ✨")
     print(borda)
     print(f"| {frase} |")
