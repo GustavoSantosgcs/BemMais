@@ -2,7 +2,7 @@ import json
 import os
 import random
 import time
-from utils import limpar_tela
+from utils import Utils
 
 # Lista de frases
 frases = [
@@ -64,7 +64,7 @@ def frase_dia():
         salvar_frase(hoje, frase)
 
     borda = "=" * (len(frase) + 4)
-    limpar_tela()
+    Utils.limpar_tela()
     print("\n✨ Frase do Dia ✨")
     print(borda)
     print(f"| {frase} |")
