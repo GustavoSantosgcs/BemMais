@@ -236,7 +236,9 @@ class DesafioBem:
                 case '3':  
                     limpar_tela()
                     if not user.desafios_realizados:
-                        print("\nVocê ainda não completou nenhum desafio.")
+                        print("\n🤔 Você ainda não completou nenhum desafio.")
+                        input("Pressione Enter para continuar...")
+                        limpar_tela()  
                     else:
                         print("\n✅ Desafios já concluídos:")
                         for d in user.desafios_realizados:
