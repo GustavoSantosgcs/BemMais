@@ -1,6 +1,6 @@
 from usuario import Usuario
 from repo_usuario import RepoUsuario
-from utils import nao_vazio, limpar_tela
+from utils import Utils
 
 class ServicoUsuario:
      
@@ -13,16 +13,16 @@ class ServicoUsuario:
           """
           Realiza o cadastro de um novo usuário com nome, telefone, email, senha e pergunta secreta.
           """ 
-          limpar_tela()
+          Utils.limpar_tela()
           while True: # looping externo de cadastro
-               nome = nao_vazio("Digite seu nome de usuário: ").title()
-               telefone = nao_vazio("Digite seu telefone com DDD Ex:(81) 9xxxx-xxxx: ")
+               nome = Utils.nao_vazio("Digite seu nome de usuário: ").title()
+               telefone = Utils.nao_vazio("Digite seu telefone com DDD Ex:(81) 9xxxx-xxxx: ")
                while not Usuario.telefone_valido(telefone):
                     print("Erro de digitação!")
-                    telefone = nao_vazio(" Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
+                    telefone = Utils.nao_vazio(" Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
                
                while True:  
-                    email = nao_vazio("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
+                    email = Utils.nao_vazio("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
                     if not Usuario.email_valido(email):
                          print("Formato de email inválido!")
                          continue
@@ -34,11 +34,11 @@ class ServicoUsuario:
                          break    
                               
                while True:     
-                    senha = nao_vazio("Digite uma senha com 6 digitos (apenas números): ")
+                    senha = Utils.nao_vazio("Digite uma senha com 6 digitos (apenas números): ")
                     if not Usuario.senha_valida(senha):
                          print("Senha inválida! Tente novamente.")
                          continue
-                    confirmação = nao_vazio("Confirme a senha: ")
+                    confirmação = Utils.nao_vazio("Confirme a senha: ")
                     if confirmação == senha:
                          print("Perfeito! Senhas iguais.")
                          break
@@ -46,7 +46,7 @@ class ServicoUsuario:
                          print("Senhas diferentes! Tente novamente...")
                     
                print("\nPara recuperação de senha, responda a seguinte pergunta: ")   
-               resposta_secreta = nao_vazio("Qual o nome da sua professora favorita? ")
+               resposta_secreta = Utils.nao_vazio("Qual o nome da sua professora favorita? ")
                     
                try:
                     novo = Usuario(
@@ -79,11 +79,11 @@ class ServicoUsuario:
           Parâmetros:
                email (str): email do usuário que está logado.
           """
-          limpar_tela()  
+          Utils.limpar_tela()  
           user = self.repo.buscar(email)
           while True:
-               nova_senha  = nao_vazio("Nova senha (6 dígitos numericos): ")
-               confirmar_senha = nao_vazio("Confirme a nova senha: ")
+               nova_senha  = Utils.nao_vazio("Nova senha (6 dígitos numericos): ")
+               confirmar_senha = Utils.nao_vazio("Confirme a nova senha: ")
 
                if nova_senha != confirmar_senha:
                     print("Senhas diferentes! Tente de novo.\n")
@@ -94,12 +94,12 @@ class ServicoUsuario:
                     self.repo.salvar_usuarios()            
                     print("Senha atualizada com sucesso!\n")
                     input("Pressione Enter para voltar…")    
-                    limpar_tela()  
+                    Utils.limpar_tela()  
                     break
                except ValueError as msg_erro:
                     print(msg_erro)
                     input("Enter para tentar de novo…")
-                    limpar_tela()
+                    Utils.limpar_tela()
 
 
      # Fluxo de alteração de email:
@@ -118,8 +118,8 @@ class ServicoUsuario:
           Retorna:
                str: o novo email em caso de sucesso, ou o email original em erro.
           """
-          limpar_tela()
-          novo_email = nao_vazio("Digite o novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
+          Utils.limpar_tela()
+          novo_email = Utils.nao_vazio("Digite o novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
           if not Usuario.email_valido(novo_email):
                print("Formato de email inválido!")
                return email
@@ -142,14 +142,14 @@ class ServicoUsuario:
           Parâmetros:
                email (str): email do usuário que está logado.
           """
-          limpar_tela()
+          Utils.limpar_tela()
           user = self.repo.buscar(email)
-          senha = nao_vazio("Confirme sua senha atual: ")
+          senha = Utils.nao_vazio("Confirme sua senha atual: ")
           if senha != user.senha:
                print("Senha incorreta! Voltando ao menu...")
                return
           
-          nova_resposta = nao_vazio("Digite a nova resposta secreta (professora favorita): ")
+          nova_resposta = Utils.nao_vazio("Digite a nova resposta secreta (professora favorita): ")
           try:
                user.alterar_resposta(nova_resposta)
                self.repo.salvar_usuarios()
@@ -169,7 +169,7 @@ class ServicoUsuario:
           Retorna:
                o email atualizado (ou o original, se não alterar).
           """
-          limpar_tela()
+          Utils.limpar_tela()
           user = self.repo.buscar(email)
           print("\nDados atuais:\n")
           print(f"Email: {user.email}")
@@ -186,33 +186,33 @@ class ServicoUsuario:
                editar = input("opção: ")
                match editar:
                     case '1': 
-                         limpar_tela()
+                         Utils.limpar_tela()
                          novo_email = self.alterar_email_interativo(email)
                          return novo_email     
                     case '2':
-                         limpar_tela()
-                         novo_nome = nao_vazio("Digite o novo nome: ").title()
+                         Utils.limpar_tela()
+                         novo_nome = Utils.nao_vazio("Digite o novo nome: ").title()
                          user.nome = novo_nome
                          self.repo.salvar_usuarios()
                          print("✔ Nome atualizado com sucesso!")
                          
                     case '3':
-                         limpar_tela()
-                         novo_tel = nao_vazio("Digite o novo número de telefone com DDD Ex:(81) 99999-8888: ")
+                         Utils.limpar_tela()
+                         novo_tel = Utils.nao_vazio("Digite o novo número de telefone com DDD Ex:(81) 99999-8888: ")
                          while not user.telefone_valido(novo_tel):
                               print("Formato inválido!")
-                              novo_tel = nao_vazio("Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
+                              novo_tel = Utils.nao_vazio("Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
                          
                          user.telefone = novo_tel
                          self.repo.salvar_usuarios()
                          print("✔ Telefone atualizado com sucesso!")
                          
                     case '4':
-                         senha_atual = nao_vazio("Digite sua senha atual: ")
+                         senha_atual = Utils.nao_vazio("Digite sua senha atual: ")
                          if senha_atual != user.senha:
                               print("🔒 Senha incorreta!")
                               input("Pressione Enter para voltar...")
-                              limpar_tela()
+                              Utils.limpar_tela()
                               continue
                          
                          self.alterar_senha_interativo(email)
@@ -241,8 +241,8 @@ class ServicoUsuario:
                2. Verifica existência e pergunta secreta.
                3. Chama fluxo de alteração de senha.
           """
-          limpar_tela()
-          email = nao_vazio("Digite seu email cadastrado: ").lower()
+          Utils.limpar_tela()
+          email = Utils.nao_vazio("Digite seu email cadastrado: ").lower()
           user = self.repo.buscar(email)
           
           if not user:
@@ -250,7 +250,7 @@ class ServicoUsuario:
                return
           
           print("\nResponda a seguinte pergunta secreta cadastrada:")
-          resposta_secreta = nao_vazio("Qual o nome da sua professora preferida? ")
+          resposta_secreta = Utils.nao_vazio("Qual o nome da sua professora preferida? ")
           if resposta_secreta.lower() != user.resposta_secreta.lower():
                print("Resposta secreta incorreta!")
                return
@@ -269,11 +269,11 @@ class ServicoUsuario:
           Retorna:
                bool: True se a conta foi excluída com sucesso, False caso contrário.
           """
-          limpar_tela()
-          senha = nao_vazio("Para excluir sua conta, confirme sua senha: ")
+          Utils.limpar_tela()
+          senha = Utils.nao_vazio("Para excluir sua conta, confirme sua senha: ")
           user = self.repo.buscar(email)
           if senha == user.senha:
-               confirmacao = nao_vazio("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
+               confirmacao = Utils.nao_vazio("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
                if confirmacao != 's':
                     print("Operação cancelada!")
                     return False
