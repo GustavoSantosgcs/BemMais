@@ -1,7 +1,7 @@
 import json
 import os
 from repo_usuario import RepoUsuario
-from utils import nao_vazio, limpar_tela
+from utils import Utils
 
 
 VOUCHER = os.path.join('dados', 'codigos_premium.json')
@@ -139,7 +139,7 @@ class DesafioBem:
         codigos = self.vouchers.carregar_codigos()
 
         while True:
-            limpar_tela()
+            Utils.limpar_tela()
             print("\n" + "="*32)
             print("🌟 MENU DESAFIOS 🌟".center(32))
             print("="*32)
@@ -153,7 +153,7 @@ class DesafioBem:
             match escolha:
                 # Desafios normais
                 case '1':
-                    limpar_tela()
+                    Utils.limpar_tela()
                     pendentes = [d for d in self.desafios.listar_regulares()
                                  if d not in user.desafios_realizados]
                     if not pendentes:
@@ -164,7 +164,7 @@ class DesafioBem:
                         print(f"[{i}] {d}")
                     idx = input("Escolha o número do desafio (ou ENTER para voltar): ")
                     if not idx.isdigit() or not (1 <= int(idx) <= len(pendentes)):
-                        limpar_tela()
+                        Utils.limpar_tela()
                         continue
 
                     selecao = pendentes[int(idx) - 1]
@@ -181,16 +181,16 @@ class DesafioBem:
                         case '2':
                             print("Tudo bem, volte quando concluir! 👍")
                             input("Pressione Enter para continuar...")
-                            limpar_tela()
+                            Utils.limpar_tela()
 
                         case _:
                             print("Opção inválida!")
                             input("Pressione Enter para continuar...")
-                            limpar_tela()
+                            Utils.limpar_tela()
 
                 # Desafios premium com interação do voucher
                 case '2':  
-                    limpar_tela()
+                    Utils.limpar_tela()
                     pendentes_premium = [d for d in self.desafios.listar_premium()
                                          if d not in user.desafios_realizados]
                     if not pendentes_premium:
@@ -209,11 +209,11 @@ class DesafioBem:
                     if not validos:
                         print("Nenhum voucher válido disponível para este premium.")
                         input("Pressione Enter para continuar...")
-                        limpar_tela()
+                        Utils.limpar_tela()
                         continue
 
                     print("\nPara validar este desafio premium, insira o voucher recebido:")
-                    voucher = nao_vazio("Voucher: ").strip()
+                    voucher = Utils.nao_vazio("Voucher: ").strip()
                     if voucher in validos:
                         # Consome o voucher
                         validos.remove(voucher)
@@ -225,29 +225,29 @@ class DesafioBem:
                         print("✅ Voucher aceito! Você ganhou 10 pontos! ✨")
                         self.users.salvar_usuarios()
                         input("Pressione Enter para continuar...")
-                        limpar_tela()
+                        Utils.limpar_tela()
 
                     else:
                         print("❌Voucher inválido ou já utilizado!")
                         input("Pressione Enter para continuar...")
-                        limpar_tela()
+                        Utils.limpar_tela()
 
 
                 case '3':  
-                    limpar_tela()
+                    Utils.limpar_tela()
                     if not user.desafios_realizados:
                         print("\n🤔 Você ainda não completou nenhum desafio.")
                         input("Pressione Enter para continuar...")
-                        limpar_tela()  
+                        Utils.limpar_tela()  
                     else:
                         print("\n✅ Desafios já concluídos:")
                         for d in user.desafios_realizados:
                             print(f" - {d}")
                         input("Pressione Enter para continuar...")
-                        limpar_tela()       
+                        Utils.limpar_tela()       
 
                 case '0':  
-                    limpar_tela()
+                    Utils.limpar_tela()
                     break
 
                 case _:
