@@ -1,6 +1,6 @@
 import random
 import time
-from utils import nao_vazio, limpar_tela
+from utils import Utils
 
 
 # Lista de perguntas com as alternativas e comentários:
@@ -214,7 +214,7 @@ def iniciar_dilema(repo,email):
     """
     user = repo.buscar(email)
     pontuacao = 0
-    limpar_tela()
+    Utils.limpar_tela()
     print("\n Seja bem-vindo(a) ao CENÁRIOS ÉTICOS!")
     print("Responda aos cinco dilemas com as alternativas (a, b ou c):\n")
 
@@ -222,7 +222,7 @@ def iniciar_dilema(repo,email):
     
     # looping de perguntas:
     for i, pergunta in enumerate(selecionadas, 1):     
-        limpar_tela()
+        Utils.limpar_tela()
         print("=" * 80)
         print(f"Cenário {i}: {pergunta['pergunta']}")
         for letra, alternativa in pergunta["alternativas"].items():
@@ -230,7 +230,7 @@ def iniciar_dilema(repo,email):
         print("=" * 80)
         
         while True:
-            resposta = nao_vazio("Digite ('a','b','c') ou 'sair' para encerrar: ").lower()
+            resposta = Utils.nao_vazio("Digite ('a','b','c') ou 'sair' para encerrar: ").lower()
             match resposta:
                 case 'a'| 'b'|'c':
                     break
