@@ -2,7 +2,7 @@ from repo_usuario import RepoUsuario
 from serv_usuario import ServicoUsuario
 from utils import Utils
 from frases import FraseDia
-from dilema import iniciar_dilema
+from dilema import Dilema
 from desafios import DesafioBem, ListaDesafios, RepoVoucher
 
 
@@ -15,6 +15,7 @@ class BemMais:
           self.serv_user = ServicoUsuario(self.repo_user)
           desafios_repo = ListaDesafios()
           voucher_repo = RepoVoucher()
+          self.dilema = Dilema(self.repo_user)
           self.serv_frase = FraseDia()
           self.desafios = DesafioBem(self.repo_user, desafios_repo, voucher_repo)
 
@@ -161,7 +162,7 @@ class BemMais:
                          input("\nPressione Enter para continuar...")
                     
                     case '2':
-                         pontos = iniciar_dilema(self.repo_user,email)
+                         pontos = self.dilema.executar_dilema(email)
                          user.pontos += pontos
                          self.repo_user.salvar_usuarios()
                          
