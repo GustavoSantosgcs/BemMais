@@ -10,8 +10,20 @@ from repo_usuario import RepoUsuario
 DILEMA = os.path.join('dados', 'dilema.json')
 
 class Dilema:
+    """
+    Provê o funcionamento da função Cenários éticos.
+    
+    Carrega do repositório (JSON) as perguntas dos cenários éticos,
+    contabiliza e retorna a pontuação.
+    """
     
     def __init__(self, repo: RepoUsuario, caminho = DILEMA):
+        """
+        Repositório para carregar as perguntas dos cenários éticos.
+
+        Parâmetros:
+            caminho (str): Caminho para o arquivo JSON de perguntas.
+        """
         self.users = repo
         self.caminho = caminho
 
@@ -20,8 +32,7 @@ class Dilema:
                 self.perguntas = json.load(arq)
 
         except FileNotFoundError:
-            self.perguntas = []
-            
+            self.perguntas = [] 
 
 
     # Iniciar cenários éticos:
