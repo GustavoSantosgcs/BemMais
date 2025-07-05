@@ -31,7 +31,7 @@ O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, pa
   - Top 5 geral exibido no menu, ordenado pela pontuação.
 
 - **Histórico de Respostas:**  
-  - Listagem completa das perguntas já respondidas, com data e resultado.
+  - Listagem completa das perguntas já respondidas, com data, resposta e pontos.
 
 ---
 ## 🛠️**Tecnologias Utilizadas**
@@ -44,6 +44,7 @@ O sistema permite que os usuários se cadastrem, respondam a dilemas éticos, pa
   - `re` – validação de e-mails e telefones  
   - `random` – seleção aleatória de dilemas e desafios  
   - `time` – registro de data em histórico  
+  - `textwrap` – formatação de texto para terminal  
 
 - **Paradigma:** Programação Orientada a Objetos 
  
@@ -71,17 +72,19 @@ git clone https://github.com/GustavoSantosgcs/BemMais.git
 ## 📁 **Estrutura do Projeto**
 ```
 BemMais/
-├── dados/                   # JSON de usuários, vouchers e frase do dia
-│   ├── usuarios.json
-│   └── codigos_premium.json
-├── usuario.py               # Classe de domínio de Usuário
-├── repo_usuario.py          # Repositório de Usuário (persistência em JSON)
-├── serv_usuario.py          # Lógica de fluxo interativo de Usuário (I/O)
-├── utils.py                 # Funções auxiliares (e.g. limpar_tela, nao_vazio)
-├── frases.py                # Frase do dia
-├── dilema.py                # Cenários éticos (quiz)
-├── desafios.py              # Menu de desafios (regulares e premium)
-└── main.py                  # Ponto de entrada (menus e orquestração)
+├── dados/                        # JSONs de dados persistidos
+│   ├── usuarios.json             # Usuários cadastrados
+│   ├── codigos_premium.json      # Vouchers dos desafios premium
+│   ├── dilema.json               # Definições de cenários éticos
+│   └── frase_dia.json            # Frase do dia (persistência diária)
+├── usuario.py                    # Classe de domínio: Usuário
+├── repo_usuario.py               # Repositório de Usuário (persistência em JSON)
+├── serv_usuario.py               # Fluxo interativo para cadastro, edição e recuperação
+├── utils.py                      # Funções utilitárias (limpar_tela, nao_vazio)
+├── frases.py                     # Lógica de "Frase do Dia" (RepoFraseDia)
+├── dilema.py                     # Lógica de quiz de cenários éticos (Dilema)
+├── desafios.py                   # Menu e fluxo de desafios do bem
+└── main.py                       # Entrada da aplicação (classe BemMais)
 ```
 ---
 ## **Melhorias Futuras (Planejadas):**
