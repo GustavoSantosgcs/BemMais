@@ -29,6 +29,7 @@ class BemMais:
           self.serv_frase = FraseDia()
           self.desafios = DesafioBem(self.repo_user, desafios_repo, voucher_repo)
 
+
      #Ver pontuação e nível:
      def pontuacao_e_nivel(self, email):
           """
