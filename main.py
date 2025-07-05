@@ -104,6 +104,7 @@ class BemMais:
           user = self.repo_user.buscar(email)
           if not (user and user.senha == senha):
                print("Email ou senha inválidos. ")
+               input ("Pressione ENTER para voltar...")
                return
           
           while True:
