@@ -7,7 +7,6 @@ from utils import Utils
 
 ARQUIVO_FRASE = os.path.join('dados','frase_dia.json')
 
-
 class FraseDia:
     """
     Gerencia a persistência e exibição da “Frase do Dia”.
@@ -20,6 +19,9 @@ class FraseDia:
     """
     
     def __init__(self):
+        """
+        Provê o caminho e a lista de frases.       
+        """
         self.caminho = ARQUIVO_FRASE
         self.frases = [
             "A tecnologia é melhor quando une as pessoas em vez de separá-las. - Autor Desconhecido",
@@ -39,12 +41,11 @@ class FraseDia:
         ]
         
         
-        
     def salvar_frase(self, data, frase):
         """
-        Persiste no disco a frase do dia em JSON, junto com a data.
+        Persiste no sistema a frase do dia em JSON, junto com a data.
         Se o diretório ainda não existir, ele é criado automaticamente.
-
+        
         Parâmetros:
             data (str): Data em que a frase foi gerada, no formato "DD/MM/YYYY".
             frase (str): Texto da frase a ser salva no arquivo JSON.
