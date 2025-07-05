@@ -1,7 +1,7 @@
 from repo_usuario import RepoUsuario
 from serv_usuario import ServicoUsuario
 from utils import Utils
-from frases import frase_dia
+from frases import FraseDia
 from dilema import iniciar_dilema
 from desafios import DesafioBem, ListaDesafios, RepoVoucher
 
@@ -15,6 +15,7 @@ class BemMais:
           self.serv_user = ServicoUsuario(self.repo_user)
           desafios_repo = ListaDesafios()
           voucher_repo = RepoVoucher()
+          self.serv_frase = FraseDia()
           self.desafios = DesafioBem(self.repo_user, desafios_repo, voucher_repo)
 
      #Ver pontuação e nível:
@@ -111,7 +112,7 @@ class BemMais:
                print("1 - Prosseguir para o Menu BEM+")
                print("2 - Editar Conta")
                print("3 - Deletar Conta")
-               print("4 - Sair")
+               print("0 - Sair")
                op = input("Opção: ")
                match op:
                     case '1':
@@ -122,7 +123,7 @@ class BemMais:
                     case '3':
                          if self.serv_user.deletar_conta(email):
                               break
-                    case '4':
+                    case '0':
                          print("Até mais então...")
                          break
                     case _:
@@ -156,7 +157,7 @@ class BemMais:
                opcao_bem = input("Sua opção é? ")
                match opcao_bem:
                     case '1':
-                         frase_dia()
+                         self.serv_frase.frase_dia()
                          input("\nPressione Enter para continuar...")
                     
                     case '2':
@@ -203,7 +204,7 @@ class BemMais:
                print("│ 1 - Cadastrar               │")
                print("│ 2 - Login                   │")
                print("│ 3 - Recuperação de senha    │")
-               print("│ 4 - Sair                    │")
+               print("│ 0 - Sair                    │")
                print("="*32)
                opcao = input("Escolha uma opção: ")
                
@@ -214,7 +215,7 @@ class BemMais:
                          self.login()
                     case '3':
                          self.serv_user.recuperar_senha()
-                    case '4':
+                    case '0':
                          print("Até mais então...")
                          break
                     case _:
