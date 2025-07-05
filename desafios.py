@@ -143,7 +143,7 @@ class DesafioBem:
             print("\n" + "="*32)
             print("🌟 MENU DESAFIOS 🌟".center(32))
             print("="*32)
-            print("1 - Desafios a serem realizados")
+            print("1 - Desafios regulares")
             print("2 - Desafios Premium")
             print("3 - Desafios realizados")
             print("0 - Voltar")
@@ -162,6 +162,7 @@ class DesafioBem:
 
                     for i, d in enumerate(pendentes, 1):
                         print(f"[{i}] {d}")
+                    print()
                     idx = input("Escolha o número do desafio (ou ENTER para voltar): ")
                     if not idx.isdigit() or not (1 <= int(idx) <= len(pendentes)):
                         Utils.limpar_tela()
@@ -252,3 +253,5 @@ class DesafioBem:
 
                 case _:
                     print("Opção inválida, tente novamente.")
+                    input("Pressione Enter para continuar...")
+                    Utils.limpar_tela()
