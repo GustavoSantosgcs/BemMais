@@ -11,6 +11,16 @@ class BemMais:
      Aplicação BEM+ que gerencia cadastro, login, menus e integra serviços.
      """
      def __init__(self):
+          """
+          Aplicação BEM+ que orquestra todos os módulos do sistema.
+
+          Nesta inicialização são configurados:
+               - repo_user: repositório de usuários (persistência em JSON).
+               - serv_user: serviço de fluxo interativo de usuário (cadastro, edição, etc.).
+               - dilema: módulo de cenários éticos, carregando perguntas de arquivo JSON.
+               - serv_frase: serviço responsável por gerenciar a Frase do Dia.
+               - desafios: módulo de “Desafios do Bem”, com desafios regulares e premium (com voucher).
+          """
           self.repo_user = RepoUsuario()
           self.serv_user = ServicoUsuario(self.repo_user)
           desafios_repo = ListaDesafios()
