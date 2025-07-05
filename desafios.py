@@ -92,6 +92,7 @@ class ListaDesafios:
         """
         return list(self.regulares)
     
+    
     def listar_premium(self):
         """
         Retorna uma cópia da lista de desafios premium.
@@ -123,6 +124,7 @@ class DesafioBem:
         self.users = repo
         self.desafios = desafios_repo
         self.vouchers = voucher_repo  
+    
     
     # Menu interativo de desafios do bem
     def desafios_bem(self, email):
