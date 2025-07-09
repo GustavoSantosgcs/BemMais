@@ -76,6 +76,7 @@ class Dilema:
                         break
                     case 'sair':    
                         print("Ok. Vamos encerrar por aqui...")
+                        input("pressione Enter para continuar...")
                         self.users.salvar_usuarios()
                         return pontuacao
                     case _:
