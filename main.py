@@ -31,7 +31,7 @@ class BemMais:
 
 
      #Ver pontuação e nível:
-     def pontuacao_e_nivel(self, email):
+     def pontuacaoENivel(self, email):
           """
           Exibe, com uma saudação personalizada, a pontuação e
           o nível do usuário com base nos pontos acumulados.
@@ -52,7 +52,7 @@ class BemMais:
           else:
                nivel = 'Mestre 👑'
                
-          Utils.limpar_tela()     
+          Utils.limparTela()     
           print(f"\n🚀 Olá, {user.nome}! Sua jornada pelo BEM+ está em andamento.")
           print("Vamos conferir seu progresso e o impacto positivo que você está construindo...\n")
           print(f"\n⭐ Pontuação total: {user.pontos} pontos")
@@ -60,7 +60,7 @@ class BemMais:
 
 
      # Ranking de Usuários:
-     def ranking_usuarios(self):
+     def rankingUsuarios(self):
           """
           Exibe um ranking dos cinco usuários com maior pontuação.
 
@@ -72,7 +72,7 @@ class BemMais:
           # Ordena direto as instâncias pelo atributo 'pontos'
           top5 = sorted(users, key=lambda user: user.pontos, reverse=True)[:5]
           
-          Utils.limpar_tela()
+          Utils.limparTela()
           print("\n🏆 Top 5 Usuários 🏆\n")
           print(f"{'Pos':<3} {'Nome':<20} {'Pontos':>6}")
           print("=" * 31)
@@ -85,7 +85,7 @@ class BemMais:
           
           
      # Histórico de Respostas do usuário:
-     def exibir_historico(self,email):
+     def exibirHistorico(self,email):
           """
           Exibe o histórico de respostas do usuário aos cenários éticos, quando existir.
           
@@ -93,7 +93,7 @@ class BemMais:
                email (str): email do usuário cujo histórico será exibido.
           """     
           user = self.repo_user.buscar(email)
-          Utils.limpar_tela()
+          Utils.limparTela()
           historico = user.historico_respostas
           if not historico:
                print("\n🤔 Você ainda não realizou nenhum cenário ético.")
@@ -110,7 +110,7 @@ class BemMais:
           Realiza o login de um usuário e apresenta opções para acessar o menu BEM+,
           editar conta, deletar conta ou sair.
           """
-          email = Utils.nao_vazio("Digite seu email: ").lower()
+          email = Utils.naoVazio("Digite seu email: ").lower()
           senha = input("Digite sua senha: ")
           user = self.repo_user.buscar(email)
           if not (user and user.senha == senha):
@@ -119,7 +119,7 @@ class BemMais:
                return
           
           while True:
-               Utils.limpar_tela()
+               Utils.limparTela()
                print(f"\nBem-vindo(a), {user.nome}")
                print("O que deseja fazer? ")
                print("1 - Prosseguir para o Menu BEM+")
@@ -130,11 +130,11 @@ class BemMais:
                match op:
                     case '1':
                          print("Então vamos continuar! ")
-                         self.menu_bem(email)
+                         self.menuBem(email)
                     case '2':
-                         email = self.serv_user.editar_conta(email)
+                         email = self.serv_user.editarConta(email)
                     case '3':
-                         if self.serv_user.deletar_conta(email):
+                         if self.serv_user.deletarConta(email):
                               break
                     case '0':
                          print("Até mais então...")
@@ -142,11 +142,11 @@ class BemMais:
                     case _:
                          print("opção inválida")          
                          input("Pressione Enter para continuar…")
-                         Utils.limpar_tela()
+                         Utils.limparTela()
 
 
      # Menu BEM+:
-     def menu_bem(self,email):
+     def menuBem(self,email):
           """
           Apresenta o menu principal do BEM+ com as opções de funcionalidades ao usuário.
 
@@ -154,7 +154,7 @@ class BemMais:
                email (str): email do usuário logado.
           """    
           while True:
-               Utils.limpar_tela()
+               Utils.limparTela()
                user = self.repo_user.buscar(email) 
                print("\n" + "="*38)
                print(f"🌟 MENU BEM+ - {user.nome} 🌟".center(38))
@@ -170,27 +170,27 @@ class BemMais:
                opcao_bem = input("Sua opção é? ")
                match opcao_bem:
                     case '1':
-                         self.serv_frase.frase_dia()
+                         self.serv_frase.fraseDia()
                          input("\nPressione Enter para continuar...")
                     
                     case '2':
-                         pontos = self.dilema.executar_dilema(email)
+                         pontos = self.dilema.executarDilema(email)
                          user.pontos += pontos
-                         self.repo_user.salvar_usuarios()
+                         self.repo_user.salvarUsuarios()
                          
                     case '3':
-                         self.desafios.desafios_bem(email)
+                         self.desafios.desafiosBem(email)
                          
                     case '4':
-                         self.pontuacao_e_nivel(email)
+                         self.pontuacaoENivel(email)
                          input("\nPressione Enter para continuar...")
                     
                     case '5':
-                         self.ranking_usuarios()
+                         self.rankingUsuarios()
                          input("\nPressione Enter para continuar...")
                     
                     case '6':
-                         self.exibir_historico(email)
+                         self.exibirHistorico(email)
                          input("\nPressione Enter para continuar...")
                     
                     case '0':
@@ -201,16 +201,16 @@ class BemMais:
                     case _:
                          print("Opção invalida!")   
                          input("Pressione Enter para continuar…")
-                         Utils.limpar_tela()    
+                         Utils.limparTela()    
 
                
      # Menu inicial:
-     def menu_inicial(self):
+     def menuInicial(self):
           """
           Exibe o menu inicial de cadastro, login e recuperação de senha.
          """     
           while True:
-               Utils.limpar_tela()
+               Utils.limparTela()
                print("\n" + "="*32)
                print("📘  MENU INICIAL - BEM+  📘".center(32))
                print("="*32)
@@ -223,21 +223,21 @@ class BemMais:
                
                match opcao:
                     case '1':
-                         self.serv_user.cadastrar_usuario()
+                         self.serv_user.cadastrarUsuario()
                     case '2':
                          self.login()
                     case '3':
-                         self.serv_user.recuperar_senha()
+                         self.serv_user.recuperarSenha()
                     case '0':
                          print("Até mais então...")
                          break
                     case _:
                          print("opção inválida") 
                          input("Pressione Enter para continuar…")
-                         Utils.limpar_tela()                 
+                         Utils.limparTela()                 
 
 
 # Main:
 if __name__ == "__main__":
      app = BemMais()
-     app.menu_inicial()
+     app.menuInicial()

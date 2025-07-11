@@ -36,7 +36,7 @@ class Dilema:
 
 
     # Iniciar cenários éticos:
-    def executar_dilema(self, email):
+    def executarDilema(self, email):
         """
         Conduz um questionário com cinco cenários éticos, contabiliza e retorna a pontuação.
         
@@ -48,7 +48,7 @@ class Dilema:
         """
         user = self.users.buscar(email)
         pontuacao = 0
-        Utils.limpar_tela()
+        Utils.limparTela()
         print("\n Seja bem-vindo(a) ao CENÁRIOS ÉTICOS!")
         print("Responda aos cinco dilemas com as alternativas (a, b ou c):\n")
 
@@ -56,7 +56,7 @@ class Dilema:
         
         # looping de perguntas:
         for i, pergunta in enumerate(selecionadas, 1):     
-            Utils.limpar_tela()
+            Utils.limparTela()
             print("=" * 75)
             
             # formatar para largura maxima = 70:
@@ -70,14 +70,14 @@ class Dilema:
             print("=" * 75)
             
             while True:
-                resposta = Utils.nao_vazio("Digite ('a','b','c') ou 'sair' para encerrar: ").lower()
+                resposta = Utils.naoVazio("Digite ('a','b','c') ou 'sair' para encerrar: ").lower()
                 match resposta:
                     case 'a'| 'b'|'c':
                         break
                     case 'sair':    
                         print("Ok. Vamos encerrar por aqui...")
                         input("pressione Enter para continuar...")
-                        self.users.salvar_usuarios()
+                        self.users.salvarUsuarios()
                         return pontuacao
                     case _:
                         print("Opção inválida!\n ")   
@@ -98,7 +98,7 @@ class Dilema:
             }
             user.historico_respostas.append(registro)
 
-        self.users.salvar_usuarios()
+        self.users.salvarUsuarios()
         print(f"\n Você ganhou {pontuacao} ponto(s) nesse dilema!\n")
         return pontuacao
 

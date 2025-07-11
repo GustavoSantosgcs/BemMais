@@ -41,7 +41,7 @@ class FraseDia:
         ]
         
         
-    def salvar_frase(self, data, frase):
+    def salvarFrase(self, data, frase):
         """
         Persiste no sistema a frase do dia em JSON, junto com a data.
         Se o diretório ainda não existir, ele é criado automaticamente.
@@ -55,7 +55,7 @@ class FraseDia:
             json.dump({"data": data, "frase": frase}, arq, indent=4, ensure_ascii=False)
 
 
-    def carregar_dados(self) -> dict:
+    def carregarDados(self) -> dict:
         """ 
         Verificação se já existe uma frase salva para o dia atual
         
@@ -73,7 +73,7 @@ class FraseDia:
             return {}
 
 
-    def frase_dia(self):
+    def fraseDia(self):
         """
         Exibe a frase do dia, garantindo que permaneça igual até o dia seguinte.
         Fluxo:
@@ -83,16 +83,16 @@ class FraseDia:
         3- Limpa a tela e imprime a frase com borda decorativa.
         """
         hoje = time.strftime("%d/%m/%Y")
-        dados = self.carregar_dados()
+        dados = self.carregarDados()
 
         if dados.get("data") == hoje:
             frase = dados.get("frase", random.choice(self.frases))
         else:
             frase = random.choice(self.frases)
-            self.salvar_frase(hoje, frase)
+            self.salvarFrase(hoje, frase)
 
         borda = "=" * (len(frase) + 4)
-        Utils.limpar_tela()
+        Utils.limparTela()
         print("\n✨ Frase do Dia ✨")
         print(borda)
         print(f"| {frase} |")

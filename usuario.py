@@ -21,11 +21,11 @@ class Usuario:
           Raise:
           ValueError: se qualquer dado de entrada não passar nas validações.
           """
-          if not self.email_valido(email):
+          if not self.emailValido(email):
                raise ValueError("Email digitado é inválido.")
-          if not self.senha_valida(senha):
+          if not self.senhaValida(senha):
                raise ValueError("Senha digitada é inválida")
-          if not self.telefone_valido(telefone):
+          if not self.telefoneValido(telefone):
                raise ValueError("Telefone digitado é inválido!")                    
                     
           self.nome = nome
@@ -39,7 +39,7 @@ class Usuario:
 
 
      # Serialização:
-     def to_dict(self):
+     def toDict(self):
                """Converte o objeto para um dicionário JSON."""
                return {
                     "nome": self.nome,
@@ -55,14 +55,14 @@ class Usuario:
                
      # Deserialização:           
      @classmethod
-     def from_dict(cls, dados):
-          """Cria um Usuario a partir de um dicionário (caminho inverso do to_dict)."""
+     def fromDict(cls, dados):
+          """Cria um Usuario a partir de um dicionário (caminho inverso do toDict)."""
           return cls(**dados) # '**' espalha as chaves/valores como argumentos nomeados para o __init__. 
 
 
      # Validação de telefone:
      @staticmethod
-     def telefone_valido(telefone):
+     def telefoneValido(telefone):
           """
           Verifica se o telefone informado possui um formato padrão do Brasil.
           Aceita o número com o sem espaço após o DDD
@@ -80,7 +80,7 @@ class Usuario:
 
      # Validação de email:
      @staticmethod
-     def email_valido(email):
+     def emailValido(email):
           """
           Verifica se o email possui um formato válido e pertence a um domínio permitido.
 
@@ -96,7 +96,7 @@ class Usuario:
           
      # Validação de senha:
      @staticmethod
-     def senha_valida(senha):
+     def senhaValida(senha):
           """
           Verifica se a senha contém apenas dígitos e tem 6 caracteres.
 
@@ -110,7 +110,7 @@ class Usuario:
 
 
      # Alterar email:
-     def alterar_email(self, novo_email):
+     def alterarEmail(self, novo_email):
           """
           Altera o email do usuário após validar seu formato.
 
@@ -120,13 +120,13 @@ class Usuario:
           Raise:
                ValueError: Se o novo_email não corresponder ao padrão válido.
           """
-          if not Usuario.email_valido(novo_email):
+          if not Usuario.emailValido(novo_email):
                raise ValueError("Formato de email inválido!")
           self.email = novo_email
 
 
      # Alteração de senha:
-     def alterar_senha(self, senha_atual, nova_senha):
+     def alterarSenha(self, senha_atual, nova_senha):
           """
            Atualiza a senha do usuário, conferindo a senha atual.
           
@@ -140,13 +140,13 @@ class Usuario:
           if senha_atual != self.senha:
                raise ValueError("Senha atual incorreta.")
           
-          if not self.senha_valida(nova_senha):
+          if not self.senhaValida(nova_senha):
                raise ValueError("Nova senha inválida (seis dígitos numéricos).")
           self.senha = nova_senha
 
 
      # Alterar resposta secreta:
-     def alterar_resposta(self, nova_resposta):
+     def alterarResposta(self, nova_resposta):
           """
           Atualiza a resposta secreta do usuário para recuperação de senha.
 

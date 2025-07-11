@@ -9,21 +9,21 @@ class ServicoUsuario:
           
           
      #Cadastro de usuário:
-     def cadastrar_usuario(self):
+     def cadastrarUsuario(self):
           """
           Realiza o cadastro de um novo usuário com nome, telefone, email, senha e pergunta secreta.
           """ 
-          Utils.limpar_tela()
+          Utils.limparTela()
           while True: # looping externo de cadastro
-               nome = Utils.nao_vazio("Digite seu nome de usuário: ").title()
-               telefone = Utils.nao_vazio("Digite seu telefone com DDD Ex:(81) 9xxxx-xxxx: ")
-               while not Usuario.telefone_valido(telefone):
+               nome = Utils.naoVazio("Digite seu nome de usuário: ").title()
+               telefone = Utils.naoVazio("Digite seu telefone com DDD Ex:(81) 9xxxx-xxxx: ")
+               while not Usuario.telefoneValido(telefone):
                     print("Erro de digitação!")
-                    telefone = Utils.nao_vazio(" Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
+                    telefone = Utils.naoVazio(" Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
                
                while True:  
-                    email = Utils.nao_vazio("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
-                    if not Usuario.email_valido(email):
+                    email = Utils.naoVazio("Digite seu email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
+                    if not Usuario.emailValido(email):
                          print("Formato de email inválido!")
                          continue
                     if self.repo.buscar(email):   
@@ -34,11 +34,11 @@ class ServicoUsuario:
                          break    
                               
                while True:     
-                    senha = Utils.nao_vazio("Digite uma senha com 6 digitos (apenas números): ")
-                    if not Usuario.senha_valida(senha):
+                    senha = Utils.naoVazio("Digite uma senha com 6 digitos (apenas números): ")
+                    if not Usuario.senhaValida(senha):
                          print("Senha inválida! Tente novamente.")
                          continue
-                    confirmação = Utils.nao_vazio("Confirme a senha: ")
+                    confirmação = Utils.naoVazio("Confirme a senha: ")
                     if confirmação == senha:
                          print("Perfeito! Senhas iguais.")
                          break
@@ -46,7 +46,7 @@ class ServicoUsuario:
                          print("Senhas diferentes! Tente novamente...")
                     
                print("\nPara recuperação de senha, responda a seguinte pergunta: ")   
-               resposta_secreta = Utils.nao_vazio("Qual o nome da sua professora favorita? ")
+               resposta_secreta = Utils.naoVazio("Qual o nome da sua professora favorita? ")
                     
                try:
                     novo = Usuario(
@@ -70,7 +70,7 @@ class ServicoUsuario:
                     
 
      # Fluxo de alteração de senha:     
-     def alterar_senha_interativo(self, email): 
+     def alterarSenhaInterativo(self, email): 
           """
           Fluxo para alterar a senha do usuário logado.
           Solicita a senha atual para autenticação, depois pede a nova senha e
@@ -79,31 +79,31 @@ class ServicoUsuario:
           Parâmetros:
                email (str): email do usuário que está logado.
           """
-          Utils.limpar_tela()  
+          Utils.limparTela()  
           user = self.repo.buscar(email)
           while True:
-               nova_senha  = Utils.nao_vazio("Nova senha (6 dígitos numericos): ")
-               confirmar_senha = Utils.nao_vazio("Confirme a nova senha: ")
+               nova_senha  = Utils.naoVazio("Nova senha (6 dígitos numericos): ")
+               confirmar_senha = Utils.naoVazio("Confirme a nova senha: ")
 
                if nova_senha != confirmar_senha:
                     print("Senhas diferentes! Tente de novo.\n")
                     continue
 
                try:
-                    user.alterar_senha(user.senha, nova_senha)   
-                    self.repo.salvar_usuarios()            
+                    user.alterarSenha(user.senha, nova_senha)   
+                    self.repo.salvarUsuarios()            
                     print("Senha atualizada com sucesso!\n")
                     input("Pressione Enter para voltar…")    
-                    Utils.limpar_tela()  
+                    Utils.limparTela()  
                     break
                except ValueError as msg_erro:
                     print(msg_erro)
                     input("Enter para tentar de novo…")
-                    Utils.limpar_tela()
+                    Utils.limparTela()
 
 
      # Fluxo de alteração de email:
-     def alterar_email_interativo(self, email):
+     def alterarEmailInterativo(self, email):
           """
           Fluxo de terminal para alterar o email de um usuário:
 
@@ -118,13 +118,13 @@ class ServicoUsuario:
           Retorna:
                str: o novo email em caso de sucesso, ou o email original em erro.
           """
-          Utils.limpar_tela()
-          novo_email = Utils.nao_vazio("Digite o novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
-          if not Usuario.email_valido(novo_email):
+          Utils.limparTela()
+          novo_email = Utils.naoVazio("Digite o novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
+          if not Usuario.emailValido(novo_email):
                print("Formato de email inválido!")
                return email
           try:
-               self.repo.atualizar_email(email, novo_email)
+               self.repo.atualizarEmail(email, novo_email)
                print("✔  Seu email foi atualizado!")
                return novo_email
           
@@ -134,7 +134,7 @@ class ServicoUsuario:
 
 
      # Fluxo de alteração da resposta secreta:
-     def alterar_resposta_interativo(self, email):
+     def alterarRespostaInterativo(self, email):
           """
           Fluxo interativo de terminal para atualizar a resposta secreta de recuperação.
           Solicita confirmação de senha, pede a nova resposta secreta e persiste a mudança.
@@ -142,17 +142,17 @@ class ServicoUsuario:
           Parâmetros:
                email (str): email do usuário que está logado.
           """
-          Utils.limpar_tela()
+          Utils.limparTela()
           user = self.repo.buscar(email)
-          senha = Utils.nao_vazio("Confirme sua senha atual: ")
+          senha = Utils.naoVazio("Confirme sua senha atual: ")
           if senha != user.senha:
                print("Senha incorreta! Voltando ao menu...")
                return
           
-          nova_resposta = Utils.nao_vazio("Digite a nova resposta secreta (professora favorita): ")
+          nova_resposta = Utils.naoVazio("Digite a nova resposta secreta (professora favorita): ")
           try:
-               user.alterar_resposta(nova_resposta)
-               self.repo.salvar_usuarios()
+               user.alterarResposta(nova_resposta)
+               self.repo.salvarUsuarios()
                print("✔  Resposta secreta atualizada com sucesso!")
                
           except ValueError as erro:
@@ -160,7 +160,7 @@ class ServicoUsuario:
 
           
      # Editar usuario:
-     def editar_conta(self,email):
+     def editarConta(self,email):
           """
           Permite ao usuário logado editar suas informações pessoais.
           
@@ -169,7 +169,7 @@ class ServicoUsuario:
           Retorna:
                o email atualizado (ou o original, se não alterar).
           """
-          Utils.limpar_tela()
+          Utils.limparTela()
           user = self.repo.buscar(email)
           print("\nDados atuais:\n")
           print(f"Email: {user.email}")
@@ -186,40 +186,40 @@ class ServicoUsuario:
                editar = input("opção: ")
                match editar:
                     case '1': 
-                         Utils.limpar_tela()
-                         novo_email = self.alterar_email_interativo(email)
+                         Utils.limparTela()
+                         novo_email = self.alterarEmailInterativo(email)
                          return novo_email     
                     case '2':
-                         Utils.limpar_tela()
-                         novo_nome = Utils.nao_vazio("Digite o novo nome: ").title()
+                         Utils.limparTela()
+                         novo_nome = Utils.naoVazio("Digite o novo nome: ").title()
                          user.nome = novo_nome
-                         self.repo.salvar_usuarios()
+                         self.repo.salvarUsuarios()
                          print("✔ Nome atualizado com sucesso!")
                          
                     case '3':
-                         Utils.limpar_tela()
-                         novo_tel = Utils.nao_vazio("Digite o novo número de telefone com DDD Ex:(81) 99999-8888: ")
-                         while not user.telefone_valido(novo_tel):
+                         Utils.limparTela()
+                         novo_tel = Utils.naoVazio("Digite o novo número de telefone com DDD Ex:(81) 99999-8888: ")
+                         while not user.telefoneValido(novo_tel):
                               print("Formato inválido!")
-                              novo_tel = Utils.nao_vazio("Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
+                              novo_tel = Utils.naoVazio("Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
                          
                          user.telefone = novo_tel
-                         self.repo.salvar_usuarios()
+                         self.repo.salvarUsuarios()
                          print("✔ Telefone atualizado com sucesso!")
                          
                     case '4':
-                         senha_atual = Utils.nao_vazio("Digite sua senha atual: ")
+                         senha_atual = Utils.naoVazio("Digite sua senha atual: ")
                          if senha_atual != user.senha:
                               print("🔒 Senha incorreta!")
                               input("Pressione Enter para voltar...")
-                              Utils.limpar_tela()
+                              Utils.limparTela()
                               continue
                          
-                         self.alterar_senha_interativo(email)
+                         self.alterarSenhaInterativo(email)
                          continue
                                         
                     case '5':
-                         self.alterar_resposta_interativo(email)
+                         self.alterarRespostaInterativo(email)
                     
                     case '0':
                          print("Vamos voltar então...\n")
@@ -231,7 +231,7 @@ class ServicoUsuario:
 
 
      # Recuperar senha:
-     def recuperar_senha(self):
+     def recuperarSenha(self):
           """
           Permite ao usuário recuperar a senha caso tenha esquecido,
           mediante verificação de email e resposta secreta.
@@ -241,8 +241,8 @@ class ServicoUsuario:
                2. Verifica existência e pergunta secreta.
                3. Chama fluxo de alteração de senha.
           """
-          Utils.limpar_tela()
-          email = Utils.nao_vazio("Digite seu email cadastrado: ").lower()
+          Utils.limparTela()
+          email = Utils.naoVazio("Digite seu email cadastrado: ").lower()
           user = self.repo.buscar(email)
           
           if not user:
@@ -250,16 +250,16 @@ class ServicoUsuario:
                return
           
           print("\nResponda a seguinte pergunta secreta cadastrada:")
-          resposta_secreta = Utils.nao_vazio("Qual o nome da sua professora preferida? ")
+          resposta_secreta = Utils.naoVazio("Qual o nome da sua professora preferida? ")
           if resposta_secreta.lower() != user.resposta_secreta.lower():
                print("Resposta secreta incorreta!")
                return
           
-          self.alterar_senha_interativo(email)
+          self.alterarSenhaInterativo(email)
           print("Senha redefinida com sucesso! Você já pode fazer login com a nova senha.")
 
      # Deletar usuario:
-     def deletar_conta(self,email):
+     def deletarConta(self,email):
           """
           Exclui a conta do usuário após validação da senha e confirmação da intenção.
 
@@ -269,11 +269,11 @@ class ServicoUsuario:
           Retorna:
                bool: True se a conta foi excluída com sucesso, False caso contrário.
           """
-          Utils.limpar_tela()
-          senha = Utils.nao_vazio("Para excluir sua conta, confirme sua senha: ")
+          Utils.limparTela()
+          senha = Utils.naoVazio("Para excluir sua conta, confirme sua senha: ")
           user = self.repo.buscar(email)
           if senha == user.senha:
-               confirmacao = Utils.nao_vazio("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
+               confirmacao = Utils.naoVazio("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
                if confirmacao != 's':
                     print("Operação cancelada!")
                     return False
