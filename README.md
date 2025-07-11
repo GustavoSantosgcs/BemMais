@@ -78,7 +78,7 @@ BemMais/
 ├── usuario.py                    # Classe de domínio: Usuário
 ├── repo_usuario.py               # Repositório de Usuário (persistência em JSON)
 ├── serv_usuario.py               # Fluxo interativo para cadastro, edição e recuperação
-├── utils.py                      # Funções utilitárias (limpar_tela, nao_vazio)
+├── utils.py                      # Funções utilitárias (limparTela, naoVazio)
 ├── frases.py                     # Lógica de "Frase do Dia" (RepoFraseDia)
 ├── dilema.py                     # Lógica de quiz de cenários éticos (Dilema)
 ├── desafios.py                   # Menu e fluxo de desafios do bem
