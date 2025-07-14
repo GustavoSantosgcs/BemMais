@@ -1,6 +1,6 @@
-from usuario import Usuario
-from repo_usuario import RepoUsuario
-from utils import Utils
+from .usuario import Usuario
+from .repo_usuario import RepoUsuario
+from .utils import Utils
 
 class ServicoUsuario:
      

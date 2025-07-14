@@ -1,9 +1,9 @@
-from repo_usuario import RepoUsuario
-from serv_usuario import ServicoUsuario
-from utils import Utils
-from frases import FraseDia
-from dilema import Dilema
-from desafios import DesafioBem, ListaDesafios, RepoVoucher
+from app.repo_usuario import RepoUsuario
+from app.serv_usuario import ServicoUsuario
+from app.utils import Utils
+from app.frases import FraseDia
+from app.dilema import Dilema
+from app.desafios import DesafioBem, ListaDesafios, RepoVoucher
 
 
 class BemMais:

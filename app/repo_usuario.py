@@ -1,6 +1,6 @@
 import json
 import os
-from usuario import Usuario
+from .usuario import Usuario
 
 
 CAMINHO = os.path.join('dados', 'usuarios.json')

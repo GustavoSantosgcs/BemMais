@@ -70,19 +70,24 @@ git clone https://github.com/GustavoSantosgcs/BemMais.git
 ##  **Estrutura do Projeto**
 ```
 BemMais/
+├── app/                         ── Código-fonte da aplicação
+│   ├── __init__.py              ── Inicialização do pacote 'app'
+│   ├── usuario.py               ── Entidade e modelo Usuário
+│   ├── repo_usuario.py          ── Repositório de Usuário (JSON)
+│   ├── serv_usuario.py          ── Serviços de cadastro, edição e recuperação
+│   ├── utils.py                 ── Utilitários (limpar tela, input, prints)
+│   ├── frases.py                ── Lógica de "Frase do Dia"
+│   ├── dilema.py                ── Quiz de cenários éticos
+│   ├── desafios.py              ── Fluxo de "Desafios do Bem"
+│   └── ui.py                    ── Camada de apresentação (Rich)
 ├── dados/                        # JSONs de dados persistidos
 │   ├── usuarios.json             # Usuários cadastrados
 │   ├── codigos_premium.json      # Vouchers dos desafios premium
 │   ├── dilema.json               # Definições de cenários éticos
 │   └── frase_dia.json            # Frase do dia (persistência diária)
-├── usuario.py                    # Classe de domínio: Usuário
-├── repo_usuario.py               # Repositório de Usuário (persistência em JSON)
-├── serv_usuario.py               # Fluxo interativo para cadastro, edição e recuperação
-├── utils.py                      # Funções utilitárias (limparTela, naoVazio)
-├── frases.py                     # Lógica de "Frase do Dia" (RepoFraseDia)
-├── dilema.py                     # Lógica de quiz de cenários éticos (Dilema)
-├── desafios.py                   # Menu e fluxo de desafios do bem
-└── main.py                       # Entrada da aplicação (classe BemMais)
+├── main.py                      ── Ponto de entrada da aplicação ('BemMais')
+├── README.md                    ── Documentação do projeto
+
 ```
 ---
 ## **Melhorias Futuras (Planejadas):**

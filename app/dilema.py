@@ -3,8 +3,8 @@ import json
 import random
 import time
 import textwrap
-from utils import Utils
-from repo_usuario import RepoUsuario
+from .utils import Utils
+from .repo_usuario import RepoUsuario
 
 
 DILEMA = os.path.join('dados', 'dilema.json')

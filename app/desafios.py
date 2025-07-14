@@ -1,7 +1,7 @@
 import json
 import os
-from repo_usuario import RepoUsuario
-from utils import Utils
+from .repo_usuario import RepoUsuario
+from .utils import Utils
 
 
 VOUCHER = os.path.join('dados', 'codigos_premium.json')
