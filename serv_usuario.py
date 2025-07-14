@@ -46,7 +46,7 @@ class ServicoUsuario:
                          print("Senhas diferentes! Tente novamente...")
                     
                print("\nPara recuperação de senha, responda a seguinte pergunta: ")   
-               resposta_secreta = Utils.naoVazio("Qual o nome da sua professora favorita? ")
+               resposta_secreta = Utils.naoVazio("Qual o nome do seu(a) professor(a) favorito(a)? ")
                     
                try:
                     novo = Usuario(

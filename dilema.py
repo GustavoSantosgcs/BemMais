@@ -82,7 +82,7 @@ class Dilema:
                     case _:
                         print("Opção inválida!\n ")   
                 
-            pontos_resposta = pergunta.get("pontuações", {}).get(resposta, 0)
+            pontos_resposta = pergunta.get("pontuacoes", {}).get(resposta, 0)
             pontuacao += pontos_resposta
             
             print(f"\n✅ Você ganhou {pontos_resposta} ponto(s) nesta pergunta.")
