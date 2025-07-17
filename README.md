@@ -54,12 +54,12 @@ O sistema, totalmente personalizado, permite que os usuários se cadastrem, resp
 
 - **Biblioteca Externa:**
   - [`rich`](https://rich.readthedocs.io/en/stable/) – Interface de terminal estilizada  
-  - `rich.console` – Impressão com estilos no terminal  
-  - `rich.text` – Criação de textos com cores e negrito  
-  - `rich.table` – Tabelas estilizadas com colunas coloridas  
-  - `rich.panel` – Painéis com bordas e títulos  
-  - `rich.rule` – Separadores horizontais estilizados  
-  - `rich.box` – Estilos de borda para tabelas (ex: arredondado, quadrado)
+    - `rich.console` – Impressão com estilos no terminal  
+    - `rich.text` – Criação de textos com cores e negrito  
+    - `rich.table` – Tabelas estilizadas com colunas coloridas  
+    - `rich.panel` – Painéis com bordas e títulos  
+    - `rich.rule` – Separadores horizontais estilizados  
+    - `rich.box` – Estilos de borda para tabelas (ex: arredondado, quadrado)
 ---
 
 ##  **Como Instalar e Executar o BEM+**
