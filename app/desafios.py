@@ -1,7 +1,13 @@
 import json
 import os
+import time
 from .repo_usuario import RepoUsuario
 from .utils import Utils
+from .ui import Ui
+from rich import box
+from rich.table import Table
+from rich.panel import Panel
+from rich.text import Text
 
 
 VOUCHER = os.path.join('dados', 'codigos_premium.json')
@@ -18,11 +24,10 @@ class RepoVoucher:
         """
         Repositório para carregar e salvar vouchers de desafios premium.
 
-        Parâmetros:
+        Args:
             caminho (str): Caminho para o arquivo JSON de vouchers.
         """
         self.caminho = caminho
-        
         
     # Funções para carregar e salvar códigos de vouchers:
     def carregarCodigos(self):
@@ -35,12 +40,11 @@ class RepoVoucher:
                 return json.load(arquivo)
         return {}
 
-
     def salvarCodigos(self, cods):
         """
         Salva arquivo de códigos, de maneira estruturada, em formato JSON.
         
-        Parâmetros:
+        Args:
             cods (dict[str, list[str]]): Mapeamento de desafio -> lista de códigos a salvar.
         """        
         os.makedirs(os.path.dirname(self.caminho), exist_ok=True)
@@ -82,7 +86,6 @@ class ListaDesafios:
             "🔍 Encontrar e devolver item perdido (Central de Achados e Perdidos UFRPE)"
         ]
 
-
     def listarRegulares(self):
         """
         Retorna uma cópia da lista de desafios regulares.
@@ -91,7 +94,6 @@ class ListaDesafios:
             list[str]: Desafios regulares.
         """
         return list(self.regulares)
-    
     
     def listarPremium(self):
         """
@@ -110,31 +112,36 @@ class DesafioBem:
     Orquestra a exibição e conclusão de desafios regulares e premium,
     atualizando pontos do usuário e consumindo vouchers conforme necessário.
     """
-    def __init__(self, repo: RepoUsuario,
-                 desafios_repo: ListaDesafios,
-                 voucher_repo: RepoVoucher):
+    
+    def __init__(self, repo: RepoUsuario, desafios_repo: ListaDesafios,
+                 voucher_repo: RepoVoucher, ui: Ui):
         """
-        Inicializa o serviço de desafios com os repositórios necessários.
+        Inicializa o serviço de desafios com os repositórios e a interface de usuário.
 
-        Parâmetros:
+        Args:
             repo (RepoUsuario): Repositório de usuários.
             desafios_repo (ListaDesafios): Repositório de listas de desafios.
             voucher_repo (RepoVoucher): Repositório de vouchers.
+            ui (Ui): Camada de apresentação para interação com o usuário.
         """
         self.users = repo
         self.desafios = desafios_repo
         self.vouchers = voucher_repo  
-    
+        self.ui = ui
     
     # Menu interativo de desafios do bem
     def desafiosBem(self, email):
         """
-        Exibe o menu de desafios e processa escolhas do usuário.
+        Exibe o menu interativo de desafios do bem.
 
-        Carrega o usuário, apresenta opções de desafios regulares, premium
-        e histórico. Atualiza pontuação e persiste dados conforme fluxo.
+        Apresenta ao usuário as opções:
+        - Desafios Regulares: exibidos em lista com seleção e confirmação.
+        - Desafios Premium: requerem validação via voucher.
+        - Desafios Realizados: mostra histórico de desafios já cumpridos.
 
-        Parâmetros:
+        Atualiza a pontuação e armazena os dados conforme necessário.
+
+        Args:
             email (str): Email do usuário logado.
         """
         user = self.users.buscar(email)
@@ -142,53 +149,67 @@ class DesafioBem:
 
         while True:
             Utils.limparTela()
-            print("\n" + "="*32)
-            print("🌟 MENU DESAFIOS 🌟".center(32))
-            print("="*32)
-            print("1 - Desafios regulares")
-            print("2 - Desafios Premium")
-            print("3 - Desafios realizados")
-            print("0 - Voltar")
-            print("="*32)
-            escolha = input("Opção: ")
+            self.ui.tituloDaFuncRich(titulo="🌟MENU DESAFIOS 🌟", cor="cyan")
+            
+            itens = [
+                ("1", "Desafios Regulares"),
+                ("2", "Desafios Premium"),
+                ("3", "Desafios Realizados"),
+                ("0", "Voltar")
+            ]
+            self.ui.showMenu("🌟 Desafios do Bem 🌟", itens, cor="green")
+            escolha = self.ui.console.input("\n[bold]Escolha uma opção:[/bold] ").strip()
 
             match escolha:
-                # Desafios normais
+                # Desafios regulares
                 case '1':
                     Utils.limparTela()
                     pendentes = [d for d in self.desafios.listarRegulares()
                                  if d not in user.desafios_realizados]
                     if not pendentes:
-                        print("\nVocê já completou todos os desafios normais! 🎉")
+                        self.ui.console.print("[yellow]Você já completou todos os desafios regulares![\yellow] 🎉")
+                        self.ui.pausar()
                         continue
-
+                    
+                    # Tabela dos Regulares
+                    tbl = Table(title="Desafios Regulares", box=box.ROUNDED, border_style="green", show_header=False, padding=(0,1))
+                    tbl.add_column("#", style="cyan", justify="center")
+                    tbl.add_column("Desafio", style="white")
                     for i, d in enumerate(pendentes, 1):
-                        print(f"[{i}] {d}")
-                    print()
-                    idx = input("Escolha o número do desafio (ou ENTER para voltar): ")
+                        tbl.add_row(str(i), d)
+                    self.ui.console.print(tbl)
+
+                    # escolha do Desafio e verificação do input
+                    idx = self.ui.console.input("\n[bold]Digite o número do desafio (ou ENTER para voltar):[/bold] ")
                     if not idx.isdigit() or not (1 <= int(idx) <= len(pendentes)):
                         Utils.limparTela()
                         continue
-
                     selecao = pendentes[int(idx) - 1]
                     
-                    print(f"\nVocê concluiu este desafio?\n{selecao}")
-                    print("[1] Sim    [2] Não")
-                    opcao = input("Opção: ").strip()
+                    # Painel de confirmação
+                    painel = Panel(
+                        Text(f"Você concluiu este desafio?\n\n{selecao}", justify="left"),
+                        title="Confirmar Desafio",
+                        border_style="green",
+                        expand=False
+                    )
+                    self.ui.console.print(painel)
+                    opcao = self.ui.console.input("[bold]1) Sim   2) Não[/bold] ").strip()
                     match opcao:
                         case '1':
                             user.pontos += 3
                             user.desafios_realizados.append(selecao)
                             print("Parabéns! Você ganhou 3 pontos pelo desafio!")
+                            self.ui.pausar()
                             self.users.salvarUsuarios()
                         case '2':
                             print("Tudo bem, volte quando concluir! 👍")
-                            input("Pressione Enter para continuar...")
+                            self.ui.pausar()
                             Utils.limparTela()
 
                         case _:
                             print("Opção inválida!")
-                            input("Pressione Enter para continuar...")
+                            self.ui.pausar()
                             Utils.limparTela()
 
                 # Desafios premium com interação do voucher
@@ -197,13 +218,20 @@ class DesafioBem:
                     pendentes_premium = [d for d in self.desafios.listarPremium()
                                          if d not in user.desafios_realizados]
                     if not pendentes_premium:
-                        print("\nVocê já completou todos os desafios premium! Parabéns! 🎉")
+                        self.ui.console.print("[yellow]Você já completou todos os desafios Premium![\yellow] 🎉")
+                        self.ui.pausar()
                         continue
                     
-                    print("Escolha o desafio premium:\n")
-                    for i, d in enumerate(pendentes_premium):
-                        print(f"{i+1}: {d}")
-                    idx = input("(Digite o numero do desafio (ex:'1') ou pressione ENTER para voltar: ")
+                    # Tabela Premium
+                    tbl = Table(title="Desafios Premium", box=box.ROUNDED, border_style="green", show_header=False, padding=(0,1))
+                    tbl.add_column("#", style="cyan", justify="center")
+                    tbl.add_column("Desafio", style="white")
+                    for i, d in enumerate(pendentes_premium, 1):
+                        tbl.add_row(str(i), d)
+                    self.ui.console.print(tbl)
+
+                    # escolha do Desafio e verificação do input
+                    idx = self.ui.console.input("\n[bold]Digite o número do desafio (ou ENTER para voltar):[/bold] ")
                     if not idx.isdigit() or not (1 <= int(idx) <= len(pendentes_premium)):
                         continue
 
@@ -211,43 +239,47 @@ class DesafioBem:
                     validos = codigos.get(selecao, [])
                     if not validos:
                         print("Nenhum voucher válido disponível para este premium.")
-                        input("Pressione Enter para continuar...")
+                        self.ui.pausar()
                         Utils.limparTela()
                         continue
 
                     print("\nPara validar este desafio premium, insira o voucher recebido:")
                     voucher = Utils.naoVazio("Voucher: ").strip()
+                    with self.ui.console.status("[yellow]Verificando voucher...[/yellow]", spinner="dots"):
+                        time.sleep(1)
                     if voucher in validos:
                         # Consome o voucher
                         validos.remove(voucher)
                         codigos[selecao] = validos
                         self.vouchers.salvarCodigos(codigos)
 
-                        user.pontos += 10
+                        user.pontos += 30
                         user.desafios_realizados.append(selecao)
-                        print("✅ Voucher aceito! Você ganhou 10 pontos! ✨")
+                        print("✅ Voucher aceito! Você ganhou 30 pontos! ✨")
                         self.users.salvarUsuarios()
-                        input("Pressione Enter para continuar...")
+                        self.ui.pausar()
                         Utils.limparTela()
 
                     else:
                         print("❌Voucher inválido ou já utilizado!")
-                        input("Pressione Enter para continuar...")
+                        self.ui.pausar()
                         Utils.limparTela()
 
 
                 case '3':  
                     Utils.limparTela()
                     if not user.desafios_realizados:
-                        print("\n🤔 Você ainda não completou nenhum desafio.")
-                        input("Pressione Enter para continuar...")
-                        Utils.limparTela()  
+                        self.ui.console.print("[yellow]🤔 Você ainda não completou nenhum desafio.[/yellow]")
                     else:
-                        print("\n✅ Desafios já concluídos:")
-                        for d in user.desafios_realizados:
-                            print(f" - {d}")
-                        input("Pressione Enter para continuar...")
-                        Utils.limparTela()       
+                        tbl = Table(title="Desafios Concluídos", box=box.ROUNDED, border_style="green")
+                        tbl.add_column("#", style="cyan", width=3, justify="center")
+                        tbl.add_column("Desafio", style="white")
+                        for i, d in enumerate(user.desafios_realizados, 1):
+                            tbl.add_row(str(i), d)
+                        self.ui.console.print(tbl)
+                    
+                    self.ui.pausar()
+                    Utils.limparTela()       
 
                 case '0':  
                     Utils.limparTela()
@@ -255,5 +287,5 @@ class DesafioBem:
 
                 case _:
                     print("Opção inválida, tente novamente.")
-                    input("Pressione Enter para continuar...")
+                    self.ui.pausar()
                     Utils.limparTela()

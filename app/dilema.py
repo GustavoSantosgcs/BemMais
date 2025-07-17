@@ -2,28 +2,36 @@ import os
 import json
 import random
 import time
-import textwrap
 from .utils import Utils
 from .repo_usuario import RepoUsuario
+from .ui import Ui
+from rich.panel import Panel
+from rich.text import Text
+from rich.rule import Rule
 
 
 DILEMA = os.path.join('dados', 'dilema.json')
 
 class Dilema:
     """
-    Provê o funcionamento da função Cenários éticos.
-    
-    Carrega do repositório (JSON) as perguntas dos cenários éticos,
-    contabiliza e retorna a pontuação.
+    Gerencia o quiz de cenários éticos do BEM+.
+
+    Carrega cenários de um JSON, conduz o questionário com 5 perguntas,
+    contabiliza pontos, registra histórico de respostas e salva o usuário.
     """
     
-    def __init__(self, repo: RepoUsuario, caminho = DILEMA):
+    def __init__(self, repo: RepoUsuario, caminho=DILEMA):
         """
-        Repositório para carregar as perguntas dos cenários éticos.
+        Inicializa o gerenciador de dilemas éticos.
+
+        Carrega perguntas de um arquivo JSON e mantém o repositório de usuários.
 
         Parâmetros:
-            caminho (str): Caminho para o arquivo JSON de perguntas.
+            repo (RepoUsuario): Repositório para buscar e salvar usuários.
+            caminho (str): Caminho para o arquivo JSON de cenários éticos.
         """
+        
+        self.ui = Ui()
         self.users = repo
         self.caminho = caminho
 
@@ -34,71 +42,80 @@ class Dilema:
         except FileNotFoundError:
             self.perguntas = [] 
 
-
-    # Iniciar cenários éticos:
     def executarDilema(self, email):
         """
-        Conduz um questionário com cinco cenários éticos, contabiliza e retorna a pontuação.
-        
-        Parâmetros:
-            email (str): email do usuário atualmente logado.
-            
-        return: 
-            int: pontuacao (total de pontos adquiridos no questionário)
+        Executa o quiz de 5 cenários éticos e retorna os pontos obtidos.
+
+        O usuário pode digitar 'sair' a qualquer momento para encerrar
+        antecipadamente, sem perder a pontuação adquirida .
+
+        Args:
+            email (str): Email do usuário logado.
+
+        Returns:
+            int: Total de pontos conquistados no questionário.
         """
+        
         user = self.users.buscar(email)
         pontuacao = 0
         Utils.limparTela()
-        print("\n Seja bem-vindo(a) ao CENÁRIOS ÉTICOS!")
-        print("Responda aos cinco dilemas com as alternativas (a, b ou c):\n")
-
+        self.ui.tituloDaFuncRich("Cenários Éticos 💡", cor="blue")
+        self.ui.escrever("Responda aos cinco dilemas com as alternativas (a, b ou c):\n")
+        self.ui.pausar()
         selecionadas = random.sample(self.perguntas, k=5)
         
-        # looping de perguntas:
-        for i, pergunta in enumerate(selecionadas, 1):     
+        # Looping de perguntas
+        for i, pergunta in enumerate(selecionadas, 1): 
             Utils.limparTela()
-            print("=" * 75)
             
-            # formatar para largura maxima = 70:
-            txt_formatado = textwrap.fill(pergunta['pergunta'],width=70)
-            print(f"Cenário {i}: ")
-            print(txt_formatado)
+            # Usando Panel para exibir o cenário
+            pergunta_texto = Text(pergunta['pergunta'], justify="left")
+            panel_content = [pergunta_texto, ""]
             for letra, alternativa in pergunta["alternativas"].items():
-                alt_formatada = textwrap.fill(alternativa, width=66)
-                alt_indentada = textwrap.indent(alt_formatada, prefix="    ")
-                print(f"({letra}) {alt_indentada.strip()}")
-            print("=" * 75)
+                panel_content.append(Text(f"({letra}) {alternativa}"))
+
+            self.ui.console.print(Panel(
+                Text("\n".join(str(c) for c in panel_content)),
+                title=f"Cenário {i}",
+                border_style="blue",
+                expand=False
+            ))
             
+            self.ui.console.print(Rule(style="blue"))
+
             while True:
                 resposta = Utils.naoVazio("Digite ('a','b','c') ou 'sair' para encerrar: ").lower()
                 match resposta:
                     case 'a'| 'b'|'c':
                         break
-                    case 'sair':    
-                        print("Ok. Vamos encerrar por aqui...")
-                        input("pressione Enter para continuar...")
+                    case 'sair': 
+                        self.ui.escrever("Ok. Vamos encerrar por aqui...")
+                        self.ui.pausar()
                         self.users.salvarUsuarios()
                         return pontuacao
                     case _:
-                        print("Opção inválida!\n ")   
-                
+                        self.ui.console.print("[red]Opção inválida![/red]\n ") 
+            
             pontos_resposta = pergunta.get("pontuacoes", {}).get(resposta, 0)
             pontuacao += pontos_resposta
             
-            print(f"\n✅ Você ganhou {pontos_resposta} ponto(s) nesta pergunta.")
-            print(pergunta["comentario"][resposta])
-            input("pressione Enter para continuar...")
+            self.ui.console.print(f"\n[green]✅ Você ganhou {pontos_resposta} ponto(s) nesta pergunta.[/green]")
+            self.ui.escrever(pergunta["comentario"][resposta], style="italic")
+            self.ui.pausar()
 
+            texto_resposta = pergunta['alternativas'][resposta]
             data_resposta = time.strftime("%d/%m/%Y")
             registro = {
-                'data': data_resposta,
-                'pergunta': pergunta['pergunta'],
-                'resposta': resposta,
+                'data': data_resposta,               
+                'pergunta': pergunta['pergunta'],    
+                'resposta_key': resposta,            
+                'texto_resposta': texto_resposta,    
                 'pontos': pontos_resposta
             }
             user.historico_respostas.append(registro)
 
         self.users.salvarUsuarios()
-        print(f"\n Você ganhou {pontuacao} ponto(s) nesse dilema!\n")
+        self.ui.console.print(f"\n[bold green]Você concluiu os cenários e ganhou um total de {pontuacao} ponto(s)![/bold green]\n")
+        self.ui.pausar()
         return pontuacao
-
+    

@@ -1,0 +1,1 @@
+# Pacote 'app': contém os módulos principais do sistema BEM+.

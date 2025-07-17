@@ -2,7 +2,7 @@ import json
 import os
 import random
 import time
-from .utils import Utils
+from .ui import Ui
 
 
 ARQUIVO_FRASE = os.path.join('dados','frase_dia.json')
@@ -18,10 +18,14 @@ class FraseDia:
       - Exibir a frase do dia no terminal com decoração.
     """
     
-    def __init__(self):
+    def __init__(self, ui: Ui):
         """
-        Provê o caminho e a lista de frases.       
+        Inicializa o gerenciador de frases com interface e lista predefinida.
+
+        Args:
+            ui (Ui): Interface para exibição da frase no terminal.
         """
+        self.ui = ui
         self.caminho = ARQUIVO_FRASE
         self.frases = [
             "A tecnologia é melhor quando une as pessoas em vez de separá-las. - Autor Desconhecido",
@@ -39,29 +43,26 @@ class FraseDia:
             "Aquele que move montanhas começa carregando pequenas pedras. - Confúcio",
             "O sucesso é a soma de pequenos esforços repetidos dia após dia. - Robert Collier"
         ]
-        
-        
+             
     def salvarFrase(self, data, frase):
         """
-        Persiste no sistema a frase do dia em JSON, junto com a data.
-        Se o diretório ainda não existir, ele é criado automaticamente.
-        
-        Parâmetros:
-            data (str): Data em que a frase foi gerada, no formato "DD/MM/YYYY".
-            frase (str): Texto da frase a ser salva no arquivo JSON.
+        Salva a frase do dia no arquivo JSON, criando diretórios se necessário.
+
+        Args:
+            data (str): Data da frase no formato "DD/MM/YYYY".
+            frase (str): Texto da frase a ser persistida.
         """
         os.makedirs(os.path.dirname(self.caminho), exist_ok=True)
         with open(self.caminho, 'w', encoding='utf-8') as arq:
             json.dump({"data": data, "frase": frase}, arq, indent=4, ensure_ascii=False)
 
+    def carregarDados(self):
+        """
+        Carrega os dados da frase do dia, se disponíveis.
 
-    def carregarDados(self) -> dict:
-        """ 
-        Verificação se já existe uma frase salva para o dia atual
-        
-        Retorna:
-          dict: conteúdo do JSON, ou {} caso o arquivo não exista
-                ou esteja corrompido.        
+        Returns:
+            dict: Conteúdo do JSON com data e frase,
+                ou dicionário vazio em caso de erro ou inexistência.
         """
         if os.path.exists(self.caminho):
             try:
@@ -72,15 +73,12 @@ class FraseDia:
         else:
             return {}
 
-
     def fraseDia(self):
         """
-        Exibe a frase do dia, garantindo que permaneça igual até o dia seguinte.
-        Fluxo:
-        1- Carrega os dados salvos via 'carregar_dados()'.
-        2- Se já há uma frase para hoje, usa-a.
-            Caso contrário, escolhe aleatoriamente uma das frases e salva.
-        3- Limpa a tela e imprime a frase com borda decorativa.
+        Exibe a frase do dia, persistindo uma nova se ainda não houver para hoje.
+
+        O método verifica se já há uma frase salva para a data atual. Caso contrário,
+        escolhe uma aleatória da lista, salva e exibe com formatação no terminal.
         """
         hoje = time.strftime("%d/%m/%Y")
         dados = self.carregarDados()
@@ -92,8 +90,9 @@ class FraseDia:
             self.salvarFrase(hoje, frase)
 
         borda = "=" * (len(frase) + 4)
-        Utils.limparTela()
-        print("\n✨ Frase do Dia ✨")
-        print(borda)
-        print(f"| {frase} |")
-        print(borda)
+        
+        self.ui.tituloDaFuncRich("Frase do Dia", cor="magenta")
+        
+        self.ui.console.print(borda, style="magenta")
+        self.ui.escrever(f"| {frase} |", delay=0.02, style="cyan bold")
+        self.ui.console.print(borda, style="magenta")

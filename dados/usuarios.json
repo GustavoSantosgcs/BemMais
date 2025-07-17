@@ -3,7 +3,7 @@
         "nome": "Guido van Rossum",
         "telefone": "(21) 98845-2789",
         "email": "guido.python@gmail.com",
-        "senha": "123123",
+        "senha": "742890",
         "pontos": 101,
         "resposta_secreta": "Brendan Eich",
         "desafios_realizados": [
@@ -14,271 +14,227 @@
         ],
         "historico_respostas": [
             {
-                "data": "20 - 06 - 2025",
+                "data": "01 - 07 - 2025",
                 "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
-                "resposta": "a",
-                "pontos": 1
+                "resposta_key": "a",
+                "texto_resposta": "Reporta o erro à equipe e solicita correção imediata.",
+                "pontos": 10
             },
             {
-                "data": "21 - 06 - 2025",
-                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você: ",
-                "resposta": "b",
-                "pontos": 1
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "b",
+                "texto_resposta": "Ignora, afinal a meta foi cumprida no fim das contas.",
+                "pontos": 0
+            }
+        ]
+    },
+    "pedro.lima@gmail.com": {
+        "nome": "Pedro Lima",
+        "telefone": "(21) 99876-5432",
+        "email": "pedro.lima@gmail.com",
+        "senha": "599874",
+        "pontos": 50,
+        "resposta_secreta": "Carlos Eduardo",
+        "desafios_realizados": [],
+        "historico_respostas": [
+            {
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "a",
+                "texto_resposta": "Reporta o erro à equipe e solicita correção imediata.",
+                "pontos": 10
             },
             {
-                "data": "22 - 06 - 2025",
-                "pergunta": "🔍 Na Central de Achados e Perdidos UFRPE, você encontra um item de valor sem registro eletrônico do dono. O que faz?",
-                "resposta": "a",
-                "pontos": 1
-            },
+                "data": "02 - 07 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
+                "resposta_key": "c",
+                "texto_resposta": "Critica o adotante publicamente para evitar que outros repitam o erro.",
+                "pontos": 0
+            }
+        ]
+    },
+    "ana.silva@hotmail.com": {
+        "nome": "Ana Silva",
+        "telefone": "(31) 97765-2211",
+        "email": "ana.silva@hotmail.com",
+        "senha": "820365",
+        "pontos": 20,
+        "resposta_secreta": "Fernanda Maria",
+        "desafios_realizados": [],
+        "historico_respostas": [
             {
-                "data": "24 - 06 - 2025",
-                "pergunta": "💻 Você é contratado para desenvolver um sistema, mas o cliente pede que você copie partes de um software de outra empresa sem autorização. O que você faz?",
-                "resposta": "b",
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "b",
+                "texto_resposta": "Ignora, afinal a meta foi cumprida no fim das contas.",
                 "pontos": 0
             },
             {
-                "data": "24 - 06 - 2025",
-                "pergunta": "🤥 Você pode mentir para proteger um amigo de um problema sério. O que faz?",
-                "resposta": "b",
-                "pontos": 1
+                "data": "02 - 07 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
+                "resposta_key": "b",
+                "texto_resposta": "Tenta entender os motivos e oferece suporte para novo acolhimento.",
+                "pontos": 10
             }
         ]
     },
-    "bgs84749@ufrpe.br": {
-        "nome": "Gustavo Santos",
-        "telefone": "(11) 98675-2583",
-        "email": "bgs84749@ufrpe.br",
-        "senha": "123123",
-        "pontos": 46,
-        "resposta_secreta": "Lemos",
-        "desafios_realizados": [
-            "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural)."
-        ],
-        "historico_respostas": [
-            {
-                "data": "23 - 06 - 2025",
-                "pergunta": "💻 Você descobre uma falha de segurança grave no sistema da empresa onde trabalha. O que faz?",
-                "resposta": "a",
-                "pontos": 1
-            }
-        ]
-    },
-    "ana.silva@gmail.com": {
-        "nome": "Ana Silva",
-        "telefone": "(81) 91234-5678",
-        "email": "ana.silva@gmail.com",
-        "senha": "654321",
-        "pontos": 25,
-        "resposta_secreta": "Mariana",
-        "desafios_realizados": [
-            "📚 Doe um livro que você já leu para alguém que possa gostar dele.",
-            "💖 Envie uma mensagem agradecendo alguém que te inspirou ou te ajudou recentemente."
-        ],
-        "historico_respostas": [
-            {
-                "data": "19 - 06 - 2025",
-                "pergunta": "📄 Durante um projeto, você percebe que um colega está plagiando códigos de fontes públicas sem dar os devidos créditos. Você:",
-                "resposta": "b",
-                "pontos": 1
-            },
-            {
-                "data": "20 - 06 - 2025",
-                "pergunta": "🤥 Você pode mentir para proteger um amigo de um problema sério. O que faz?",
-                "resposta": "b",
-                "pontos": 1
-            }
-        ]
-    },
-    "carlos.melo@ufrpe.br": {
-        "nome": "Carlos Melo",
-        "telefone": "(81) 99876-4321",
-        "email": "carlos.melo@ufrpe.br",
-        "senha": "112233",
-        "pontos": 30,
-        "resposta_secreta": "Pedro",
-        "desafios_realizados": [
-            "🌱 Plante algo (pode ser uma muda ou até um grão) e cuide por uma semana."
-        ],
-        "historico_respostas": [
-            {
-                "data": "18 - 06 - 2025",
-                "pergunta": "💻 Você encontra um script online que promete burlar o licenciamento de um software caro que sua equipe precisa. Você:",
-                "resposta": "a",
-                "pontos": 1
-            },
-            {
-                "data": "19 - 06 - 2025",
-                "pergunta": "⏩ Seu chefe pede para acelerar o projeto, mesmo que precise 'dar um jeitinho' nos testes de segurança. Você:",
-                "resposta": "a",
-                "pontos": 1
-            }
-        ]
-    },
-    "mariana.rocha@gmail.com": {
-        "nome": "Mariana Rocha",
-        "telefone": "(81) 97765-4433",
-        "email": "mariana.rocha@gmail.com",
-        "senha": "445566",
-        "pontos": 15,
-        "resposta_secreta": "Fernanda",
-        "desafios_realizados": [
-            "📵 Fique 1 hora longe do celular e aproveite para dar atenção total a alguém."
-        ],
-        "historico_respostas": [
-            {
-                "data": "21 - 06 - 2025",
-                "pergunta": "🔒 Você tem acesso a dados pessoais de usuários na empresa. Um amigo pede para você passar algumas informações. O que você faz?",
-                "resposta": "a",
-                "pontos": 1
-            }
-        ]
-    },
-    "joao.pereira@ufrpe.br": {
+    "joao.pereira@outlook.com": {
         "nome": "João Pereira",
-        "telefone": "(81) 96654-3322",
-        "email": "joao.pereira@ufrpe.br",
-        "senha": "778899",
-        "pontos": 30,
-        "resposta_secreta": "Ricardo",
-        "desafios_realizados": [
-            "🤗 Separe roupas ou alimentos que não usa mais e doe para quem precisa.",
-            "🎭 Levar alguém a um evento cultural (colaboração Pernamb. Cultural).",
-            "🚿 Reduzir o consumo de água em casa por uma semana (EcoDrop)."
-        ],
+        "telefone": "(11) 96654-3322",
+        "email": "joao.pereira@outlook.com",
+        "senha": "314278",
+        "pontos": 40,
+        "resposta_secreta": "João Marcos",
+        "desafios_realizados": [],
         "historico_respostas": [
             {
-                "data": "22 - 06 - 2025",
-                "pergunta": "💬 Inicie uma conversa com alguém novo hoje e deseje um bom dia sincero.",
-                "resposta": "a",
-                "pontos": 1
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "a",
+                "texto_resposta": "Reporta o erro à equipe e solicita correção imediata.",
+                "pontos": 10
             },
             {
-                "data": "23 - 06 - 2025",
-                "pergunta": "🌟 Faça um elogio genuíno a alguém que esteja precisando de motivação.",
-                "resposta": "a",
-                "pontos": 1
+                "data": "02 - 07 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
+                "resposta_key": "a",
+                "texto_resposta": "Aceita a devolução sem questionar, pois não é sua responsabilidade.",
+                "pontos": 0
             }
         ]
     },
-    "luiza.alves@gmail.com": {
-        "nome": "Luiza Alves",
-        "telefone": "(81) 95543-2211",
-        "email": "luiza.alves@gmail.com",
-        "senha": "990011",
-        "pontos": 5,
-        "resposta_secreta": "Carla",
+    "carla.freitas@ufrpe.br": {
+        "nome": "Carla Freitas",
+        "telefone": "(81) 99812-3344",
+        "email": "carla.freitas@ufrpe.br",
+        "senha": "765041",
+        "pontos": 30,
+        "resposta_secreta": "Lucas Santos",
+        "desafios_realizados": [],
+        "historico_respostas": [
+            {
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "c",
+                "texto_resposta": "Continua usando os dados alterados e não documenta nada.",
+                "pontos": 0
+            },
+            {
+                "data": "02 - 07 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
+                "resposta_key": "b",
+                "texto_resposta": "Tenta entender os motivos e oferece suporte para novo acolhimento.",
+                "pontos": 10
+            }
+        ]
+    },
+    "lucas.alves@gmail.com": {
+        "nome": "Lucas Alves",
+        "telefone": "(21) 91432-1100",
+        "email": "lucas.alves@gmail.com",
+        "senha": "492831",
+        "pontos": 50,
+        "resposta_secreta": "Mariana Lopes",
+        "desafios_realizados": [],
+        "historico_respostas": [
+            {
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "b",
+                "texto_resposta": "Ignora, afinal a meta foi cumprida no fim das contas.",
+                "pontos": 0
+            },
+            {
+                "data": "02 - 07 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
+                "resposta_key": "a",
+                "texto_resposta": "Aceita a devolução sem questionar, pois não é sua responsabilidade.",
+                "pontos": 0
+            }
+        ]
+    },
+    "patricia.costa@hotmail.com": {
+        "nome": "Patrícia Costa",
+        "telefone": "(31) 95543-3322",
+        "email": "patricia.costa@hotmail.com",
+        "senha": "180634",
+        "pontos": 20,
+        "resposta_secreta": "Patrícia Oliveira",
+        "desafios_realizados": [],
+        "historico_respostas": [
+            {
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "a",
+                "texto_resposta": "Reporta o erro à equipe e solicita correção imediata.",
+                "pontos": 10
+            },
+            {
+                "data": "02 - 07 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
+                "resposta_key": "b",
+                "texto_resposta": "Tenta entender os motivos e oferece suporte para novo acolhimento.",
+                "pontos": 10
+            }
+        ]
+    },
+    "bruno.ferreira@outlook.com": {
+        "nome": "Bruno Ferreira",
+        "telefone": "(41) 98876-5544",
+        "email": "bruno.ferreira@outlook.com",
+        "senha": "630295",
+        "pontos": 10,
+        "resposta_secreta": "Bruno César",
+        "desafios_realizados": [],
+        "historico_respostas": [
+            {
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "c",
+                "texto_resposta": "Continua usando os dados alterados e não documenta nada.",
+                "pontos": 0
+            },
+            {
+                "data": "02 - 07 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
+                "resposta_key": "b",
+                "texto_resposta": "Tenta entender os motivos e oferece suporte para novo acolhimento.",
+                "pontos": 10
+            }
+        ]
+    },
+    "renata.carvalho@ufrpe.br": {
+        "nome": "Renata Carvalho",
+        "telefone": "(81) 95522-1100",
+        "email": "renata.carvalho@ufrpe.br",
+        "senha": "947512",
+        "pontos": 0,
+        "resposta_secreta": "Renata Silva",
         "desafios_realizados": [],
         "historico_respostas": []
     },
-    "rafael.santos@ufrpe.br": {
-        "nome": "Rafael Santos",
-        "telefone": "(81) 94432-1100",
-        "email": "rafael.santos@ufrpe.br",
-        "senha": "223344",
-        "pontos": 20,
-        "resposta_secreta": "Juliana",
-        "desafios_realizados": [
-            "💬 Inicie uma conversa com alguém novo hoje e deseje um bom dia sincero."
-        ],
-        "historico_respostas": [
-            {
-                "data": "20 - 06 - 2025",
-                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
-                "resposta": "b",
-                "pontos": 1
-            }
-        ]
-    },
-    "beatriz.melo@gmail.com": {
-        "nome": "Beatriz Melo",
-        "telefone": "(81) 93321-0099",
-        "email": "beatriz.melo@gmail.com",
-        "senha": "556677",
-        "pontos": 35,
-        "resposta_secreta": "Sofia",
-        "desafios_realizados": [
-            "📝 Escreva uma mensagem positiva (bilhete, WhatsApp ou e-mail) para alguém importante na sua vida.",
-            "🤝 Ajude uma pessoa idosa com sacolas ou atravessar a rua com segurança."
-        ],
-        "historico_respostas": [
-            {
-                "data": "18 - 06 - 2025",
-                "pergunta": "📄 Durante um projeto, você percebe que um colega está plagiando códigos de fontes públicas sem dar os devidos créditos. Você:",
-                "resposta": "b",
-                "pontos": 1
-            },
-            {
-                "data": "19 - 06 - 2025",
-                "pergunta": "🤥 Você pode mentir para proteger um amigo de um problema sério. O que faz?",
-                "resposta": "b",
-                "pontos": 1
-            }
-        ]
-    },
-    "fernando.lima@ufrpe.br": {
-        "nome": "Fernando Lima",
-        "telefone": "(81) 92210-9988",
-        "email": "fernando.lima@ufrpe.br",
-        "senha": "889900",
-        "pontos": 40,
-        "resposta_secreta": "Letícia",
-        "desafios_realizados": [
-            "😊 Ofereça ajuda a um colega que esteja com dificuldades, mesmo que ele não peça.",
-            "🌱 Plante algo (pode ser uma muda ou até um grão) e cuide por uma semana."
-        ],
-        "historico_respostas": [
-            {
-                "data": "21 - 06 - 2025",
-                "pergunta": "🔒 Você tem acesso a dados pessoais de usuários na empresa. Um amigo pede para você passar algumas informações. O que você faz?",
-                "resposta": "a",
-                "pontos": 1
-            },
-            {
-                "data": "22 - 06 - 2025",
-                "pergunta": "💻 Você descobre uma falha de segurança grave no sistema da empresa onde trabalha. O que faz?",
-                "resposta": "a",
-                "pontos": 1
-            }
-        ]
-    },
-    "larissa@gmail.com": {
-        "nome": "larissa",
-        "telefone": "(81) 98433-2533",
-        "email": "larissa@gmail.com",
-        "senha": "123123",
-        "pontos": 1,
-        "resposta_secreta": "Larissa",
+    "rafael.rocha@gmail.com": {
+        "nome": "Rafael Rocha",
+        "telefone": "(62) 99911-2233",
+        "email": "rafael.rocha@gmail.com",
+        "senha": "384950",
+        "pontos": 65,
+        "resposta_secreta": "Rafael Gomes",
         "desafios_realizados": [],
         "historico_respostas": [
             {
-                "data": "24 - 06 - 2025",
-                "pergunta": "🔎 Na Central de Achados e Perdidos UFRPE, você encontra um item de valor sem registro eletrônico do dono. O que faz?",
-                "resposta": "a",
-                "pontos": 1
+                "data": "01 - 07 - 2025",
+                "pergunta": "💧 No projeto EcoDrop, você percebe que os dados de consumo de água estão sendo ajustados manualmente para aparentar melhor desempenho. O que você faz?",
+                "resposta_key": "a",
+                "texto_resposta": "Reporta o erro à equipe e solicita correção imediata.",
+                "pontos": 10
             },
             {
-                "data": "24 - 06 - 2025",
-                "pergunta": "🤥 Você pode mentir para proteger um amigo de um problema sério. O que faz?",
-                "resposta": "a",
-                "pontos": 0
-            },
-            {
-                "data": "24 - 06 - 2025",
-                "pergunta": "💻 Você descobre uma falha de segurança grave no sistema da empresa onde trabalha. O que faz?",
-                "resposta": "b",
-                "pontos": 0
-            },
-            {
-                "data": "24 - 06 - 2025",
-                "pergunta": "📂 Você está saindo de uma empresa e pensa em copiar o código que desenvolveu lá para usar em projetos futuros. Você:",
-                "resposta": "c",
-                "pontos": 0
-            },
-            {
-                "data": "24 - 06 - 2025",
-                "pergunta": "📄 Durante um projeto, você percebe que um colega está plagiando códigos de fontes públicas sem dar os devidos créditos. Você:",
-                "resposta": "a",
+                "data": "02 - 07 - 2025",
+                "pergunta": "🐾 No projeto P.A.T.A.S., um adotante devolve o animal após poucos dias sem explicar o motivo. Você:",
+                "resposta_key": "a",
+                "texto_resposta": "Aceita a devolução sem questionar, pois não é sua responsabilidade.",
                 "pontos": 0
             }
         ]

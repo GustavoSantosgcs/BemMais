@@ -1,26 +1,33 @@
 import re
 
 
-# Classe usuário:
 class Usuario:         
+     """
+     Representa um usuário do sistema BEM+.
+
+     Armazena dados pessoais, autenticação, pontuação e histórico de interações.
+     Fornece métodos para validação, alteração e serialização.
+     """
+     
      def __init__(self, nome, telefone, email, senha, pontos=0, resposta_secreta=None,
                      desafios_realizados=None, historico_respostas=None):
           """
-          Constrói um novo usuário e vlaida seus daados iniciais.
+          Inicializa um novo usuário com validações de entrada.
 
-          Parâmetros:
-               nome (str).
-               telefone (str).
-               email (str): email válido (@ufrpe.br, @gmail.com, etc.).
-               senha (str): senha numérica de 6 dígitos.
-               pontos (int): pontuação inicial (default=0).
-               resposta_secreta (str|None): resposta para recuperação de senha.
-               desafios_realizados (list|None): lista inicial de códigos de desafios.
-               historico_respostas (list|None): lista inicial de respostas.
+          Args:
+               nome (str): Nome do usuário.
+               telefone (str): Telefone com DDD.
+               email (str): Email válido (@ufrpe.br, @gmail.com etc).
+               senha (str): Senha numérica de 6 dígitos.
+               pontos (int): Pontuação inicial (default = 0).
+               resposta_secreta (str | None): Resposta secreta para recuperação de senha.
+               desafios_realizados (list | None): Lista de desafios concluídos.
+               historico_respostas (list | None): Histórico de respostas éticas.
 
-          Raise:
-          ValueError: se qualquer dado de entrada não passar nas validações.
+          Raises:
+               ValueError: Se algum dado for inválido.
           """
+          
           if not self.emailValido(email):
                raise ValueError("Email digitado é inválido.")
           if not self.senhaValida(senha):
@@ -37,21 +44,24 @@ class Usuario:
           self.desafios_realizados = list(desafios_realizados) if desafios_realizados is not None else []
           self.historico_respostas = list(historico_respostas) if historico_respostas is not None else []
 
-
      # Serialização:
      def toDict(self):
-               """Converte o objeto para um dicionário JSON."""
-               return {
-                    "nome": self.nome,
-                    "telefone": self.telefone,
-                    "email": self.email,
-                    "senha": self.senha,
-                    "pontos": self.pontos,
-                    "resposta_secreta": self.resposta_secreta,
-                    "desafios_realizados": self.desafios_realizados,
-                    "historico_respostas": self.historico_respostas,
-               }
-               
+          """
+          Converte o objeto Usuario em um dicionário compatível com JSON.
+
+          Returns:
+               dict: Representação serializável do usuário.
+          """
+          return {
+               "nome": self.nome,
+               "telefone": self.telefone,
+               "email": self.email,
+               "senha": self.senha,
+               "pontos": self.pontos,
+               "resposta_secreta": self.resposta_secreta,
+               "desafios_realizados": self.desafios_realizados,
+               "historico_respostas": self.historico_respostas,
+          }
                
      # Deserialização:           
      @classmethod
@@ -59,24 +69,21 @@ class Usuario:
           """Cria um Usuario a partir de um dicionário (caminho inverso do toDict)."""
           return cls(**dados) # '**' espalha as chaves/valores como argumentos nomeados para o __init__. 
 
-
      # Validação de telefone:
      @staticmethod
      def telefoneValido(telefone):
           """
-          Verifica se o telefone informado possui um formato padrão do Brasil.
-          Aceita o número com o sem espaço após o DDD
-          Ex.:(81) 98877-4422 ou (81)98877-4422
-          
-          Parâmetros:
-               telefone (str): telefone informado pelo usuário.
-          
-          Retorna:
-               bool: True se o telefone estiver valido, False caso negativo.
+          Verifica se o telefone informado está no formato brasileiro válido.
+          Exemplo válido: (81) 98877-4422 ou (81)98877-4422
+
+          Args:
+               telefone (str): Telefone informado.
+
+          Returns:
+               bool: True se válido, False caso contrário.
           """
           padrao = r'^\([1-9]{2}\)\s?9[0-9]{4}-[0-9]{4}$'
           return re.match(padrao,telefone) is not None
-
 
      # Validação de email:
      @staticmethod
@@ -84,57 +91,54 @@ class Usuario:
           """
           Verifica se o email possui um formato válido e pertence a um domínio permitido.
 
-          Parâmetros:
+          Args:
                email (str): Email informado pelo usuário.
 
-          Retorna:
+          Returns:
                bool: True se o email for válido, False caso contrário.
           """
           padrao = r'^[\w\.-]+@(?:gmail\.com|hotmail\.com|outlook\.com|ufrpe\.br)$'
           return re.match(padrao, email) is not None
-      
-          
+            
      # Validação de senha:
      @staticmethod
      def senhaValida(senha):
           """
           Verifica se a senha contém apenas dígitos e tem 6 caracteres.
 
-          Parâmetros:
-          senha (str): Senha informada pelo usuário.
+          Args:
+               senha (str): Senha informada pelo usuário.
 
-          Retorna:
-          bool: True se a senha for válida, False caso contrário.
+          Returns:
+               bool: True se a senha for válida, False caso contrário.
           """
           return senha.isdigit() and len(senha) == 6
-
 
      # Alterar email:
      def alterarEmail(self, novo_email):
           """
-          Altera o email do usuário após validar seu formato.
+          Atualiza o email do usuário após validação.
 
-          Parâmetros:
-               novo_email (str): novo endereço de email a ser atribuído.
-          
-          Raise:
-               ValueError: Se o novo_email não corresponder ao padrão válido.
+          Args:
+               novo_email (str): Novo email digitado pelo usuário.
+
+          Raises:
+               ValueError: Se o email não for válido.
           """
           if not Usuario.emailValido(novo_email):
                raise ValueError("Formato de email inválido!")
           self.email = novo_email
-
 
      # Alteração de senha:
      def alterarSenha(self, senha_atual, nova_senha):
           """
            Atualiza a senha do usuário, conferindo a senha atual.
           
-          Parâmetros:
+          Args:
                senha_atual (str): senha atual do usuário para autenticação.
                nova_senha (str): nova senha numérica de exatamente 6 dígitos.
 
-          Raise:
+          Raises:
                ValueError: se a senha atual não confere ou nova senha for inválida.
           """
           if senha_atual != self.senha:
@@ -144,18 +148,18 @@ class Usuario:
                raise ValueError("Nova senha inválida (seis dígitos numéricos).")
           self.senha = nova_senha
 
-
      # Alterar resposta secreta:
      def alterarResposta(self, nova_resposta):
           """
-          Atualiza a resposta secreta do usuário para recuperação de senha.
+          Atualiza a resposta secreta do usuário.
 
-          Parâmetros:
-               nova_resposta (str): Nova resposta não vazia.
+          Args:
+               nova_resposta (str): Nova resposta.
 
-          Raise:
-               ValueError: Se nova_resposta for vazia.
+          Raises:
+               ValueError: Se a nova resposta for vazia.
           """
+          
           self.resposta_secreta = nova_resposta
           
 

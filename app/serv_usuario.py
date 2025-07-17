@@ -1,19 +1,34 @@
 from .usuario import Usuario
 from .repo_usuario import RepoUsuario
 from .utils import Utils
+from .ui import Ui
+
 
 class ServicoUsuario:
+     """
+     Lida com as interações interativas do usuário: cadastro, edição,
+     alteração de dados e recuperação de senha.
+     """
      
-     def __init__(self, repo: RepoUsuario):
+     def __init__(self, repo: RepoUsuario, ui: Ui):
+          """
+          Inicializa o serviço de usuário com repositório e interface.
+
+          Args:
+               repo (RepoUsuario): Repositório para persistência dos usuários.
+               ui (Ui): Interface para exibição e interação com o terminal.
+          """
+          
           self.repo = repo
-          
-          
-     #Cadastro de usuário:
+          self.ui = ui
+      
      def cadastrarUsuario(self):
           """
-          Realiza o cadastro de um novo usuário com nome, telefone, email, senha e pergunta secreta.
-          """ 
-          Utils.limparTela()
+          Realiza o cadastro interativo de um novo usuário.
+
+          O fluxo valida telefone, email e senha, coleta resposta secreta e persiste o novo usuário.
+          """
+          
           while True: # looping externo de cadastro
                nome = Utils.naoVazio("Digite seu nome de usuário: ").title()
                telefone = Utils.naoVazio("Digite seu telefone com DDD Ex:(81) 9xxxx-xxxx: ")
@@ -28,7 +43,7 @@ class ServicoUsuario:
                          continue
                     if self.repo.buscar(email):   
                          print("Email já cadastrado!")
-                         input("Pressione Enter para voltar ao inicio...")
+                         self.ui.pausar()
                          return
                     else:
                          break    
@@ -58,26 +73,22 @@ class ServicoUsuario:
                     )
                except ValueError as msg_erro: # Se Alguma validação do __init__ falhou 
                     print("Erro:", msg_erro)
+                    self.ui.pausar()
                     continue  
                
-               try:
-                    self.repo.cadastrar(novo)
-                    print("✅ Cadastro realizado com sucesso!\n")
-                    input("Pressione Enter para continuar...")
-                    break
-               except ValueError as msg_erro: # Verifica novamente se o email já é cadastrado
-                    print(msg_erro)
-                    
+               self.repo.cadastrar(novo)
+               print("✅ Cadastro realizado com sucesso!\n")
+               self.ui.pausar()
+               break
 
      # Fluxo de alteração de senha:     
      def alterarSenhaInterativo(self, email): 
           """
           Fluxo para alterar a senha do usuário logado.
-          Solicita a senha atual para autenticação, depois pede a nova senha e
-          sua confirmação, valida o formato (6 dígitos) e persiste a mudança.
+         Solicita a nova senha e confirmação, valida e atualiza a senha no repositório.
 
-          Parâmetros:
-               email (str): email do usuário que está logado.
+          Args:
+               email (str): Email do usuário logado.
           """
           Utils.limparTela()  
           user = self.repo.buscar(email)
@@ -93,125 +104,130 @@ class ServicoUsuario:
                     user.alterarSenha(user.senha, nova_senha)   
                     self.repo.salvarUsuarios()            
                     print("Senha atualizada com sucesso!\n")
-                    input("Pressione Enter para voltar…")    
+                    self.ui.pausar()    
                     Utils.limparTela()  
                     break
                except ValueError as msg_erro:
                     print(msg_erro)
-                    input("Enter para tentar de novo…")
+                    self.ui.pausar()
                     Utils.limparTela()
-
 
      # Fluxo de alteração de email:
      def alterarEmailInterativo(self, email):
           """
-          Fluxo de terminal para alterar o email de um usuário:
+          Altera o email do usuário após validação.
 
-               1. Pede o novo email.
-               2. Chama Usuario.alterar_email para validar.
-               3. Persiste a mudança no repositório.
-               4. Exibe mensagem de sucesso e retorna o email atualizado.
-               
-          Parâmetros:
-               email (str): email atual do usuário logado.
+          Args:
+               email (str): Email atual do usuário.
 
-          Retorna:
-               str: o novo email em caso de sucesso, ou o email original em erro.
+          Returns:
+               str: Novo email em caso de sucesso, ou o original se houver erro.
           """
           Utils.limparTela()
           novo_email = Utils.naoVazio("Digite o novo email (@ufrpe.br, @gmail.com, @hotmail.com ou @outlook.com): ").lower()
           if not Usuario.emailValido(novo_email):
                print("Formato de email inválido!")
+               self.ui.pausar()
                return email
           try:
                self.repo.atualizarEmail(email, novo_email)
                print("✔  Seu email foi atualizado!")
+               self.ui.pausar()
                return novo_email
           
           except ValueError as erro:
                print("Erro: ",erro)
+               self.ui.pausar()
                return email
-
 
      # Fluxo de alteração da resposta secreta:
      def alterarRespostaInterativo(self, email):
           """
-          Fluxo interativo de terminal para atualizar a resposta secreta de recuperação.
-          Solicita confirmação de senha, pede a nova resposta secreta e persiste a mudança.
- 
-          Parâmetros:
-               email (str): email do usuário que está logado.
+          Altera a resposta secreta do usuário, após confirmação de senha.
+
+          Args:
+               email (str): Email do usuário logado.
           """
           Utils.limparTela()
           user = self.repo.buscar(email)
           senha = Utils.naoVazio("Confirme sua senha atual: ")
           if senha != user.senha:
-               print("Senha incorreta! Voltando ao menu...")
+               print("Senha incorreta! Voltaremos ao menu")
+               self.ui.pausar()
                return
           
-          nova_resposta = Utils.naoVazio("Digite a nova resposta secreta (professora favorita): ")
+          nova_resposta = Utils.naoVazio("Digite a nova resposta secreta (professor(a) favorito(a)): ")
           try:
                user.alterarResposta(nova_resposta)
                self.repo.salvarUsuarios()
                print("✔  Resposta secreta atualizada com sucesso!")
+               self.ui.pausar()
                
           except ValueError as erro:
                print("Erro: ",erro)
+               self.ui.pausar()
 
-          
-     # Editar usuario:
      def editarConta(self,email):
           """
-          Permite ao usuário logado editar suas informações pessoais.
-          
-          Parâmetros:
-               email (str): email atual do usuário logado.
-          Retorna:
-               o email atualizado (ou o original, se não alterar).
+          Menu interativo para edição de dados da conta.
+          Permite alterar nome, telefone, senha, email ou pergunta secreta.
+
+          Args:
+               email (str): Email atual do usuário.
+
+          Returns:
+               str: Novo email, ou original se não for alterado.
           """
           Utils.limparTela()
           user = self.repo.buscar(email)
-          print("\nDados atuais:\n")
-          print(f"Email: {user.email}")
-          print(f"Nome: {user.nome}")
-          print(f"Telefone: {user.telefone}")
           while True:
-               print("\nO que deseja editar: ")
-               print("1 - email")
-               print("2 - nome")
-               print("3 - telefone")
-               print("4 - senha")
-               print("5 - Resposta_secreta")
-               print("0 - sair")
-               editar = input("opção: ")
-               match editar:
+               self.ui.tituloDaFuncRich("Editar Conta", cor="cyan")
+
+               # Mostra dados atuais
+               self.ui.console.print(f"[bold]Email:[/bold] {user.email}")
+               self.ui.console.print(f"[bold]Nome :[/bold] {user.nome}")
+               self.ui.console.print(f"[bold]Telefone:[/bold] {user.telefone}\n")
+
+               # Menu de opções de edição
+               itens = [
+                    ("1", "Email"),
+                    ("2", "Nome"),
+                    ("3", "Telefone"),
+                    ("4", "Senha"),
+                    ("5", "Pergunta Secreta"),
+                    ("0", "Voltar")
+               ]
+               self.ui.showMenu("O que deseja editar?", itens, cor="cyan", limpar_tela=False)
+               opcao = self.ui.console.input("\n[bold]Opção:[/bold] ").strip()
+
+               match opcao:
                     case '1': 
-                         Utils.limparTela()
                          novo_email = self.alterarEmailInterativo(email)
-                         return novo_email     
+                         return novo_email
+                         
                     case '2':
-                         Utils.limparTela()
                          novo_nome = Utils.naoVazio("Digite o novo nome: ").title()
                          user.nome = novo_nome
                          self.repo.salvarUsuarios()
                          print("✔ Nome atualizado com sucesso!")
+                         self.ui.pausar()
                          
                     case '3':
-                         Utils.limparTela()
                          novo_tel = Utils.naoVazio("Digite o novo número de telefone com DDD Ex:(81) 99999-8888: ")
                          while not user.telefoneValido(novo_tel):
                               print("Formato inválido!")
                               novo_tel = Utils.naoVazio("Tente novamente conforme exemplo (xx) 9xxxx-xxxx: ")
-                         
+                              
                          user.telefone = novo_tel
                          self.repo.salvarUsuarios()
                          print("✔ Telefone atualizado com sucesso!")
+                         self.ui.pausar()
                          
                     case '4':
                          senha_atual = Utils.naoVazio("Digite sua senha atual: ")
                          if senha_atual != user.senha:
                               print("🔒 Senha incorreta!")
-                              input("Pressione Enter para voltar...")
+                              self.ui.pausar()
                               Utils.limparTela()
                               continue
                          
@@ -222,66 +238,70 @@ class ServicoUsuario:
                          self.alterarRespostaInterativo(email)
                     
                     case '0':
-                         print("Vamos voltar então...\n")
+                         print("OK! Vamos voltar então.\n")
+                         self.ui.pausar()
                          break
                     
                     case _:
                          print("Opção inválida!")        
           return email
 
-
-     # Recuperar senha:
      def recuperarSenha(self):
           """
-          Permite ao usuário recuperar a senha caso tenha esquecido,
-          mediante verificação de email e resposta secreta.
-          
-          Fluxo de recuperação de senha:
-               1. Pede o email cadastrado.
-               2. Verifica existência e pergunta secreta.
-               3. Chama fluxo de alteração de senha.
+          Recupera a senha de um usuário após validação do email e da resposta secreta.
+
+          Exibe um fluxo interativo com verificação e redirecionamento para alteração de senha.
           """
-          Utils.limparTela()
+          
+          self.ui.tituloDaFuncRich("Recuperar Senha", cor="blue")
           email = Utils.naoVazio("Digite seu email cadastrado: ").lower()
           user = self.repo.buscar(email)
           
           if not user:
                print("Email não cadastrado!")
+               self.ui.pausar()
                return
           
           print("\nResponda a seguinte pergunta secreta cadastrada:")
-          resposta_secreta = Utils.naoVazio("Qual o nome da sua professora preferida? ")
+          resposta_secreta = Utils.naoVazio("Qual o nome do(a) seu(sua) professor(a) preferido(a)? ")
           if resposta_secreta.lower() != user.resposta_secreta.lower():
                print("Resposta secreta incorreta!")
+               self.ui.pausar()
                return
           
           self.alterarSenhaInterativo(email)
-          print("Senha redefinida com sucesso! Você já pode fazer login com a nova senha.")
+          print("Senha redefinida com sucesso! Você já pode fazer login com a nova senha. 😉")
+          self.ui.pausar()
 
      # Deletar usuario:
      def deletarConta(self,email):
           """
-          Exclui a conta do usuário após validação da senha e confirmação da intenção.
+          Exclui a conta do usuário após validação de senha e confirmação.
 
-          Parâmetros:
-               email: email do usuário que deseja excluir a conta.
+          Args:
+               email (str): Email do usuário que deseja excluir a conta.
 
-          Retorna:
+          Returns:
                bool: True se a conta foi excluída com sucesso, False caso contrário.
           """
           Utils.limparTela()
+          self.ui.tituloDaFuncRich("Deletar Conta", cor="red")
           senha = Utils.naoVazio("Para excluir sua conta, confirme sua senha: ")
           user = self.repo.buscar(email)
+          
           if senha == user.senha:
                confirmacao = Utils.naoVazio("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
                if confirmacao != 's':
                     print("Operação cancelada!")
+                    self.ui.pausar()
                     return False
           
           else:
                print("Senha incorreta! Retornando...")
+               self.ui.pausar()
                return False
 
           self.repo.remover(email)
           print("✔ Sua conta foi deletada com sucesso.")
+          self.ui.pausar()
           return True
