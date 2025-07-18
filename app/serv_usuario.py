@@ -1,6 +1,6 @@
 from .usuario import Usuario
 from .repo_usuario import RepoUsuario
-from .utils import Utils
+from .utils import Utils, SenhaCripto
 from .ui import Ui
 
 
@@ -99,9 +99,11 @@ class ServicoUsuario:
                if nova_senha != confirmar_senha:
                     print("Senhas diferentes! Tente de novo.\n")
                     continue
-
+               if not Usuario.senhaValida(nova_senha):
+                    print("Formato inválido! A senha deve ter 6 dígitos numéricos.")
+                    continue
                try:
-                    user.alterarSenha(user.senha, nova_senha)   
+                    user.senha = SenhaCripto.hashSenha(nova_senha)   
                     self.repo.salvarUsuarios()            
                     print("Senha atualizada com sucesso!\n")
                     self.ui.pausar()    
@@ -151,7 +153,7 @@ class ServicoUsuario:
           Utils.limparTela()
           user = self.repo.buscar(email)
           senha = Utils.naoVazio("Confirme sua senha atual: ")
-          if senha != user.senha:
+          if not SenhaCripto.verificarSenha(senha, user.senha):
                print("Senha incorreta! Voltaremos ao menu")
                self.ui.pausar()
                return
@@ -202,6 +204,13 @@ class ServicoUsuario:
 
                match opcao:
                     case '1': 
+                         senha_atual = Utils.naoVazio("Digite sua senha atual: ")
+                         if not SenhaCripto.verificarSenha(senha_atual, user.senha):
+                              print("🔒 Senha incorreta!")
+                              self.ui.pausar()
+                              Utils.limparTela()
+                              continue
+                         
                          novo_email = self.alterarEmailInterativo(email)
                          return novo_email
                          
@@ -225,7 +234,7 @@ class ServicoUsuario:
                          
                     case '4':
                          senha_atual = Utils.naoVazio("Digite sua senha atual: ")
-                         if senha_atual != user.senha:
+                         if not SenhaCripto.verificarSenha(senha_atual, user.senha):
                               print("🔒 Senha incorreta!")
                               self.ui.pausar()
                               Utils.limparTela()
@@ -289,7 +298,7 @@ class ServicoUsuario:
           senha = Utils.naoVazio("Para excluir sua conta, confirme sua senha: ")
           user = self.repo.buscar(email)
           
-          if senha == user.senha:
+          if SenhaCripto.verificarSenha(senha, user.senha):
                confirmacao = Utils.naoVazio("Tem certeza que deseja excluir sua conta? (s/n): ").lower()
                if confirmacao != 's':
                     print("Operação cancelada!")

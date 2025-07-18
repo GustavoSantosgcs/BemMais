@@ -13,7 +13,7 @@ O sistema, totalmente personalizado, permite que os usuários se cadastrem, resp
 - **CRUD de Usuário:**  
   - Cadastro, edição, login e exclusão de contas.  
   - Armazenamento em JSON e validações robustas de entrada.  
-  - Recuperação de senha via pergunta secreta.
+  - Recuperação de senha via pergunta secreta e hashing seguro.
 
 - **Frase do Dia:**  
   - Exibição decorada de uma frase motivacional.  
@@ -60,6 +60,7 @@ O sistema, totalmente personalizado, permite que os usuários se cadastrem, resp
     - `rich.panel` – Painéis com bordas e títulos  
     - `rich.rule` – Separadores horizontais estilizados  
     - `rich.box` – Estilos de borda para tabelas (ex: arredondado, quadrado)
+  - `bcrypt` – Hashing seguro de senhas (credenciais protegidas via salt)
 ---
 
 ##  **Como Instalar e Executar o BEM+**
@@ -82,7 +83,7 @@ git clone https://github.com/GustavoSantosgcs/BemMais.git
 - **4 -** Instale as dependências:
 
 ```bash
-pip install rich
+pip install rich bcrypt
 ```
 
 - **5 -** Execute o arquivo *main.py*
@@ -117,11 +118,11 @@ BemMais/
 
 -  Interface Gráfica com CustomTkInter (GUI)
 
--  Autenticação em Dois Fatores
+-  Autenticação em Dois Fatores (2FA)
 
 - Sistema de feedbacks dos usuários
 
-- Armazenamento de senha com hash (bcrypt ou hashlib)
+- Ampliação do Público-Alvo para outras áreas além de TI
 
 
 ### ⚠️ **Aviso:**

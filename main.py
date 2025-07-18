@@ -1,6 +1,6 @@
 from app.repo_usuario import RepoUsuario
 from app.serv_usuario import ServicoUsuario
-from app.utils import Utils
+from app.utils import Utils, SenhaCripto
 from app.frases import FraseDia
 from app.dilema import Dilema
 from app.desafios import DesafioBem, ListaDesafios, RepoVoucher
@@ -156,15 +156,14 @@ class BemMais:
      # Menu do usuário logado:
      def login(self):
           """
-          Apresenta o menu principal do BEM+ com todas as funcionalidades disponíveis.
+          Realiza o login de um usuário e apresenta o menu de conta.
 
-          Args:
-               email (str): Email do usuário logado.
+          Solicita email e senha (via hash), e valida para prosseguir.
           """
           email = Utils.naoVazio("Digite seu email: ").lower()
           senha = Utils.naoVazio("Digite sua senha: ")
           user = self.repo_user.buscar(email)
-          if not (user and user.senha == senha):
+          if not (user and SenhaCripto.verificarSenha(senha, user.senha)):
                print("Email ou senha inválidos. ")
                self.ui.pausar()
                return

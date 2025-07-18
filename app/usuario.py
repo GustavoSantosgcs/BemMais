@@ -1,5 +1,5 @@
 import re
-
+from .utils import SenhaCripto
 
 class Usuario:         
      """
@@ -18,7 +18,7 @@ class Usuario:
                nome (str): Nome do usuário.
                telefone (str): Telefone com DDD.
                email (str): Email válido (@ufrpe.br, @gmail.com etc).
-               senha (str): Senha numérica de 6 dígitos.
+               senha (str): Senha em texto puro, com exatamente 6 dígitos numéricos.
                pontos (int): Pontuação inicial (default = 0).
                resposta_secreta (str | None): Resposta secreta para recuperação de senha.
                desafios_realizados (list | None): Lista de desafios concluídos.
@@ -38,7 +38,7 @@ class Usuario:
           self.nome = nome
           self.telefone = telefone
           self.email = email
-          self.senha = senha
+          self.senha = SenhaCripto.hashSenha(senha)
           self.pontos = pontos
           self.resposta_secreta = resposta_secreta
           self.desafios_realizados = list(desafios_realizados) if desafios_realizados is not None else []
@@ -56,7 +56,7 @@ class Usuario:
                "nome": self.nome,
                "telefone": self.telefone,
                "email": self.email,
-               "senha": self.senha,
+               "senha": self.senha.decode(),
                "pontos": self.pontos,
                "resposta_secreta": self.resposta_secreta,
                "desafios_realizados": self.desafios_realizados,
@@ -66,8 +66,26 @@ class Usuario:
      # Deserialização:           
      @classmethod
      def fromDict(cls, dados):
-          """Cria um Usuario a partir de um dicionário (caminho inverso do toDict)."""
-          return cls(**dados) # '**' espalha as chaves/valores como argumentos nomeados para o __init__. 
+          """
+         Cria um Usuario a partir de um dicionário (inverso de toDict),
+         preservando o hash da senha sem re-hash.
+
+         Args:
+             dados (dict): Dicionário com todas as chaves de um usuário serializado.
+
+         Returns:
+             Usuario: Instância populada com hash de senha original.
+         """
+          user = cls.__new__(cls)
+          user.nome = dados["nome"]
+          user.telefone = dados["telefone"]
+          user.email = dados["email"]
+          user.senha = dados["senha"].encode()   
+          user.pontos = dados["pontos"]
+          user.resposta_secreta = dados["resposta_secreta"]
+          user.desafios_realizados = dados["desafios_realizados"]
+          user.historico_respostas = dados["historico_respostas"]
+          return user
 
      # Validação de telefone:
      @staticmethod
@@ -141,12 +159,12 @@ class Usuario:
           Raises:
                ValueError: se a senha atual não confere ou nova senha for inválida.
           """
-          if senha_atual != self.senha:
+          if not SenhaCripto.verificarSenha(senha_atual,self.senha):
                raise ValueError("Senha atual incorreta.")
           
           if not self.senhaValida(nova_senha):
                raise ValueError("Nova senha inválida (seis dígitos numéricos).")
-          self.senha = nova_senha
+          self.senha = SenhaCripto.hashSenha(nova_senha)
 
      # Alterar resposta secreta:
      def alterarResposta(self, nova_resposta):
