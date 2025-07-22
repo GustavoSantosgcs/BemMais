@@ -99,7 +99,7 @@ BemMais/
 │   ├── usuario.py                # Entidade e modelo do Usuário
 │   ├── repo_usuario.py           # Repositório (JSON) com métodos CRUD
 │   ├── serv_usuario.py           # Fluxo interativo de usuário (cadastro, edição, login)
-│   ├── utils.py                  # Funções auxiliares (input validado, limpar tela)
+│   ├── utils.py                  # Funções utilitárias e de segurança (hashing de senha com bcrypt)
 │   ├── frases.py                 # Gerenciamento da Frase do Dia
 │   ├── dilema.py                 # Módulo de dilemas éticos (quiz + pontuação)
 │   ├── desafios.py               # Fluxo dos Desafios do Bem (regular e premium)
