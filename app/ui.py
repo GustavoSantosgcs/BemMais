@@ -7,25 +7,30 @@ from rich.text    import Text
 
 
 class Ui:
-     """
-    Camada de apresentação do sistema BEM+.
+     """Gerencia a camada de apresentação visual no terminal para o sistema BEM+.
 
-    Responsável por toda interação visual no terminal, incluindo:
-    - Impressão de menus estilizados com Rich;
-    - Exibição de banners e títulos;
-    - Escrita com efeito de máquina de escrever;
-    - Pausas e prompts ao usuário.
-    """
+     Esta classe centraliza toda a interação com o usuário que ocorre no
+     terminal. Ela utiliza a biblioteca Rich para criar interfaces ricas e
+     agradáveis, incluindo menus, painéis, tabelas e textos estilizados.
+
+     """
     
      console = Console()
          
      def showMenu(self, titulo, itens, cor="yellow", limpar_tela: bool = True):
-          """
-          Exibe um menu rico no terminal usando Rich:
-          - titulo: cabeçalho 
-          - itens: lista de tuplas (chave, descrição)
-          - cor: cor principal
-          - limpar_tela: True para console.clear(), False para não limpar
+          """Exibe um menu estilizado e interativo no terminal.
+
+          Utiliza a biblioteca Rich para criar uma tabela que serve como menu,
+          com título, bordas e itens personalizáveis.
+
+          Args:
+               titulo (str): O cabeçalho a ser exibido no topo do menu.
+               itens (list): Uma lista de tuplas, onde cada tupla contém
+                    a chave da opção e sua descrição. Ex: [("1", "Login")].
+               cor (str, optional): A cor principal para o título e borda do menu.
+                    Padrão é "yellow".
+               limpar_tela (bool, optional): Se True, limpa a tela antes de
+                    exibir o menu. Padrão é True.
           """
           
           if limpar_tela:
@@ -45,9 +50,14 @@ class Ui:
           self.console.print(table)
      
      def menuInicialRich(self):
-          """
-          Mostra o banner, faz a entrada dramática, aguarda,
-          limpa e exibe o menu inicial. Retorna a opção escolhida.
+          """Orquestra e exibe a tela de menu inicial completa.
+
+          Limpa a tela, mostra o banner principal, exibe uma mensagem de
+          boas-vindas com efeito de digitação e, por fim, apresenta o menu
+          com as opções iniciais (cadastro, login, etc.).
+
+          Returns:
+               str: A opção escolhida pelo usuário, sem espaços extras.
           """
 
           self.console.clear()
@@ -69,10 +79,17 @@ class Ui:
           return opcao.strip()
      
      def menuBemRich(self, nome):
+          """Exibe o menu principal do usuário logado.
+
+          Apresenta um painel de boas-vindas com o nome do usuário e, em seguida,
+          um menu com todas as funcionalidades principais do sistema BEM+.
+
+          Args:
+               nome (str): O nome do usuário logado para ser exibido no título.
+
+          Returns:
+               str: A opção de menu escolhida pelo usuário.
           """
-          Exibe o menu principal do BEM+ estilizado e retorna a opção escolhida.
-          """
-          
           self.console.clear()
           titulo = Text(f"🌟 MENU BEM+ – {nome} 🌟", style="bold green")
           self.console.print(Panel(titulo, expand=True, border_style="green"))
@@ -93,10 +110,15 @@ class Ui:
           return self.console.input("\n[bold]Sua opção é?[/bold] ").strip()
           
      def tituloDaFuncRich(self, titulo, cor="blue"):
-          """
-          Limpa a tela e exibe um cabeçalho padronizado para uma seção.
-          - titulo: nome da funcionalidade (ex: "Cadastro de Usuário")
-          - cor: cor principal do painel
+          """Exibe um título de seção padronizado e estilizado.
+
+          Limpa a tela e mostra um painel que serve como cabeçalho para
+          diferentes seções da aplicação, como "Cadastro" ou "Ranking".
+
+          Args:
+               titulo (str): O texto a ser exibido dentro do painel de título.
+               cor (str, optional): A cor da borda e do texto do painel.
+                    Padrão é "blue".
           """
           self.console.clear()
           header = Text(f"🔹 {titulo} 🔹", style=f"bold {cor}")
