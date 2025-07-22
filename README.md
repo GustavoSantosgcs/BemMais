@@ -50,7 +50,7 @@ O sistema, totalmente personalizado, permite que os usuários se cadastrem, resp
   - `re` – Validação com expressões regulares (regex)  
   - `random` – Sorteio de dilemas e desafios  
   - `time` – Controle de delays e data atual  
-  - `textwrap` – (reservado para formatação, mas não usado diretamente)
+  - `textwrap` – Formatação de texto no terminal
 
 - **Biblioteca Externa:**
   - [`rich`](https://rich.readthedocs.io/en/stable/) – Interface de terminal estilizada  
