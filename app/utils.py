@@ -58,7 +58,7 @@ class SenhaCripto:
 
         Args:
             senha (str): Senha em texto puro.
-            hash (bytes): Hash armazenado.
+            hash_ (bytes): Hash armazenado.
 
         Returns:
             bool: True se corresponder, False caso contrário.
