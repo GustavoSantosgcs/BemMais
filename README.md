@@ -94,23 +94,24 @@ pip install rich bcrypt
 ##  **Estrutura do Projeto**
 ```
 BemMais/
-├── app/                          # Código-fonte da aplicação
-│   ├── __init__.py               # Inicialização do pacote 'app'
-│   ├── usuario.py                # Entidade e modelo do Usuário
-│   ├── repo_usuario.py           # Repositório (JSON) com métodos CRUD
-│   ├── serv_usuario.py           # Fluxo interativo de usuário (cadastro, edição, login)
-│   ├── utils.py                  # Funções utilitárias e de segurança (hashing de senha com bcrypt)
-│   ├── frases.py                 # Gerenciamento da Frase do Dia
-│   ├── dilema.py                 # Módulo de dilemas éticos (quiz + pontuação)
-│   ├── desafios.py               # Fluxo dos Desafios do Bem (regular e premium)
-│   └── ui.py                     # Interface de terminal usando Rich (menus, tabelas)
-├── dados/                        # Dados persistentes em JSON
-│   ├── usuarios.json             # Cadastro de usuários
-│   ├── codigos_premium.json      # Vouchers dos desafios premium
-│   ├── dilema.json               # Banco de dilemas éticos
-│   └── frase_dia.json            # Frase exibida por dia
-├── main.py                       # Ponto de entrada principal da aplicação
-├── README.md                     # Documentação do projeto
+├── app/                      # Código-fonte da aplicação
+│   ├── __init__.py           # Inicialização do pacote 'app'
+│   ├── usuario.py            # Entidade e modelo do Usuário
+│   ├── repo_usuario.py       # Repositório (JSON) com métodos CRUD
+│   ├── serv_usuario.py       # Fluxo interativo de usuário (cadastro, edição, login)
+│   ├── seguranca.py          # Módulo de segurança (hashing de senha com bcrypt)
+│   ├── utils.py              # Funções utilitárias (input validado, limpar tela)
+│   ├── frases.py             # Gerenciamento da Frase do Dia
+│   ├── dilema.py             # Módulo de dilemas éticos (quiz + pontuação)
+│   ├── desafios.py           # Fluxo dos Desafios do Bem (regular e premium)
+│   └── ui.py                 # Interface de terminal usando Rich (menus, tabelas)
+├── dados/                    # Dados persistentes em JSON
+│   ├── usuarios.json         # Cadastro de usuários
+│   ├── codigos_premium.json  # Vouchers dos desafios premium
+│   ├── dilema.json           # Banco de dilemas éticos
+│   └── frase_dia.json        # Frase exibida por dia
+├── main.py                   # Ponto de entrada principal da aplicação
+├── README.md                 # Documentação do projeto
 
 ```
 ---
