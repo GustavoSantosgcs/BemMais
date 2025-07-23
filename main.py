@@ -1,6 +1,6 @@
 from app.repo_usuario import RepoUsuario
 from app.serv_usuario import ServicoUsuario
-from app.utils import Utils, SenhaCripto
+from app.utils import Utils
 from app.seguranca import SenhaCripto
 from app.frases import FraseDia
 from app.dilema import Dilema
