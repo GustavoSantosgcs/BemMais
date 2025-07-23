@@ -1,5 +1,6 @@
 import re
-from .utils import SenhaCripto
+from .seguranca import SenhaCripto
+
 
 class Usuario:         
      """

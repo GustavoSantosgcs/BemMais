@@ -1,6 +1,7 @@
 from .usuario import Usuario
 from .repo_usuario import RepoUsuario
-from .utils import Utils, SenhaCripto
+from .utils import Utils
+from .seguranca import SenhaCripto
 from .ui import Ui
 
 
