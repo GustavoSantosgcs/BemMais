@@ -1,4 +1,4 @@
-# 🧠 **Projeto BEM+ | _Pratique o bem. Viva a ética._** 
+# 🧠 **Projeto BEM+ | _Pratique o bem. Viva a ética._** ![Release](https://img.shields.io/badge/release-2.0.0-blue) 
 ---
 
 ##   **Descrição:**
